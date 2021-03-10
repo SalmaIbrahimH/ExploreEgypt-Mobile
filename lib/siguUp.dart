@@ -87,22 +87,22 @@ class _BodyState extends State<Body> {
 
   setUsersFromsServer(String fname, String lname, String email, String pass,
       String conpass, String city) async {
-    var data = userslist.where((item) => (item.email.contains(email)));
+    var data = userslist.where((item) => (item.email.contains(email.trim())));
     if (data.length < 1) {
       user = new Users(
-          email: email,
-          password: pass,
-          firstName: fname,
-          lastName: lname,
-          confirmPassword: conpass,
-          city: city);
+          email: email.trim(),
+          password: pass.trim(),
+          firstName: fname.trim(),
+          lastName: lname.trim(),
+          confirmPassword: conpass.trim(),
+          city: city.trim());
       if (user != null) {
         var res = await UsersService().setUser(user);
         setState(() {
           isApiCallProcess = false;
         });
         if (res == true) {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginScreen()),
           );
@@ -119,7 +119,7 @@ class _BodyState extends State<Body> {
       final snackBar =
           SnackBar(content: Text('this email are already sing up'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
       );
