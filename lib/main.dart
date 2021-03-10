@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'screens/home.dart';
 void main() {
   runApp(MyApp());
 }
@@ -29,11 +29,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void _incrementCounter() {
-    setState(() {
-    
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
