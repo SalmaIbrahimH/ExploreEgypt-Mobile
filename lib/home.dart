@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './screens/explore_screen.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -11,21 +12,22 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0',
-      style: optionStyle,
-    ),
+  static final List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 1',
       style: optionStyle,
     ),
+    ExploreScreen(),
     Text(
-      'Index 2',
+      'Index3',
       style: optionStyle,
     ),
     Text(
-      'Index 3',
+      'Index 4',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 5',
       style: optionStyle,
     ),
   ];
@@ -88,7 +90,7 @@ class _HomeState extends State<Home> {
                 color: Colors.grey.shade200,
               ),
               accountName: Padding(
-                padding: const EdgeInsets.only(top: 30,left: 20),
+                padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Text("xyz",
                     style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
               ),
@@ -139,11 +141,13 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_activity),
+            label: 'Activities',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore),
             label: 'Explore',
