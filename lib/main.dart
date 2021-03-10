@@ -1,5 +1,8 @@
+import 'package:explore_egypt/login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -9,9 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-
-      ),
+      theme: ThemeData(),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -20,7 +21,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
- 
   final String title;
 
   @override
@@ -28,16 +28,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  SharedPreferences sharedPreferences;
 
-  void _incrementCounter() {
-    setState(() {
-    
-    });
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getInt("token");
+    print("token main");
+    print(token);
+    if (token == null) {
+      print("go");
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-   
-    return Home() ;
+    return Home();
+    //  return widget.id == 3 ? Scaffold(/*version 1*/) : Scaffold(/*version 2*/);
   }
 }

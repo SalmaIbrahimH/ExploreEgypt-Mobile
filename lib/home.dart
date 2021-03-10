@@ -1,6 +1,11 @@
+import 'package:explore_egypt/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+import 'dart:convert';
+import 'login.dart';
+
+GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class Home extends StatefulWidget {
   @override
@@ -8,6 +13,35 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    print("token home");
+    print(utf8.decode(base64.decode(token)));
+    print(token);
+    if (token == null) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    }
+    //   if (sharedPreferences.getInt("token") == 0) {
+    //     Navigator.of(context).pop();
+    //     Navigator.of(context).pushReplacement(
+    //       MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+    //     );
+    //   }
+    // }
+  }
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -88,7 +122,7 @@ class _HomeState extends State<Home> {
                 color: Colors.grey.shade200,
               ),
               accountName: Padding(
-                padding: const EdgeInsets.only(top: 30,left: 20),
+                padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Text("xyz",
                     style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
               ),
@@ -100,9 +134,19 @@ class _HomeState extends State<Home> {
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.grey.shade50,
                 foregroundColor: Colors.blueGrey,
-                child: Text(
-                  "image",
-                  style: TextStyle(fontSize: 20),
+                child: InkWell(
+                  onTap: () {
+                    // Toast.show("you have to sing up ", context,
+                    //     duration: Toast.LENGTH_LONG);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => ProfilePage()),
+                    );
+                  },
+                  child: Text(
+                    "image",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
               otherAccountsPictures: <Widget>[
@@ -135,6 +179,18 @@ class _HomeState extends State<Home> {
               title: new Text("Primary",
                   style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
               leading: new Icon(Icons.inbox),
+            ),
+            MaterialButton(
+              onPressed: () {
+                sharedPreferences.clear();
+                // sharedPreferences.commit();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginScreen()),
+                    (Route<dynamic> route) => false);
+              },
+              child: Text("Log Out", style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
