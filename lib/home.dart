@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'login.dart';
+import 'package:explore_egypt/tripComponant/myTrip.dart';
+import './screens/explore_screen.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -44,21 +46,28 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0',
-      style: optionStyle,
-    ),
+  static final List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 1',
       style: optionStyle,
     ),
+    // Text(
+    //   'Index 1',
+    //   style: optionStyle,
+    // ),
+
+    ExploreScreen(),
+    MyTrip(),
     Text(
-      'Index 2',
+      'Index3',
       style: optionStyle,
     ),
     Text(
-      'Index 3',
+      'Index 4',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 5',
       style: optionStyle,
     ),
   ];
@@ -194,11 +203,13 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_activity),
+            label: 'Activities',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore),
             label: 'Explore',
