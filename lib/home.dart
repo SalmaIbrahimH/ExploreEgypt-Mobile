@@ -1,3 +1,7 @@
+
+
+
+import 'package:explore_egypt/tripComponant/myTrip.dart';
 import 'package:flutter/material.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -11,15 +15,16 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static  List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0',
       style: optionStyle,
     ),
-    Text(
-      'Index 1',
-      style: optionStyle,
-    ),
+    // Text(
+    //   'Index 1',
+    //   style: optionStyle,
+    // ),
+    MyTrip(),
     Text(
       'Index 2',
       style: optionStyle,
