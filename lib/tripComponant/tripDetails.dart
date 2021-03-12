@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class TripDetails extends StatefulWidget {
@@ -111,8 +112,9 @@ class _TripDetailsState extends State<TripDetails> {
                       Row(
                         children: <Widget>[
                           Expanded(
-                            child: Text(
-                              widget.from,
+                            child: Text( widget.from
+                              // "${DateFormat("dd/MM/yyyy").format( widget.from)}"
+                           ,
                               style: TextStyle(fontSize: 20),
                             ),
                             flex: 4,
@@ -152,7 +154,7 @@ class _TripDetailsState extends State<TripDetails> {
                           )),
                     ),
                     Expanded(
-                        flex: 8,
+                        flex:8,
                         child: Padding(
                           padding: EdgeInsets.all(20),
                           child: Column(
@@ -160,12 +162,12 @@ class _TripDetailsState extends State<TripDetails> {
                             children: [
                               Text(widget.hotelName,
                                   style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 23,
                                       fontWeight: FontWeight.w500)),
                               SizedBox(
                                 height: 16,
                               ),
-                              Text("widget.roomPrice",
+                              Text(widget.roomPrice,
                                   style: TextStyle(
                                     fontSize: 15,
                                   )),
@@ -213,14 +215,14 @@ class _TripDetailsState extends State<TripDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("widget.trainNumber",
+                              Text(widget.trainNumber,
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w500)),
                               SizedBox(
-                                height: 16,
+                                height: 12,
                               ),
-                              Text("widget.ticketPrice",
+                              Text(widget.ticketPrice,
                                   style: TextStyle(
                                     fontSize: 15,
                                   )),
@@ -230,10 +232,12 @@ class _TripDetailsState extends State<TripDetails> {
                                     Icons.location_on,
                                     size: 15,
                                   ),
-                                  Text("Adress",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      )),
+                                  Flexible(
+                                    child: Text("Adress",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        )),
+                                  ),
                                 ],
                               )
                             ],

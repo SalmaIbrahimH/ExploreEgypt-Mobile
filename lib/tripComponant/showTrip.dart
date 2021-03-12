@@ -38,17 +38,21 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
           future: getTripsFromJson(),
         builder:(BuildContext context, snapshot ){
         //   if(snapshot.connectionState == ConnectionState.done){
-          if(tripList.length>0){
+           if(tripList.length>0){
             return 
              ListView.builder(
             itemCount: tripList.length,
             itemBuilder: (BuildContext context, int index) {
             return  TripCard(
                 programName: tripList[index].programName,
-                from: tripList[index].from,
-                to: tripList[index].to,
+                 from: tripList[index].from.toString(),
+                 to: tripList[index].to.toString(),
                 hotelName: tripList[index].selHotel.hotelName,
+                 roomPrice: tripList[index].selHotel.roomPrice,
+                //  adress: tripList[index].selHotel.hotelName,
                 destenation: tripList[index].selTrain.destination,
+                trainNumber: tripList[index].selTrain.trainNumber.toString(),
+                 ticketPrice: tripList[index].selTrain.ticketPrice,
               );
             
           },);
@@ -61,8 +65,9 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                 Padding(padding: EdgeInsets.all(10),
                child: Text("Loading trips"))
               ],)
-            );
-          }})
+         
+         
         );
   }
-}
+}));
+  }}

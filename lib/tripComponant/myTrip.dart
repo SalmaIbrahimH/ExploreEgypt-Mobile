@@ -1,6 +1,8 @@
 // ignore: avoid_web_libraries_in_flutter
 // import 'dart:html';
 
+// import 'package:explore_egypt/model/tripModel.dart';
+// import 'package:explore_egypt/model/tripModel.dart';
 import 'package:explore_egypt/tripComponant/addTripform/addTrip.dart';
 import 'package:explore_egypt/tripComponant/showTrip.dart';
 
@@ -14,6 +16,7 @@ class MyTrip extends StatefulWidget {
 class _MyTripState extends State<MyTrip> {
   @override
   Widget build(BuildContext context) {
+    // final nwTrip = new Trip(null,null,null, null,null,null,null, null,null,null);
     return Scaffold(
       // appBar: AppBar(
       //   title: Text("My Trips"),

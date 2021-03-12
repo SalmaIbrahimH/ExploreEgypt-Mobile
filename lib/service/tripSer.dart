@@ -1,11 +1,12 @@
 
 import 'package:explore_egypt/model/cityModal.dart';
 import 'package:explore_egypt/model/hotelModel.dart';
+import 'package:explore_egypt/model/trainModal.dart';
 import 'package:explore_egypt/model/tripModel.dart';
 import 'package:dio/dio.dart';
 
 class TripService{
-  String url="https://explore-egypt-db.herokuapp.com/programs";
+  String url="https://explore-egypt-db.herokuapp.com";
 
  //// get trip program 
   Future<List<Trip>> getTrips() async {
@@ -13,22 +14,22 @@ class TripService{
     List<Trip> trips= new List();
     Response response;
     Dio dio = new Dio();
-    response = await dio.get(url);
+    response = await dio.get("$url/programs");
     var data = response.data;
-    // print(data);
+    print(data);
     data.forEach((value){
       trips.add(Trip.fromJson(value));
     });
     return trips;    
 }
-  String curl="https://explore-egypt-db.herokuapp.com/city";
+
   ////get cities
  Future<List<Cities>> getCties() async {
     // ignore: deprecated_member_use
     List<Cities> city= new List();
     Response response;
     Dio dio = new Dio();
-    response = await dio.get(curl);
+    response = await dio.get("$url/city");
     var data = response.data;
     // print(data);
     data.forEach((value){
@@ -37,7 +38,6 @@ class TripService{
     return city;
 }
 
-String hurl="https://explore-egypt-db.herokuapp.com/hotels";
 
  //// get Hotel By Id program 
   Future<List<Hotel>> getHotelById(cityvalue) async {
@@ -45,7 +45,7 @@ String hurl="https://explore-egypt-db.herokuapp.com/hotels";
     List<Hotel> hotel= new List();
     Response response;
     Dio dio = new Dio();
-    response = await dio.get("$hurl?cityID=$cityvalue");
+    response = await dio.get("$url/hotels?cityID=$cityvalue");
     var data = response.data;
     // print(data);
     data.forEach((value){
@@ -53,4 +53,67 @@ String hurl="https://explore-egypt-db.herokuapp.com/hotels";
     });
     return hotel;    
 }
+ //// get train By Id program 
+  Future<List<Train>> getTrainById(destvalue) async {
+    // ignore: deprecated_member_use
+    List<Train> train= new List();
+    Response response;
+    Dio dio = new Dio();
+    response = await dio.get("$url/trains?destinationId=$destvalue");
+    var data = response.data;
+    // print(data);
+    data.forEach((value){
+      train.add(Train.fromJson(value));
+    });
+    return train;    
+}
+//// post program 
+  Future<List<Trip>> save(String programName, 
+  // DateTime from, DateTime to,
+  String hotelName, String roomPrice,String adress,
+   String trainNumber, String ticketPrice, String destination,
+  ) async {
+    // ignore: deprecated_member_use
+    // List<Trip> train= new List();
+    Response response;
+    Dio dio = new Dio();
+    response = await dio.post("$url/programs",
+    data:  {"programName":programName,
+    //  "from":from,"to":to,
+    "hotelName": hotelName,"roomPrice":roomPrice,"adress":adress,
+     "trainNumber":trainNumber,  "ticketPrice":ticketPrice, "destination": destination, 
+    });
+    var data = response.data;
+    // print(data);
+    print("helllllo");
+    // data.forEach((value){
+    //   train.add(Trip.fromJson(value));
+    // });
+    return data;    
+}
+
+//   Future<bool> save(String programName, DateTime from, DateTime to,
+//   // String hotelName, String roomPrice,String adress,
+//   // String trainNumber, String ticketPrice, String destination,
+//   ) async {
+//     // ignore: deprecated_member_use
+//     List<Trip> nProgram= new List();
+//     Trip program =new Trip( programName:programName, from:from,to:to,
+// // hotelName: hotelName,roomPrice:roomPrice,adress:adress, 
+// //    trainNumber:trainNumber,  ticketPrice:ticketPrice,  destination:destination
+// );
+//     print("hello");
+//     Response response;
+//     Dio dio = new Dio();
+//     print("hello");
+//     response = await dio.post("$url/programs",
+//     data:program);
+//     var data = response.data;
+//      print(data);
+//      print("hello");
+//     // data.forEach((value){
+//     //   nProgram.add(Trip.fromJson(value));
+//     // });
+//     return true;    
+// }
 } 

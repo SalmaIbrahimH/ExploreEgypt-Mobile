@@ -294,6 +294,7 @@ class MapScreenState extends State<ProfilePage>
             child: Padding(
               padding: EdgeInsets.only(right: 10.0),
               child: Container(
+                  // ignore: deprecated_member_use
                   child: new RaisedButton(
                 child: new Text("Save"),
                 textColor: Colors.white,
@@ -314,6 +315,7 @@ class MapScreenState extends State<ProfilePage>
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Container(
+                  // ignore: deprecated_member_use
                   child: new RaisedButton(
                 child: new Text("Cancel"),
                 textColor: Colors.white,
