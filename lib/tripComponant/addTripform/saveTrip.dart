@@ -1,4 +1,4 @@
-import 'package:explore_egypt/model/tripModel.dart';
+import 'package:explore_egypt/models/tripModel.dart';
 import 'package:explore_egypt/service/tripSer.dart';
 import 'package:flutter/material.dart';
 
@@ -31,17 +31,21 @@ class SaveTrip extends StatefulWidget {
 }
 
 class _SaveTripState extends State<SaveTrip> {
-
-   List<Trip> program;
+  List<Trip> program;
   save() async {
-    
-    program = await TripService().save(widget.programName,
-    //  widget.from, widget.to,
-     widget.hotelName, widget.roomPrice,widget. adress,
-     widget.destination,widget.trainNumber,widget.ticketPrice) ;
-   print(program);
+    program = await TripService().save(
+        widget.programName,
+        //  widget.from, widget.to,
+        widget.hotelName,
+        widget.roomPrice,
+        widget.adress,
+        widget.destination,
+        widget.trainNumber,
+        widget.ticketPrice);
+    print(program);
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,14 +62,13 @@ class _SaveTripState extends State<SaveTrip> {
                   ),
                   onPressed: () {
                     print("hotelName${widget.hotelName}");
-          print("hotelName${widget.hotelName}");
-          print("adress${widget.adress}");
-          print("name${widget.programName}");
-          print("from${widget.from}");
-          print("to${widget.to}");
-                     save();
-                    //  Navigator.push(context,
-                    //           MaterialPageRoute(builder: (context)=> ));
+                    print("hotelName${widget.hotelName}");
+                    print("adress${widget.adress}");
+                    print("name${widget.programName}");
+                    print("from${widget.from}");
+                    print("to${widget.to}");
+                    save();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   }),
         ),
       ),

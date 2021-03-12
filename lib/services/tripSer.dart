@@ -1,10 +1,9 @@
 
-
-import 'package:dio/dio.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/models/tripModel.dart';
+import 'package:dio/dio.dart';
 
 class TripService{
   String url="https://explore-egypt-db.herokuapp.com";

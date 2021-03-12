@@ -2,7 +2,7 @@ import 'package:explore_egypt/TripComponant/addTripform/addCity.dart';
 // import 'package:explore_egypt/model/tripModel.dart';
 // import 'package:explore_egypt/service/tripSer.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 
 class NewTrip extends StatefulWidget {
   // final Trip ntrip;

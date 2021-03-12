@@ -1,10 +1,12 @@
 import 'package:explore_egypt/profile.dart';
+import 'package:explore_egypt/screens/activities.dart';
+import 'package:explore_egypt/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'login.dart';
 import 'package:explore_egypt/tripComponant/myTrip.dart';
-import './screens/explore_screen.dart';
+import '../login.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -47,15 +49,7 @@ class _HomeState extends State<Home> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 1',
-      style: optionStyle,
-    ),
-    // Text(
-    //   'Index 1',
-    //   style: optionStyle,
-    // ),
-
+    Activities(),
     ExploreScreen(),
     MyTrip(),
     Text(
@@ -93,12 +87,14 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         toolbarHeight: 130,
         title: Padding(
-          padding: const EdgeInsets.only(top: 45),
-          child: Image.asset(
-            'assets/try.png',
-            height: 70,
-          ),
-        ),
+            padding: const EdgeInsets.only(top: 45),
+            child: Text(
+              'Explore Egypt',
+              style: GoogleFonts.playfairDisplay(
+                  fontSize: 45.6,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.blue[800]),
+            )),
         centerTitle: true,
         actions: <Widget>[
           Padding(
@@ -106,7 +102,7 @@ class _HomeState extends State<Home> {
             child: IconButton(
               icon: Icon(
                 Icons.person,
-                color: Colors.blueGrey[500],
+                color: Colors.blue[700],
                 size: 40,
               ),
               onPressed: () {
@@ -119,7 +115,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.grey[100],
 
         // title: const Text('Explore Egypt',
-        // style: TextStyle(color: Colors.blueGrey,fontSize: 30),),
+        // style: TextStyle(color: Colors.blue[700],fontSize: 30),),
       ),
       endDrawer: Drawer(
         elevation: 16.0,
@@ -132,16 +128,16 @@ class _HomeState extends State<Home> {
               accountName: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Text("xyz",
-                    style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+                    style: TextStyle(fontSize: 20, color: Colors.blue[700])),
               ),
               accountEmail: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Text("xyz@gmail.com",
-                    style: TextStyle(fontSize: 15, color: Colors.blueGrey)),
+                    style: TextStyle(fontSize: 15, color: Colors.blue[700])),
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.grey.shade50,
-                foregroundColor: Colors.blueGrey,
+                foregroundColor: Colors.blue[700],
                 child: InkWell(
                   onTap: () {
                     // Toast.show("you have to sing up ", context,
@@ -163,7 +159,7 @@ class _HomeState extends State<Home> {
                   child: IconButton(
                     icon: Icon(
                       Icons.cancel,
-                      color: Colors.blueGrey[500],
+                      color: Colors.blue[700],
                       size: 40,
                     ),
                     onPressed: () {
@@ -176,7 +172,7 @@ class _HomeState extends State<Home> {
             ListTile(
               title: new Text(
                 "All Inboxes",
-                style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                style: TextStyle(fontSize: 20, color: Colors.blue[700]),
               ),
               leading: new Icon(Icons.mail),
             ),
@@ -185,7 +181,7 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               title: new Text("Primary",
-                  style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+                  style: TextStyle(fontSize: 20, color: Colors.blue[700])),
               leading: new Icon(Icons.inbox),
             ),
             MaterialButton(
@@ -207,7 +203,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_activity),
+            icon: Icon(Icons.map),
             label: 'Activities',
           ),
           BottomNavigationBarItem(
@@ -228,11 +224,11 @@ class _HomeState extends State<Home> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blueGrey[400],
+        selectedItemColor: Colors.blue[700],
         onTap: _onItemTapped,
         backgroundColor: Colors.grey.shade200,
         iconSize: 42,
-        unselectedItemColor: Colors.blueGrey[100],
+        unselectedItemColor: Colors.grey[300],
       ),
       endDrawerEnableOpenDragGesture: true,
     );

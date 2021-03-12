@@ -1,9 +1,9 @@
-import 'package:explore_egypt/service/usersService.dart';
+import 'package:explore_egypt/services/usersService.dart';
 import 'package:explore_egypt/siguUp.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Progress.dart';
-import 'home.dart';
+import 'package:explore_egypt/screens/home.dart';
 import 'models/users.dart';
 import 'package:flutter/services.dart';
 

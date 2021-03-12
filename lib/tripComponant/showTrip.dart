@@ -1,7 +1,7 @@
 
 
-import 'package:explore_egypt/model/tripModel.dart';
-import 'package:explore_egypt/service/tripSer.dart';
+import 'package:explore_egypt/models/tripModel.dart';
+import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/cards/tripCard.dart';
 import 'package:flutter/material.dart';
 

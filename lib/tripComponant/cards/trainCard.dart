@@ -1,4 +1,4 @@
-import 'package:explore_egypt/model/trainModal.dart';
+// import 'package:explore_egypt/model/trainModal.dart';
 import 'package:explore_egypt/tripComponant/addTripform/saveTrip.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class TrainCard extends StatefulWidget {
   String destinationId;
   String departureTime;
   String arrivalTime;
-  Details details;
+  // Details details;
   int id;
 
   TrainCard(
@@ -34,7 +34,7 @@ class TrainCard extends StatefulWidget {
       this.destinationId,
       this.departureTime,
       this.arrivalTime,
-      this.details,
+      // this.details,
       this.id,
       this.hotelName,
       this.roomPrice,

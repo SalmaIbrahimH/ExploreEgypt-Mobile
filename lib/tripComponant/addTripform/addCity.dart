@@ -1,8 +1,7 @@
 
-import 'package:explore_egypt/model/cityModal.dart';
-import 'package:explore_egypt/model/hotelModel.dart';
-// import 'package:explore_egypt/model/tripModel.dart';
-import 'package:explore_egypt/service/tripSer.dart';
+import 'package:explore_egypt/models/cityModal.dart';
+import 'package:explore_egypt/models/hotelModel.dart';
+import 'package:explore_egypt/services/tripSer.dart';
 // import 'package:explore_egypt/tripComponant/addTripform/addTrain.dart';
 import 'package:explore_egypt/tripComponant/cards/hotelCard.dart';
 

@@ -1,8 +1,8 @@
-import 'package:explore_egypt/service/usersService.dart';
+import 'package:explore_egypt/screens/home.dart';
+import 'package:explore_egypt/services/usersService.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Progress.dart';
-import 'home.dart';
 import 'login.dart';
 import 'models/users.dart';
 

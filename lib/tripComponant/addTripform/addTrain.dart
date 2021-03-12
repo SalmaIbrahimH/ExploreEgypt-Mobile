@@ -1,8 +1,7 @@
 
-import 'package:explore_egypt/model/cityModal.dart';
-import 'package:explore_egypt/model/trainModal.dart';
-// import 'package:explore_egypt/model/tripModel.dart';
-import 'package:explore_egypt/service/tripSer.dart';
+import 'package:explore_egypt/models/cityModal.dart';
+import 'package:explore_egypt/models/trainModal.dart';
+import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/cards/trainCard.dart';
 import 'package:flutter/material.dart';
 
