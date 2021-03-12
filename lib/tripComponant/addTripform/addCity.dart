@@ -12,8 +12,10 @@ class City extends StatefulWidget {
 
   // final Trip ntrip;
   String programName;
-  DateTime from;
-  DateTime to;
+  // DateTime from;
+  // DateTime to;
+   String from;
+    String to;
   City({Key key,  this.programName,this.from,this.to}): super(key:key);
 
 
@@ -59,10 +61,37 @@ class _CityState extends State<City> {
       body: Container(
         child: Form(
           child: Center(
-          child:  Column(mainAxisAlignment: MainAxisAlignment.center,
+          child:  Column(
           children: [
-            // Padding(padding: EdgeInsets.all(10),
-            // child:Text("name ${ntrip.programNameController} "),),
+             Container(
+                height: 150,
+                color: Colors.cyan,
+                child: Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          "Choose the city you will go to show the hotel",
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                              textAlign: TextAlign.center,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Center(
+                          child: Text(
+                        "you can change these details later",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                    ],
+                  ),
+                )),
+            
             Padding(padding: EdgeInsets.all(10),
             child: DropdownButton(
               value: cityvalue ,

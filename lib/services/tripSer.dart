@@ -54,12 +54,26 @@ class TripService{
     return hotel;    
 }
  //// get train By Id program 
-  Future<List<Train>> getTrainById(destvalue) async {
+  Future<List<Train>> getTrainById(destvalue,cityvalue) async {
     // ignore: deprecated_member_use
     List<Train> train= new List();
     Response response;
     Dio dio = new Dio();
-    response = await dio.get("$url/trains?destinationId=$destvalue");
+    response = await dio.get("$url/trains?destinationId=$destvalue&cityID=$cityvalue");
+    var data = response.data;
+    // print(data);
+    data.forEach((value){
+      train.add(Train.fromJson(value));
+    });
+    return train;    
+}
+//// get train By Id program 
+  Future<List<Train>> getTrainBycityId(cityvalue) async {
+    // ignore: deprecated_member_use
+    List<Train> train= new List();
+    Response response;
+    Dio dio = new Dio();
+    response = await dio.get("$url/trains?cityID=$cityvalue");
     var data = response.data;
     // print(data);
     data.forEach((value){
@@ -69,7 +83,7 @@ class TripService{
 }
 //// post program 
   Future<List<Trip>> save(String programName, 
-  // DateTime from, DateTime to,
+   String from, String to,
   String hotelName, String roomPrice,String adress,
    String trainNumber, String ticketPrice, String destination,
   ) async {
@@ -79,7 +93,7 @@ class TripService{
     Dio dio = new Dio();
     response = await dio.post("$url/programs",
     data:  {"programName":programName,
-    //  "from":from,"to":to,
+      "from":from,"to":to,
     "hotelName": hotelName,"roomPrice":roomPrice,"adress":adress,
      "trainNumber":trainNumber,  "ticketPrice":ticketPrice, "destination": destination, 
     });

@@ -9,8 +9,10 @@ class HotelCard extends StatefulWidget {
   // final Trip ntrip;
   // HotelCard({Key key, @required this.ntrip}) : super(key: key);
   String programName;
-   DateTime from;
-  DateTime to;
+  //  DateTime from;
+  // DateTime to;
+   String from;
+    String to;
   // HotelCard({Key key,  this.name}): super(key:key);
 
   int id;

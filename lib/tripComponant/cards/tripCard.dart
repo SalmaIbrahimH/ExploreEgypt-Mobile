@@ -92,7 +92,7 @@ class _TripCardState extends State<TripCard> {
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    widget.programName,
+                                    "widget.programName",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "sans-serif",
@@ -105,7 +105,7 @@ class _TripCardState extends State<TripCard> {
                                 children: <Widget>[
                                   Flexible(
                                     child: Text(
-                                      widget.hotelName,
+                                      "widget.hotelName",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: "sans-serif",
@@ -126,7 +126,7 @@ class _TripCardState extends State<TripCard> {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      widget.destenation,
+                                      "widget.destenation",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: "sans-serif",

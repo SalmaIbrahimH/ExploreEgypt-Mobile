@@ -23,8 +23,10 @@ class Trip {
     });
 
     String programName;
-    DateTime from;
-    DateTime to;
+    // DateTime from;
+    // DateTime to;
+    String from;
+    String to;
     String city;
     String fromCity;
     String toCity;
@@ -35,10 +37,10 @@ class Trip {
 
     factory Trip.fromJson(Map<String, dynamic> json) => Trip(
         programName: json["programName"],
-        from: DateTime.parse(json["from"]),
-        to: DateTime.parse(json["to"]),
-        // from: json["from"],
-        // to: json["to"],
+        // from: DateTime.parse(json["from"]),
+        // to: DateTime.parse(json["to"]),
+        from: json["from"],
+        to: json["to"],
         city: json["city"],
         fromCity: json["fromCity"] == null ? null : json["fromCity"],
         toCity: json["toCity"] == null ? null : json["toCity"],
@@ -50,10 +52,10 @@ class Trip {
 
     Map<String, dynamic> toJson() => {
         "programName": programName,
-        "from": "${from.year.toString().padLeft(4, '0')}-${from.month.toString().padLeft(2, '0')}-${from.day.toString().padLeft(2, '0')}",
-        "to": "${to.year.toString().padLeft(4, '0')}-${to.month.toString().padLeft(2, '0')}-${to.day.toString().padLeft(2, '0')}",
-        // "from": from,
-        // "to": to,
+        // "from": "${from.year.toString().padLeft(4, '0')}-${from.month.toString().padLeft(2, '0')}-${from.day.toString().padLeft(2, '0')}",
+        // "to": "${to.year.toString().padLeft(4, '0')}-${to.month.toString().padLeft(2, '0')}-${to.day.toString().padLeft(2, '0')}",
+        "from": from,
+        "to": to,
         "city": city,
         "fromCity": fromCity == null ? null : fromCity,
         "toCity": toCity == null ? null : toCity,

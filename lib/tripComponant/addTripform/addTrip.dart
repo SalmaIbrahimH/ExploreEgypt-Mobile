@@ -15,8 +15,10 @@ class NewTrip extends StatefulWidget {
 
 class _NewTripState extends State<NewTrip> {
   String programNameq;
-  DateTime from;
-  DateTime to;
+  // DateTime from;
+  // DateTime to;
+   String from;
+    String to;
   void startDate() {
     showDatePicker(
       context: context,
@@ -26,7 +28,7 @@ class _NewTripState extends State<NewTrip> {
     ).then((value) => {
           if (value == null) {},
           setState(() {
-            from = value;
+            from = value.toString();
           })
         });
   }
@@ -40,7 +42,7 @@ class _NewTripState extends State<NewTrip> {
     ).then((value) => {
           if (value == null) {},
           setState(() {
-            to = value;
+            to = value.toString();
           })
         });
   }
@@ -185,7 +187,8 @@ class _NewTripState extends State<NewTrip> {
                                       City(
                                       programName:programName.text,
                                       from:from,
-                                      to:to,)));
+                                      to:to,
+                                      )));
                         }),
               ),
             )

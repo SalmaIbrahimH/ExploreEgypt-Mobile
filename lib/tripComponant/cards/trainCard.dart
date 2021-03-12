@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class TrainCard extends StatefulWidget {
   String programName;
-  DateTime from;
-  DateTime to;
+  // DateTime from;
+  // DateTime to;
+   String from;
+    String to;
   String hotelName;
   String roomPrice;
   String adress;
