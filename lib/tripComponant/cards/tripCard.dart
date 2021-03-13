@@ -14,6 +14,7 @@ class TripCard extends StatefulWidget {
   String destenation;
   String selHotel;
   String selTrain;
+  int id;
 
   TripCard({
     this.programName,
@@ -27,6 +28,7 @@ class TripCard extends StatefulWidget {
     this.destenation,
     this.selHotel,
     this.selTrain,
+    this.id,
   });
 
   @override
@@ -43,7 +45,7 @@ class _TripCardState extends State<TripCard> {
               MaterialPageRoute(
                   builder: (context) => TripDetails(
                         programName: widget.programName,
-                        destenation: widget.destenation,
+                        destination: widget.destenation,
                         hotelName: widget.hotelName,
                         roomPrice: widget.roomPrice,
                         from: widget.from,
@@ -51,6 +53,7 @@ class _TripCardState extends State<TripCard> {
                         ticketPrice: widget.ticketPrice,
                         trainNumber: widget.trainNumber,
                         adress: widget.adress,
+                        id: widget.id,
                       )));
         },
         child: Card(
@@ -92,7 +95,7 @@ class _TripCardState extends State<TripCard> {
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    "widget.programName",
+                                    widget.programName,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "sans-serif",
@@ -105,7 +108,7 @@ class _TripCardState extends State<TripCard> {
                                 children: <Widget>[
                                   Flexible(
                                     child: Text(
-                                      "widget.hotelName",
+                                      widget.hotelName,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: "sans-serif",
@@ -126,7 +129,7 @@ class _TripCardState extends State<TripCard> {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      "widget.destenation",
+                                      widget.destenation,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: "sans-serif",

@@ -1,48 +1,77 @@
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/services/tripSer.dart';
-import 'package:explore_egypt/tripComponant/cards/trainCard.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editTrainCard.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
 // ignore: must_be_immutable
-// ignore: camel_case_types
-// ignore: must_be_immutable
-class AddTrain extends StatefulWidget {
-
+class EditTrain extends StatefulWidget {
+  int id;
   String programName;
-  // DateTime from;
-  // DateTime to;
   String from;
   String to;
+  String toCity;
   String hotelName;
   String roomPrice;
   String adress;
-  AddTrain(
+  String trainNumber;
+  String ticketPrice;
+  String destination;
+
+  EditTrain(
       {Key key,
-      this.hotelName,
-      this.adress,
-      this.roomPrice,
+      this.id,
       this.programName,
       this.from,
-      this.to})
+      this.to,
+      this.toCity,
+      this.hotelName,
+      this.roomPrice,
+      this.adress,
+      this.trainNumber,
+      this.ticketPrice,
+      this.destination})
       : super(key: key);
 
   @override
-  _AddTrainState createState() => _AddTrainState();
+  _EditTrainState createState() => _EditTrainState();
 }
 
-class _AddTrainState extends State<AddTrain> {
+class _EditTrainState extends State<EditTrain> {
+  String toCity;
+  String hotelName;
+  String roomPrice;
+  int id;
+  String from;
+  String to;
+
+  String adress;
+  String trainNumber;
+  String ticketPrice;
+  String destination;
 
   List<Cities> cityList = [];
   List<Train> trainList = [];
   String cityvalue;
   String destvalue;
-  
+
   @override
   void initState() {
     super.initState();
+    setState(() {
+      // cityvalue=widget.toCity;
+    });
     getCityFromJson();
+
+    print(widget.programName);
+    print(widget.from);
+    print(widget.to);
+    print(widget.adress);
+    print(widget.hotelName);
+    print(widget.roomPrice);
+    print(widget.trainNumber);
+    print(widget.ticketPrice);
+    print(widget.destination);
   }
 
   getCityFromJson() async {
@@ -167,7 +196,7 @@ class _AddTrainState extends State<AddTrain> {
                                     itemCount: trainList.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      return TrainCard(
+                                      return EditTrainCard(
                                         from: widget.from,
                                         to: widget.to,
                                         programName: widget.programName,
@@ -176,7 +205,8 @@ class _AddTrainState extends State<AddTrain> {
                                         adress: widget.adress,
                                         trainNumber:
                                             trainList[index].trainNumber,
-                                         ticketPrice: trainList[index].ticketPrice,
+                                        ticketPrice:
+                                            trainList[index].ticketPrice,
                                         arrivalTime:
                                             trainList[index].arrivalTime,
                                         departureTime:

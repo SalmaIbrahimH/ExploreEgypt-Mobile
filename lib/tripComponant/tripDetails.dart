@@ -1,10 +1,11 @@
-
+import 'package:explore_egypt/services/tripSer.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editTrip.dart';
+import 'package:explore_egypt/tripComponant/showTrip.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class TripDetails extends StatefulWidget {
-  
   String programName;
   String from;
   String to;
@@ -14,37 +15,72 @@ class TripDetails extends StatefulWidget {
   String adress;
   String trainNumber;
   String ticketPrice;
-  String destenation;
+  String destination;
+  int id;
 
-  TripDetails({
-    this.programName,
-    this.from,
-    this.to,
-    this.toCity,
-    this.hotelName,
-    this.roomPrice,
-    this.adress,
-    this.trainNumber,
-    this.ticketPrice,
-    this.destenation
-  });
+  TripDetails(
+      {this.programName,
+      this.from,
+      this.to,
+      this.toCity,
+      this.hotelName,
+      this.roomPrice,
+      this.adress,
+      this.trainNumber,
+      this.ticketPrice,
+      this.id,
+      this.destination});
   @override
-  
   _TripDetailsState createState() => _TripDetailsState();
 }
 
 class _TripDetailsState extends State<TripDetails> {
+  int id;
+  String programName;
+  String from;
+  String to;
+  String toCity;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String trainNumber;
+  String ticketPrice;
+  String destination;
+
+  // editTOJson(id) async {
+  //   print("edit $id");
+  //   await TripService().edit(
+  //       id,
+  //       widget.programName,
+  //       widget.from,
+  //       widget.to,
+  //       widget.hotelName,
+  //       widget.roomPrice,
+  //       widget.adress,
+  //       widget.destination,
+  //       widget.trainNumber,
+  //       widget.ticketPrice);
+
+  //   setState(() {});
+  // }
+
+  delete(id) async {
+    print(" delete1$id");
+    await TripService().delete(id);
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          // backgroundColor: Colors.amberAccent,
           title: Center(
-            child: Text(
-              "Trip Details",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-          )),
+        child: Text(
+          "Trip Details",
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      )),
       body: Container(
         child: Column(
           children: [
@@ -55,13 +91,82 @@ class _TripDetailsState extends State<TripDetails> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      widget.programName,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500),
+                    //Edit and delete botton
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // program name
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 50),
+                          child: Text(
+                            widget.programName,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    size: 30,
+                                  ),
+                                  onPressed: () {
+                                    print("edit${widget.id}");
+
+                                    {
+                                      id = widget.id;
+                                      programName = widget.programName;
+                                      from = widget.from;
+                                      to = widget.to;
+                                      hotelName = widget.hotelName;
+                                      roomPrice = widget.roomPrice;
+                                      adress = widget.adress;
+                                      destination = widget.destination;
+                                      trainNumber = widget.trainNumber;
+                                      ticketPrice = widget.ticketPrice;
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => EditTrip(
+                                                    id: id,
+                                                    programName: programName,
+                                                    from: from,
+                                                    to: to,
+                                                    hotelName: hotelName,
+                                                    roomPrice: roomPrice,
+                                                    adress: adress,
+                                                    destination: destination,
+                                                    trainNumber: trainNumber,
+                                                    ticketPrice: ticketPrice,
+                                                  )));
+                                    }
+                                  }),
+                              IconButton(
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                    size: 30,
+                                  ),
+                                  onPressed: () {
+                                    print("object1${widget.id}");
+                                    conifrmDelete(widget.id);
+                                    print("object${widget.id}");
+                                  }),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
+
+                    // msg
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
@@ -78,23 +183,24 @@ class _TripDetailsState extends State<TripDetails> {
             ),
             Container(
               height: 150,
-              decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(24),
-                  color: Colors.cyan.shade50),
+              decoration: BoxDecoration(color: Colors.cyan.shade50),
               child: Padding(
                   padding: EdgeInsets.all(30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      //trave; details
                       Row(
                         children: <Widget>[
+                          // depatrutre city
                           Expanded(
                             child: Text(
-                              "Cairo",
+                              widget.destination,
                               style: TextStyle(fontSize: 30),
                             ),
                             flex: 4,
                           ),
+                          // arrow icon
                           Expanded(
                             child: Icon(
                               Icons.arrow_forward,
@@ -102,23 +208,27 @@ class _TripDetailsState extends State<TripDetails> {
                             ),
                             flex: 4,
                           ),
+                          // arival city
                           Expanded(
-                            child:
-                                Text(widget.destenation, style: TextStyle(fontSize: 20)),
+                            child: Text(widget.destination,
+                                style: TextStyle(fontSize: 20)),
                             flex: 4,
                           )
                         ],
                       ),
                       Row(
                         children: <Widget>[
+                          //departure date
                           Expanded(
-                            child: Text( widget.from
+                            child: Text(
+                              widget.from
                               // "${DateFormat("dd/MM/yyyy").format( widget.from)}"
-                           ,
+                              ,
                               style: TextStyle(fontSize: 20),
                             ),
                             flex: 4,
                           ),
+                          // arrow icon
                           Expanded(
                             child: Icon(
                               Icons.arrow_back,
@@ -126,8 +236,10 @@ class _TripDetailsState extends State<TripDetails> {
                             ),
                             flex: 5,
                           ),
+                          // arrival date
                           Expanded(
-                            child: Text(widget.to, style: TextStyle(fontSize: 20)),
+                            child:
+                                Text(widget.to, style: TextStyle(fontSize: 20)),
                             flex: 4,
                           )
                         ],
@@ -135,14 +247,14 @@ class _TripDetailsState extends State<TripDetails> {
                     ],
                   )),
             ),
+            //hotel details
             Container(
               height: 150,
-              decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(24),
-                  color: Colors.cyan.shade50),
+              decoration: BoxDecoration(color: Colors.cyan.shade50),
               child: Center(
                 child: Row(
                   children: [
+                    //hotel icon
                     Expanded(
                       flex: 4,
                       child: Padding(
@@ -153,8 +265,9 @@ class _TripDetailsState extends State<TripDetails> {
                             color: Colors.deepOrangeAccent,
                           )),
                     ),
+                    //hotel name
                     Expanded(
-                        flex:8,
+                        flex: 8,
                         child: Padding(
                           padding: EdgeInsets.all(20),
                           child: Column(
@@ -190,14 +303,14 @@ class _TripDetailsState extends State<TripDetails> {
                 ),
               ),
             ),
+            // train details
             Container(
               height: 150,
-              decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(24),
-                  color: Colors.cyan.shade50),
+              decoration: BoxDecoration(color: Colors.cyan.shade50),
               child: Center(
                 child: Row(
                   children: [
+                    // train icon
                     Expanded(
                       flex: 4,
                       child: Padding(
@@ -208,6 +321,7 @@ class _TripDetailsState extends State<TripDetails> {
                             color: Colors.deepOrangeAccent,
                           )),
                     ),
+                    // train number
                     Expanded(
                         flex: 8,
                         child: Padding(
@@ -251,5 +365,32 @@ class _TripDetailsState extends State<TripDetails> {
         ),
       ),
     );
+  }
+
+//// delete modal
+  conifrmDelete(id) {
+    print("sonfitrm$id");
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("Do you want to delete"),
+              actions: [
+                MaterialButton(
+                  onPressed: () {
+                    delete(id);
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ShowMyTrips()));
+                  },
+                  child: Text("Yes"),
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("No"),
+                )
+              ],
+            ));
   }
 }

@@ -1,8 +1,8 @@
-import 'package:explore_egypt/tripComponant/addTripform/saveTrip.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/saveEdit.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class TrainCard extends StatefulWidget {
+class EditTrainCard extends StatefulWidget {
   String programName;
   String from;
   String to;
@@ -19,7 +19,7 @@ class TrainCard extends StatefulWidget {
   String arrivalTime;
   int id;
 
-  TrainCard(
+  EditTrainCard(
       {this.trainNumber,
       this.city,
       this.cityId,
@@ -37,10 +37,20 @@ class TrainCard extends StatefulWidget {
       this.to});
 
   @override
-  _TrainCardState createState() => _TrainCardState();
+  _EditTrainCardState createState() => _EditTrainCardState();
 }
 
-class _TrainCardState extends State<TrainCard> {
+class _EditTrainCardState extends State<EditTrainCard> {
+  String toCity;
+  String hotelName;
+  String roomPrice;
+  int id;
+  String from;
+  String to;
+  String adress;
+  String trainNumber;
+  String ticketPrice;
+  String destination;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -56,7 +66,7 @@ class _TrainCardState extends State<TrainCard> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SaveTrip(
+                  builder: (context) => SaveEdit(
                       hotelName: widget.hotelName,
                       roomPrice: widget.roomPrice,
                       adress: widget.adress,
