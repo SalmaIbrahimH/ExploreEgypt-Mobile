@@ -1,24 +1,56 @@
-import 'package:explore_egypt/TripComponant/addTripform/addCity.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editHotel.dart';
 import 'package:flutter/material.dart';
 
-class NewTrip extends StatefulWidget {
-  @override
-  _NewTripState createState() => _NewTripState();
-}
-
-class _NewTripState extends State<NewTrip> {
-  String programNameq;
-  // DateTime from;
-  // DateTime to;
+class EditTrip extends StatefulWidget {
+  int id;
+  String programName;
   String from;
   String to;
+  String toCity;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String trainNumber;
+  String ticketPrice;
+  String destination;
+
+  EditTrip(
+      {Key key,
+      this.id,
+      this.programName,
+      this.from,
+      this.to,
+      this.toCity,
+      this.hotelName,
+      this.roomPrice,
+      this.adress,
+      this.trainNumber,
+      this.ticketPrice,
+      this.destination})
+      : super(key: key);
+  @override
+  _EditTripState createState() => _EditTripState();
+}
+
+class _EditTripState extends State<EditTrip> {
+  int id;
+  String from;
+  String to;
+   String toCity;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String trainNumber;
+  String ticketPrice;
+  String destination;
+
   var formKey = GlobalKey<FormState>();
   var programName = new TextEditingController();
 
   void startDate() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.parse(widget.from),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     ).then((value) => {
@@ -32,7 +64,7 @@ class _NewTripState extends State<NewTrip> {
   void endDate() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.parse(widget.to),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     ).then((value) => {
@@ -43,14 +75,30 @@ class _NewTripState extends State<NewTrip> {
         });
   }
 
-  
- 
+  void initState() {
+    super.initState();
+    setState(() {
+      programName.text = widget.programName;
+      from = widget.from;
+      to = widget.to;
+    });
+    print(widget.id);
+    print(widget.programName);
+    print(widget.from);
+    print(widget.to);
+    print(widget.adress);
+    print(widget.hotelName);
+    print(widget.roomPrice);
+    print(widget.trainNumber);
+    print(widget.ticketPrice);
+    print(widget.destination);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("New Trip"),
+          title: Text("Edit your Trip"),
         ),
         body: ListView(
           children: <Widget>[
@@ -64,7 +112,7 @@ class _NewTripState extends State<NewTrip> {
                     children: [
                       Center(
                         child: Text(
-                          "Trip Program Setup",
+                          "Trip Program Edit",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w500,
@@ -76,7 +124,7 @@ class _NewTripState extends State<NewTrip> {
                       ),
                       Center(
                           child: Text(
-                        "you can change these details later",
+                        "you can Edit your trip details",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       )),
                     ],
@@ -106,7 +154,7 @@ class _NewTripState extends State<NewTrip> {
                             TextFormField(
                               controller: programName,
                               decoration: InputDecoration(
-                                hintText: "Enter you trip name",
+                                hintText: "Edit you trip name",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                 ),
@@ -160,26 +208,31 @@ class _NewTripState extends State<NewTrip> {
             Padding(
               padding: EdgeInsets.all(15),
               child: Center(
-                child:
-                    MaterialButton(
-                        color: Colors.green,
-                        child: Text(
-                          "Continue",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        onPressed: () {
-                          // print("from $from");
-                          // print("from $to");
-                          // print(programName.text);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => City(
-                                        programName: programName.text,
-                                        from: from,
-                                        to: to,
-                                      )));
-                        }),
+                child: MaterialButton(
+                    color: Colors.green,
+                    child: Text(
+                      "Continue",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () {
+                      // print("from $from");
+                      // print("from $to");
+                      // print(programName.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditHotel(
+                                    programName: programName.text,
+                                    from: from,
+                                    to: to,
+                                    hotelName: hotelName,
+                                    roomPrice: roomPrice,
+                                    adress: adress,
+                                    destination: destination,
+                                    trainNumber: trainNumber,
+                                    ticketPrice: ticketPrice,
+                                  )));
+                    }),
               ),
             )
           ],

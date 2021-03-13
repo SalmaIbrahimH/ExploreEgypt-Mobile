@@ -7,25 +7,24 @@ import 'package:dio/dio.dart';
 class TripService {
   String url = "https://explore-egypt-db.herokuapp.com";
 
-  //// get trip program
+  //// get trip program from json
   Future<List<Trip>> getTrips() async {
     // ignore: deprecated_member_use
-    List<Trip> trips = new List();
+    List<Trip> trips = [];
     Response response;
     Dio dio = new Dio();
     response = await dio.get("$url/programs");
     var data = response.data;
-    print(data);
+    //  print(data);
     data.forEach((value) {
       trips.add(Trip.fromJson(value));
     });
     return trips;
   }
 
-  ////get cities
+  ////get cities list from json
   Future<List<Cities>> getCties() async {
-    // ignore: deprecated_member_use
-    List<Cities> city = new List();
+    List<Cities> city = [];
     Response response;
     Dio dio = new Dio();
     response = await dio.get("$url/city");
@@ -37,10 +36,9 @@ class TripService {
     return city;
   }
 
-  //// get Hotel By Id program
+  //// get Hotel By Id program from json
   Future<List<Hotel>> getHotelById(cityvalue) async {
-    // ignore: deprecated_member_use
-    List<Hotel> hotel = new List();
+    List<Hotel> hotel = [];
     Response response;
     Dio dio = new Dio();
     response = await dio.get("$url/hotels?cityID=$cityvalue");
@@ -52,10 +50,9 @@ class TripService {
     return hotel;
   }
 
-  //// get train By Id program
+  //// get train By Id program from jsom
   Future<List<Train>> getTrainById(destvalue, cityvalue) async {
-    // ignore: deprecated_member_use
-    List<Train> train = new List();
+    List<Train> train = [];
     Response response;
     Dio dio = new Dio();
     response =
@@ -68,10 +65,9 @@ class TripService {
     return train;
   }
 
-//// get train By Id program
+//// get train By deperture city Id program
   Future<List<Train>> getTrainBycityId(cityvalue) async {
-    // ignore: deprecated_member_use
-    List<Train> train = new List();
+    List<Train> train = [];
     Response response;
     Dio dio = new Dio();
     response = await dio.get("$url/trains?cityID=$cityvalue");
@@ -83,7 +79,7 @@ class TripService {
     return train;
   }
 
-//// post program
+//// post program to json
   Future<List<Trip>> save(
     String programName,
     String from,
@@ -95,54 +91,71 @@ class TripService {
     String ticketPrice,
     String destination,
   ) async {
-    // ignore: deprecated_member_use
-    // List<Trip> train= new List();
     Response response;
     Dio dio = new Dio();
     response = await dio.post("$url/programs", data: {
       "programName": programName,
       "from": from,
       "to": to,
-      "hotelName": hotelName,
-      "roomPrice": roomPrice,
-      "adress": adress,
-      "trainNumber": trainNumber,
+      "selHotel": {
+        "hotelName": hotelName,
+        "roomPrice": roomPrice,
+      },
+      "selTrain"
+          "trainNumber": trainNumber,
       "ticketPrice": ticketPrice,
       "destination": destination,
+      "adress": adress,
     });
     var data = response.data;
-    // print(data);
-    print("helllllo");
-    // data.forEach((value){
-    //   train.add(Trip.fromJson(value));
-    // });
+
     return data;
   }
 
-//   Future<bool> save(String programName, DateTime from, DateTime to,
-//   // String hotelName, String roomPrice,String adress,
-//   // String trainNumber, String ticketPrice, String destination,
-//   ) async {
-//     // ignore: deprecated_member_use
-//     List<Trip> nProgram= new List();
-//     Trip program =new Trip( programName:programName, from:from,to:to,
-// // hotelName: hotelName,roomPrice:roomPrice,adress:adress,
-// //    trainNumber:trainNumber,  ticketPrice:ticketPrice,  destination:destination
-// );
-//     print("hello");
-//     Response response;
-//     Dio dio = new Dio();
-//     print("hello");
-//     response = await dio.post("$url/programs",
-//     data:program);
-//     var data = response.data;
-//      print(data);
-//      print("hello");
-//     // data.forEach((value){
-//     //   nProgram.add(Trip.fromJson(value));
-//     // });
-//     return true;
-// }
+  //// post program to json
+  Future<List<Trip>> edit(
+    int id,
+    String programName,
+    String from,
+    String to,
+    String hotelName,
+    String roomPrice,
+    String adress,
+    String trainNumber,
+    String ticketPrice,
+    String destination,
+  ) async {
+    Response response;
+    Dio dio = new Dio();
+    response = await dio.put("$url/programs/$id", data: {
+      "programName": programName,
+      "from": from,
+      "to": to,
+      "selHotel": {
+        "hotelName": hotelName,
+        "roomPrice": roomPrice,
+      },
+      "selTrain"
+          "trainNumber": trainNumber,
+      "ticketPrice": ticketPrice,
+      "destination": destination,
+      "adress": adress,
+    });
+    var data = response.data;
+
+    return data;
+  }
+
+  //// Delet program
+  Future<List<Trip>> delete(id) async {
+    print("delete service$id");
+
+    Response response;
+    Dio dio = new Dio();
+    response = await dio.delete("$url/programs/$id");
+    var data = response.data;
+    return data;
+  }
 
   Future<List<Hotel>> getHotels() async {
     List<Hotel> hotels = new List();

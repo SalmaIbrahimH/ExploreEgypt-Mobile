@@ -1,8 +1,8 @@
-import 'package:explore_egypt/tripComponant/addTripform/AddTrain.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editTrainCard.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class HotelCard extends StatefulWidget {
+class EditHotelCard extends StatefulWidget {
   String programName;
   String from;
   String to;
@@ -14,7 +14,7 @@ class HotelCard extends StatefulWidget {
   String cityId;
   String img;
 
-  HotelCard(
+  EditHotelCard(
       {this.id,
       this.hotelName,
       this.roomPrice,
@@ -24,13 +24,27 @@ class HotelCard extends StatefulWidget {
       this.img,
       this.programName,
       this.from,
-      this.to});
+      this.to,
+      // this.destination,
+      // this.ticketPrice,
+      // this.trainNumber
+      });
 
   @override
-  _HotelCardState createState() => _HotelCardState();
+  _EditHotelCardState createState() => _EditHotelCardState();
 }
 
-class _HotelCardState extends State<HotelCard> {
+class _EditHotelCardState extends State<EditHotelCard> {
+  int id;
+  String from;
+  String to;
+  String toCity;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  // String trainNumber;
+  // String ticketPrice;
+  // String destination;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +59,16 @@ class _HotelCardState extends State<HotelCard> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddTrain(
-                        hotelName: widget.hotelName,
-                        roomPrice: widget.roomPrice,
-                        adress: widget.adress,
-                        programName: widget.programName,
-                        from: widget.from,
-                        to: widget.to,
+                  builder: (context) => EditTrainCard(
+                      hotelName: widget.hotelName,
+                      roomPrice: widget.roomPrice,
+                      adress: widget.adress,
+                      programName: widget.programName,
+                      from: widget.from,
+                      to: widget.to,
+                      // destination: widget.destination,
+                      // trainNumber: widget.trainNumber,
+                      // ticketPrice: widget.ticketPrice,
                       )));
         },
         child: Card(

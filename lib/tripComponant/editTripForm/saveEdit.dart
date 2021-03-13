@@ -3,7 +3,7 @@ import 'package:explore_egypt/services/tripSer.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class SaveTrip extends StatefulWidget {
+class SaveEdit extends StatefulWidget {
   String programName;
   // DateTime from;
   // DateTime to;
@@ -15,8 +15,9 @@ class SaveTrip extends StatefulWidget {
   String ticketPrice;
   String destination;
   String trainNumber;
+  int id;
 
-  SaveTrip(
+  SaveEdit(
       {Key key,
       this.hotelName,
       this.adress,
@@ -26,16 +27,18 @@ class SaveTrip extends StatefulWidget {
       this.to,
       this.destination,
       this.ticketPrice,
+      this.id,
       this.trainNumber})
       : super(key: key);
   @override
-  _SaveTripState createState() => _SaveTripState();
+  _SaveEditState createState() => _SaveEditState();
 }
 
-class _SaveTripState extends State<SaveTrip> {
+class _SaveEditState extends State<SaveEdit> {
   List<Trip> program;
-  save() async {
-    program = await TripService().save(
+  editTOJson() async {
+    program = await TripService().edit(
+        widget.id,
         widget.programName,
         widget.from,
         widget.to,
@@ -62,7 +65,7 @@ class _SaveTripState extends State<SaveTrip> {
               MaterialButton(
                   color: Colors.green,
                   child: Text(
-                    "add trip",
+                    "Edit trip",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
@@ -72,7 +75,7 @@ class _SaveTripState extends State<SaveTrip> {
                     print("name${widget.programName}");
                     print("from${widget.from}");
                     print("to${widget.to}");
-                    save();
+                    editTOJson()();
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -118,7 +121,7 @@ dialogContant(BuildContext context) {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Your trip is Saved succssfully",
+                  "Your trip is Edited succssfully",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                 ),
