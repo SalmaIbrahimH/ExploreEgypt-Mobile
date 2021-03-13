@@ -67,9 +67,8 @@ class _FactsScreenState extends State<FactsScreen> {
       );
     } else {
       return Center(
-        child: SpinKitCircle(
-          color: Colors.blue,
-          size: 85.0,
+        child: CircularProgressIndicator(
+          backgroundColor: Color(0xFFeeeeee),
         ),
       );
     }

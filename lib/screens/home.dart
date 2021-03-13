@@ -1,6 +1,9 @@
+import 'package:explore_egypt/components/search.dart';
+import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/profile.dart';
 import 'package:explore_egypt/screens/activities.dart';
 import 'package:explore_egypt/screens/explore_screen.dart';
+import 'package:explore_egypt/services/tripSer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,11 +20,19 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   SharedPreferences sharedPreferences;
+  List<Hotel> hotels = [];
+
+  Future getHotels() async {
+    hotels = await TripService().getHotels();
+    print(hotels);
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
     checkLoginStatus();
+    getHotels();
   }
 
   checkLoginStatus() async {
@@ -56,10 +67,7 @@ class _HomeState extends State<Home> {
       'Index3',
       style: optionStyle,
     ),
-    Text(
-      'Index 4',
-      style: optionStyle,
-    ),
+    ProfilePage(),
     Text(
       'Index 5',
       style: optionStyle,
@@ -85,31 +93,43 @@ class _HomeState extends State<Home> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        toolbarHeight: 130,
-        title: Padding(
-            padding: const EdgeInsets.only(top: 45),
-            child: Text(
-              'Explore Egypt',
-              style: GoogleFonts.playfairDisplay(
-                  fontSize: 45.6,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.blue[800]),
-            )),
+        toolbarHeight: 90,
+        title: Text(
+          'Explore Egypt',
+          style: GoogleFonts.playfairDisplay(
+              fontSize: 38.6,
+              fontWeight: FontWeight.w400,
+              color: Colors.blue[800]),
+        ),
         centerTitle: true,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50, right: 15),
-            child: IconButton(
-              icon: Icon(
-                Icons.person,
-                color: Colors.blue[700],
-                size: 40,
-              ),
-              onPressed: () {
-                _openEndDrawer();
-              },
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 50, right: 15),
+          //   child: IconButton(
+          //     icon: Icon(
+          //       Icons.person,
+          //       color: Colors.blue[700],
+          //       size: 40,
+          //     ),
+          //     onPressed: () {
+          //       _openEndDrawer();
+          //     },
+          //   ),
+          // ),
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              size: 32.0,
+              color: Colors.blue[700],
             ),
-          )
+            onPressed: () {
+              print(hotels);
+              showSearch(
+                context: context,
+                delegate: DataSearch(data: hotels),
+              );
+            },
+          ),
         ],
 
         backgroundColor: Colors.grey[100],
