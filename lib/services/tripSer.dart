@@ -107,10 +107,10 @@ class TripService {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
       },
-      "selTrain"
+      "selTrain":{
           "trainNumber": trainNumber,
           "ticketPrice": ticketPrice,
-          "destination": destination,
+          "destination": destination,},
       "adress": adress,
     });
     var data = response.data;
