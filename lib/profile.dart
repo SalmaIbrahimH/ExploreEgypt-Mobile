@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:explore_egypt/service/usersService.dart';
+import 'package:explore_egypt/screens/home.dart';
+import 'package:explore_egypt/services/usersService.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Progress.dart';
-import 'home.dart';
 import 'models/users.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -178,7 +179,7 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Parsonal Information',
+                                    getTranslated(context, 'personal_info'),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18.0,
@@ -206,7 +207,7 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Frist Name',
+                                    getTranslated(context, 'name'),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16.0,
@@ -249,7 +250,7 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Last Name',
+                                    getTranslated(context, 'email_id'),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16.0,
@@ -288,7 +289,7 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Email',
+                                    getTranslated(context, 'mobile'),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16.0,
@@ -320,12 +321,10 @@ class MapScreenState extends State<ProfilePage>
                           child: new Row(
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              new Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  new Text(
-                                    'Password',
+                              Expanded(
+                                child: Container(
+                                  child: new Text(
+                                    getTranslated(context, 'pin_code'),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16.0,
@@ -349,6 +348,7 @@ class MapScreenState extends State<ProfilePage>
                                   enabled: !_status,
                                 ),
                               ),
+<<<<<<< HEAD
                             ],
                           )),
                       Padding(
@@ -363,6 +363,12 @@ class MapScreenState extends State<ProfilePage>
                                 children: <Widget>[
                                   new Text(
                                     'City',
+=======
+                              Expanded(
+                                child: Container(
+                                  child: new Text(
+                                    getTranslated(context, 'state'),
+>>>>>>> 8be9de4a0993825362af133b4f597201864127a6
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         color: Colors.white,
@@ -418,8 +424,9 @@ class MapScreenState extends State<ProfilePage>
             child: Padding(
               padding: EdgeInsets.only(right: 12.0),
               child: Container(
+                  // ignore: deprecated_member_use
                   child: new RaisedButton(
-                child: new Text("Save"),
+                child: new Text(getTranslated(context, 'save')),
                 textColor: Colors.white,
                 color: Colors.blue[600],
                 onPressed: () {
@@ -446,8 +453,9 @@ class MapScreenState extends State<ProfilePage>
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Container(
+                  // ignore: deprecated_member_use
                   child: new RaisedButton(
-                child: new Text("Cancel"),
+                child: new Text(getTranslated(context, 'cancel')),
                 textColor: Colors.white,
                 color: Colors.red[200],
                 onPressed: () {

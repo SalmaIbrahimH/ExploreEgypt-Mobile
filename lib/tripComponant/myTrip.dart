@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/screens/home.dart';
 import 'package:explore_egypt/tripComponant/addTripform/addTrip.dart';
 import 'package:explore_egypt/tripComponant/showTrip.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../home.dart';
 
 class MyTrip extends StatefulWidget {
   @override
@@ -52,7 +52,7 @@ class _MyTripState extends State<MyTrip> {
               padding: EdgeInsets.all(10),
               child: MaterialButton(
                 child: Text(
-                  "Design new Trip",
+                  getTranslated(context, 'new_trip'),
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 color: Colors.blue,
@@ -68,7 +68,7 @@ class _MyTripState extends State<MyTrip> {
               padding: EdgeInsets.all(10),
               child: MaterialButton(
                 child: Text(
-                  "Show My Trip",
+                  getTranslated(context, 'show_trip'),
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 color: Colors.blue,

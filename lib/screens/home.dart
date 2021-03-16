@@ -1,13 +1,22 @@
+import 'package:explore_egypt/components/language.dart';
+import 'package:explore_egypt/components/search.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/main.dart';
+import 'package:explore_egypt/models/hotelModel.dart';
+import 'package:explore_egypt/models/users.dart';
 import 'package:explore_egypt/profile.dart';
-import 'package:explore_egypt/service/usersService.dart';
+import 'package:explore_egypt/services/tripSer.dart';
+import 'package:explore_egypt/services/usersService.dart';
+import 'package:explore_egypt/tripComponant/myTrip.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:explore_egypt/tripComponant/myTrip.dart';
-import './screens/explore_screen.dart';
-import 'account.dart';
-import 'login.dart';
-import 'models/users.dart';
+
+import '../account.dart';
+import '../login.dart';
+import 'activities.dart';
+import 'explore_screen.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -20,6 +29,13 @@ class _HomeState extends State<Home> {
   SharedPreferences sharedPreferences;
   String userID;
   Users user;
+  List<Hotel> hotels = [];
+
+  Future getHotels() async {
+    hotels = await TripService().getHotels();
+    print(hotels);
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -34,6 +50,8 @@ class _HomeState extends State<Home> {
     user = await UsersService().getUserByID(userID);
     print("user");
     setState(() {});
+    checkLoginStatus();
+    getHotels();
   }
 
   Future<bool> checkLoginStatus() async {
@@ -54,10 +72,7 @@ class _HomeState extends State<Home> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 1',
-      style: optionStyle,
-    ),
+    Activities(),
     ExploreScreen(),
     MyTrip(),
     AccountScreen()
@@ -77,20 +92,29 @@ class _HomeState extends State<Home> {
     Navigator.of(context).pop();
   }
 
+  // Change language
+  void _changeLanguage(Language language) async {
+    Locale _temp = await setLocale(language.languageCode);
+
+    MyApp.setLocale(context, _temp);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => super.widget));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        toolbarHeight: 130,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 45),
-          child: Image.asset(
-            'assets/try.png',
-            height: 70,
-          ),
+        toolbarHeight: 90,
+        title: Text(
+          getTranslated(context, 'explore_egypt'),
+          style: GoogleFonts.playfairDisplay(
+              fontSize: 38.6,
+              fontWeight: FontWeight.w400,
+              color: Colors.blue[800]),
         ),
-        centerTitle: true,
+        // centerTitle: true,
         actions: <Widget>[
           // Padding(
           //   padding: const EdgeInsets.only(bottom: 50, right: 15),
@@ -105,12 +129,61 @@ class _HomeState extends State<Home> {
           //     },
           //   ),
           // )
+          // ),
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              size: 32.0,
+              color: Colors.blue[700],
+            ),
+            onPressed: () {
+              print(hotels);
+              showSearch(
+                context: context,
+                delegate: DataSearch(data: hotels),
+              );
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: DropdownButton(
+              onChanged: (Language language) {
+                _changeLanguage(language);
+              },
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.language,
+                color: Colors.blue[700],
+                size: 30.0,
+              ),
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
+                        value: lang,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(
+                              lang.flag,
+                              style: TextStyle(
+                                fontSize: 24.0,
+                              ),
+                            ),
+                            Text(lang.name,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                )),
+                          ],
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
         ],
 
         backgroundColor: Colors.grey[100],
 
         // title: const Text('Explore Egypt',
-        // style: TextStyle(color: Colors.blueGrey,fontSize: 30),),
+        // style: TextStyle(color: Colors.blue[700],fontSize: 30),),
       ),
       endDrawer: Drawer(
         elevation: 16.0,
@@ -121,7 +194,18 @@ class _HomeState extends State<Home> {
                 color: Colors.grey.shade200,
               ),
               accountName: Padding(
-                padding: const EdgeInsets.only(top: 30, left: 2),
+                padding: const EdgeInsets.only(top: 30, left: 20),
+                child: Text("xyz",
+                    style: TextStyle(fontSize: 20, color: Colors.blue[700])),
+              ),
+              accountEmail: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Text("xyz@gmail.com",
+                    style: TextStyle(fontSize: 15, color: Colors.blue[700])),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.grey.shade50,
+                foregroundColor: Colors.blue[700],
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
@@ -133,25 +217,13 @@ class _HomeState extends State<Home> {
                       style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
                 ),
               ),
-              accountEmail: Padding(
-                padding: const EdgeInsets.all(2.0),
-
-                //  padding: const EdgeInsets.only(top: 30, left: 2),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 2),
-                  child: Text(
-                    "",
-                    style: TextStyle(fontSize: 15, color: Colors.blueGrey),
-                  ),
-                ),
-              ),
               otherAccountsPictures: <Widget>[
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
                   child: IconButton(
                     icon: Icon(
                       Icons.cancel,
-                      color: Colors.blueGrey[500],
+                      color: Colors.blue[700],
                       size: 40,
                     ),
                     onPressed: () {
@@ -225,7 +297,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_activity),
+            icon: Icon(Icons.map),
             label: 'Activities',
           ),
           BottomNavigationBarItem(
@@ -247,11 +319,11 @@ class _HomeState extends State<Home> {
           )
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blueGrey[400],
+        selectedItemColor: Colors.blue[700],
         onTap: _onItemTapped,
         backgroundColor: Colors.grey.shade200,
         iconSize: 42,
-        unselectedItemColor: Colors.blueGrey[100],
+        unselectedItemColor: Colors.grey[300],
       ),
       endDrawerEnableOpenDragGesture: true,
     );

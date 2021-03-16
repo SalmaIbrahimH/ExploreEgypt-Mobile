@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:explore_egypt/model/tripModel.dart';
+import 'package:explore_egypt/models/tripModel.dart';
 
 import 'package:explore_egypt/models/users.dart';
 
@@ -48,26 +48,6 @@ class UsersService {
     print(sharedPreferences.getInt('token') ?? 0);
     return true;
   }
-
-  // signInnn(Users users) async {
-  //   print("asmaa");
-  //   // var sharedPreferences = await SharedPreferences.getInstance();
-  //   Map data = users.toJson();
-  //   // var jsonResponse = {};
-  //   var response = await http
-  //       .post("https://explore-egypt-db.herokuapp.com/Users", body: data);
-  //   if (response.body != null) {
-  //     // jsonResponse = json.decode(response.body);
-  //     // if (jsonResponse != null) {
-  //     ////////////////////  دا اللي بيعمل التوكن والمشكلة///////////////
-  //     // sharedPreferences.setString("token", jsonResponse['token']);
-
-  //     return true;
-  //   } else {
-  //     print("errooooooooo");
-  //     return false;
-  //   }
-  // }
 
   Future<bool> signIn(String email, String pass) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

@@ -3,30 +3,44 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TripCard extends StatefulWidget {
+  int userId;
   String programName;
-  String from;
-  String to;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
+  String contactInfo;
   String trainNumber;
+  String destination;
   String ticketPrice;
-  String destenation;
-  String selHotel;
-  String selTrain;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
   TripCard({
+    this.userId,
     this.programName,
-    this.from,
-    this.to,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
     this.hotelName,
     this.roomPrice,
     this.adress,
+    this.contactInfo,
     this.trainNumber,
+    this.destination,
     this.ticketPrice,
-    this.destenation,
-    this.selHotel,
-    this.selTrain,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
   });
 
   @override
@@ -42,14 +56,24 @@ class _TripCardState extends State<TripCard> {
               context,
               MaterialPageRoute(
                   builder: (context) => TripDetails(
+                        userId: widget.userId,
                         programName: widget.programName,
-                        destenation: widget.destenation,
+                        fromDate: widget.fromDate.toString(),
+                        toDate: widget.toDate.toString(),
+                        cityId: widget.cityId,
+                        fromCityId: widget.fromCityId,
+                        toCityId: widget.toCityId,
+                        id: widget.id,
                         hotelName: widget.hotelName,
                         roomPrice: widget.roomPrice,
-                        from: widget.from,
-                        to: widget.to,
-                        ticketPrice: widget.ticketPrice,
+                        adress: widget.adress,
+                        contactInfo: widget.contactInfo,
                         trainNumber: widget.trainNumber,
+                        destination: widget.destination,
+                        ticketPrice: widget.ticketPrice,
+                        departureTime: widget.departureTime,
+                        arrivalTime: widget.arrivalTime,
+                        details: widget.details,
                       )));
         },
         child: Card(
@@ -123,12 +147,14 @@ class _TripCardState extends State<TripCard> {
                                     size: 20,
                                     color: Colors.white,
                                   ),
-                                  Text(
-                                    widget.destenation,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "sans-serif",
-                                        fontSize: 20),
+                                  Flexible(
+                                    child: Text(
+                                      widget.destination,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "sans-serif",
+                                          fontSize: 20),
+                                    ),
                                   )
                                 ],
                               )

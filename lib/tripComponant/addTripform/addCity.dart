@@ -1,22 +1,65 @@
-import 'package:explore_egypt/model/cityModal.dart';
-import 'package:explore_egypt/model/hotelModel.dart';
-import 'package:explore_egypt/service/tripSer.dart';
-import 'package:explore_egypt/tripComponant/addTripform/addTrain.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/models/cityModal.dart';
+import 'package:explore_egypt/models/hotelModel.dart';
+import 'package:explore_egypt/services/tripSer.dart';
+// import 'package:explore_egypt/tripComponant/addTripform/AddTrain.dart';
 import 'package:explore_egypt/tripComponant/cards/hotelCard.dart';
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class City extends StatefulWidget {
+  int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+  City({
+    Key key,
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  }) : super(key: key);
+
   @override
   _CityState createState() => _CityState();
 }
 
 class _CityState extends State<City> {
-  // ignore: deprecated_member_use
-  List<Cities> cityList = new List();
-  // ignore: deprecated_member_use
-  List<Hotel> hotelList = new List();
+  List<Cities> cityList = [];
+  List<Hotel> hotelList = [];
   String cityvalue;
+  String cityname;
+  var formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -39,91 +82,135 @@ class _CityState extends State<City> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Select Hotel"),
+          title: Text(getTranslated(context, 'select_hotel')),
         ),
         body: Container(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: DropdownButton(
-                    value: cityvalue,
-                    items: cityList.map((value) {
-                      return DropdownMenuItem(
-                        child: Text(value.name),
-                        value: value.id.toString(),
-                      );
-                    }).toList(),
-                    onChanged: (_value) => {
-                      print(_value),
-                      setState(() {
-                        cityvalue = _value;
-                        getHotelByIdFromJson();
-                      })
-                    },
-                    hint: Text(
-                      "Select city",
-                      style: TextStyle(fontSize: 25),
+          child: Form(
+            child: Center(
+              child: Column(
+                children: [
+                  // intro container
+                  Container(
+                      height: 150,
+                      color: Colors.cyan,
+                      child: Padding(
+                        padding: EdgeInsets.all(30),
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                getTranslated(
+                                    context, 'select_city_to_show_hotel'),
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Center(
+                                child: Text(
+                              getTranslated(context, 'change_later'),
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            )),
+                          ],
+                        ),
+                      )),
+
+                  // city dropdown
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: DropdownButton(
+                      value: cityvalue,
+                      items: cityList.map((value) {
+                        return DropdownMenuItem(
+                          child: Text(
+                            value.name,
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          value: value.id.toString(),
+                        );
+                      }).toList(),
+                      onChanged: (_value) => {
+                        print(_value),
+                        setState(() {
+                          cityvalue = _value;
+                          getHotelByIdFromJson();
+                        })
+                      },
+                      hint: Text(
+                        getTranslated(context, 'select_city'),
+                        style: TextStyle(fontSize: 25),
+                      ),
                     ),
                   ),
-                ),
-                // Text(cityvalue),
 
-                cityvalue != null
-                    ? Expanded(
-                        child: Container(
-                          //  height: 400,
-
-                          child: FutureBuilder(
-                            //  future: getHotelByIdFromJson(),
-                            builder: (context, snapshot) {
-                              print(snapshot.hasData);
-                              //  if(snapshot.hasData){
-                              if (hotelList.length == 0) {
-                                return Text("no hotels in this city");
-                              } else {
-                                return ListView.builder(
-                                  itemCount: hotelList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return HotelCard(
-                                      hotelName: hotelList[index].hotelName,
-                                      roomPrice: hotelList[index].roomPrice,
-                                      contactInfo: hotelList[index].contactInfo,
-                                      adress: hotelList[index].adress,
-                                    );
-                                  },
-                                );
-                              }
-                              //  }else  {return Text("no data found");}
-                            },
-                          ),
-                        ),
-                      )
-                    : Text("selct city first"),
-                Padding(
-                  padding: EdgeInsets.all(40),
-                  child: Center(
-                    child:
-                        // ignore: deprecated_member_use
-                        RaisedButton(
-                            color: Colors.green,
-                            child: Text(
-                              "Continue",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                  // Hotel card
+                  cityvalue != null
+                      ? Expanded(
+                          child: Container(
+                            child: FutureBuilder(
+                              builder: (context, snapshot) {
+                                if (hotelList.length == 0) {
+                                  return Text(
+                                    getTranslated(context, 'no_hotels'),
+                                    style: TextStyle(fontSize: 20),
+                                  );
+                                }
+                                if (hotelList.length > 0) {
+                                  return ListView.builder(
+                                    itemCount: hotelList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return HotelCard(
+                                        userId: widget.userId,
+                                        programName: widget.programName,
+                                        fromDate: widget.fromDate,
+                                        toDate: widget.toDate,
+                                        cityId: hotelList[index].cityId,
+                                        // fromCityId: widget.fromCityId,
+                                        // toCityId: widget.toCityId,
+                                        hotelName: hotelList[index].hotelName,
+                                        roomPrice: hotelList[index].roomPrice,
+                                        adress: hotelList[index].adress,
+                                        contactInfo:
+                                            hotelList[index].contactInfo,
+                                        // trainNumber: widget.trainNumber,
+                                        // destination: widget.destination,
+                                        // ticketPrice: widget.ticketPrice,
+                                        // departureTime: widget.departureTime,
+                                        // arrivalTime: widget.arrivalTime,
+                                        // details: widget.details,
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return Center(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: Text(getTranslated(
+                                              context, 'loading_trips')))
+                                    ],
+                                  ));
+                                }
+                              },
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Train()));
-                            }),
-                  ),
-                ),
-              ],
+                          ),
+                        )
+                      : Text(""),
+                ],
+              ),
             ),
           ),
         ));

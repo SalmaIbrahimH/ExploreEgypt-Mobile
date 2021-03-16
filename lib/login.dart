@@ -1,9 +1,10 @@
-import 'package:explore_egypt/service/usersService.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/services/usersService.dart';
 import 'package:explore_egypt/siguUp.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Progress.dart';
-import 'home.dart';
+import 'package:explore_egypt/screens/home.dart';
 import 'models/users.dart';
 import 'package:flutter/services.dart';
 
@@ -99,13 +100,14 @@ class _BodyState extends State<Body> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => Home()),
       );
-      final snackBar = SnackBar(content: Text('welcom in Home )))-'));
+      final snackBar =
+          SnackBar(content: Text(getTranslated(context, 'welcome_in_home')));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       print("false");
       // Toast.show("you have to sing up ", context, duration: Toast.LENGTH_LONG);
       final snackBar =
-          SnackBar(content: Text('this email not found you have to sing up '));
+          SnackBar(content: Text(getTranslated(context, 'have_to_signup')));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       // Navigator.push(
       //   context,
@@ -141,7 +143,7 @@ class _BodyState extends State<Body> {
             ),
             SizedBox(height: size.height * 0.04),
             Text(
-              "LOGIN ",
+              getTranslated(context, 'login'),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
             SizedBox(height: size.height * 0.05),
@@ -149,7 +151,7 @@ class _BodyState extends State<Body> {
                 key: globalFormKey,
                 child: Column(children: [
                   RoundedInputField(
-                      hintText: "Your Email",
+                      hintText: getTranslated(context, 'your_email'),
                       controller: emailController,
                       validator: (value) {
                         if (value.isEmpty) {
@@ -362,7 +364,7 @@ class RoundedPasswordField extends StatelessWidget {
         controller: controller,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
-          hintText: "Password",
+          hintText: getTranslated(context, 'password'),
           suffixIcon: suffixIcon,
           prefixIcon: Icon(
             Icons.lock,
@@ -413,13 +415,17 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          login ? "Don’t have an Account ? " : "Already have an Account ? ",
+          login
+              ? getTranslated(context, 'dont_have_account')
+              : getTranslated(context, 'have_account'),
           style: TextStyle(color: kPrimaryColor),
         ),
         GestureDetector(
           onTap: press,
           child: Text(
-            login ? "Sign Up" : "Sign In",
+            login
+                ? getTranslated(context, 'signup')
+                : getTranslated(context, 'signin'),
             style: TextStyle(
                 color: kPrimaryColor,
                 fontWeight: FontWeight.bold,

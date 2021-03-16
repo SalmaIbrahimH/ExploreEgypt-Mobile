@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'package:explore_egypt/model/tripModel.dart';
+import 'package:explore_egypt/screens/home.dart';
 import 'package:explore_egypt/service/tripSer.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/models/tripModel.dart';
 import 'package:explore_egypt/tripComponant/cards/tripCard.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Progress.dart';
-import '../home.dart';
 
 class ShowMyTrips extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
   Widget _uiSetup(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          title: Text("My Trips"),
+          title: Text(getTranslated(context, 'my_trips')),
         ),
         body: FutureBuilder(
             future: getTripsFromJson(),
@@ -73,11 +74,18 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                   itemCount: tripList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return TripCard(
+                      id: tripList[index].id,
                       programName: tripList[index].programName,
-                      from: tripList[index].from,
-                      to: tripList[index].to,
+                      fromDate: tripList[index].fromDate,
+                      toDate: tripList[index].toDate.toString(),
                       hotelName: tripList[index].selHotel.hotelName,
-                      destenation: tripList[index].selTrain.destination,
+                      roomPrice: tripList[index].selHotel.roomPrice,
+                      adress: tripList[index].selHotel.adress,
+                      contactInfo: tripList[index].selHotel.contactInfo,
+                      destination: tripList[index].selTrain.destination,
+                      trainNumber: tripList[index].selTrain.trainNumber,
+                      ticketPrice: tripList[index].selTrain.ticketPrice,
+                      details: tripList[index].selTrain.details.toString(),
                     );
                   },
                 );

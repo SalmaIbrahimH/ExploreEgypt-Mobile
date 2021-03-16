@@ -1,7 +1,6 @@
-
 import 'package:explore_egypt/TripComponant/addTripform/addCity.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class NewTrip extends StatefulWidget {
   @override
@@ -9,8 +8,27 @@ class NewTrip extends StatefulWidget {
 }
 
 class _NewTripState extends State<NewTrip> {
-  DateTime selectedStart;
-  DateTime selectedEnd;
+  int userId;
+  // String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+  var formKey = GlobalKey<FormState>();
+  var programName = new TextEditingController();
+
   void startDate() {
     showDatePicker(
       context: context,
@@ -18,34 +36,36 @@ class _NewTripState extends State<NewTrip> {
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     ).then((value) => {
-      if(value== null){},
-      setState((){
-        selectedStart= value;
-      })
-    });
+          if (value == null) {},
+          setState(() {
+            fromDate = value.toString();
+          })
+        });
   }
-   void endDate() {
+
+  void endDate() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     ).then((value) => {
-      if(value== null){},
-      setState((){
-        selectedEnd= value;
-      })
-    });
+          if (value == null) {},
+          setState(() {
+            toDate = value.toString();
+          })
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("New Trip"),
+          title: Text(getTranslated(context, 'new_trip')),
         ),
-        body: Column(
-          children: [
+        body: ListView(
+          children: <Widget>[
+            // welcome
             Container(
                 height: 150,
                 color: Colors.cyan,
@@ -55,7 +75,7 @@ class _NewTripState extends State<NewTrip> {
                     children: [
                       Center(
                         child: Text(
-                          "Trip Program Setup",
+                          getTranslated(context, 'trip_program_setup'),
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w500,
@@ -67,83 +87,112 @@ class _NewTripState extends State<NewTrip> {
                       ),
                       Center(
                           child: Text(
-                        "you can change these details later",
+                        getTranslated(context, 'change_later'),
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       )),
                     ],
                   ),
                 )),
+            //start form
             Container(
               child: Center(
                 child: Form(
+                  key: formKey,
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            Text("Trip program name"),
-                             TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Enter you trip name",
-                            
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 0, left: 0, right: 0, bottom: 20),
+                              child: Text(
+                                getTranslated(context, 'trip_program_name'),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                             ),
-                          ),
+                            TextFormField(
+                              controller: programName,
+                              decoration: InputDecoration(
+                                hintText:
+                                    getTranslated(context, 'enter_trip_name'),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 20),
+                                      child: Text(
+                                        getTranslated(context, 'start_date'),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 24),
+                                      ),
+                                      color: Colors.cyan,
+                                      onPressed: startDate,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 20),
+                                      child: Text(
+                                        getTranslated(context, 'end_date'),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 24),
+                                      ),
+                                      color: Colors.cyan,
+                                      onPressed: endDate,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                          ],),)
-                      
+                      )
                     ],
                   ),
                 ),
               ),
             ),
-            Center(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    // ignore: deprecated_member_use
-                    child: RaisedButton(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Text(
-                        "Start Date",
-                        style: TextStyle(color: Colors.cyan, fontSize: 24),
-                      ),
-                      color: Colors.deepPurple,
-                      onPressed: startDate,
+
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: Center(
+                child: MaterialButton(
+                    color: Colors.green,
+                    child: Text(
+                      getTranslated(context, 'continue'),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    // ignore: deprecated_member_use
-                    child: RaisedButton(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Text(
-                        "End Date",
-                        style: TextStyle(color: Colors.cyan, fontSize: 24),
-                      ),
-                      color: Colors.deepPurple,
-                      onPressed: endDate,
-                    ),
-                  ),
-                ],
+                    onPressed: () {
+                      // print("from $from");
+                      // print("from $to");
+                      // print(programName.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => City(
+                                    programName: programName.text,
+                                    fromDate: fromDate,
+                                    toDate: toDate,
+                                  )));
+                    }),
               ),
-            ),
-            //  Center(child: Text(" your start date is ${DateFormat("dd/MM/yyyy").format(selectedStart)}"),),
-            //  Center(child: Text(" your End date is ${DateFormat("dd/MM/yyyy").format(selectedEnd)}"),),
-            
-            Padding(padding: EdgeInsets.all(15),
-            child: Center(child:
-            // ignore: deprecated_member_use
-             RaisedButton(
-               color: Colors.green,
-               child: Text("Continue",style: TextStyle(color: Colors.white,fontSize: 20),)
-               ,onPressed: (){Navigator.push(context, 
-                          MaterialPageRoute(builder: (context)=> City()));}),),)
+            )
           ],
         ));
   }
