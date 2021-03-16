@@ -1,57 +1,75 @@
-// To parse this JSON data, do
-//
-//     final activitiesArticle = activitiesArticleFromJson(jsonString);
 
 import 'dart:convert';
 
-List<ActivitiesArticle> activitiesArticleFromJson(String str) => List<ActivitiesArticle>.from(json.decode(str).map((x) => ActivitiesArticle.fromJson(x)));
+List<ActivitiesArticles> activitiesArticlesFromJson(String str) => List<ActivitiesArticles>.from(json.decode(str).map((x) => ActivitiesArticles.fromJson(x)));
 
-String activitiesArticleToJson(List<ActivitiesArticle> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String activitiesArticlesToJson(List<ActivitiesArticles> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ActivitiesArticle {
-    ActivitiesArticle({
-        this.id,
+class ActivitiesArticles {
+    ActivitiesArticles({
         this.title,
-        this.coverImg,
         this.description,
+        this.img,
         this.section,
-        this.dep,
         this.content,
         this.images,
+        this.dep,
         this.city,
+        this.id,
     });
 
-    int id;
     String title;
-    String coverImg;
-    dynamic description;
-    dynamic section;
-    dynamic dep;
-    String content;
+    String description;
+    dynamic img;
+    Section section;
+    List<String> content;
     List<String> images;
+    dynamic dep;
     String city;
+    int id;
 
-    factory ActivitiesArticle.fromJson(Map<String, dynamic> json) => ActivitiesArticle(
-        id: json["id"],
+    factory ActivitiesArticles.fromJson(Map<String, dynamic> json) => ActivitiesArticles(
         title: json["title"],
-        coverImg: json["img"],
         description: json["description"],
-        section: json["section"],
-        dep: json["dep"],
-        content: json["content"] == null ? null : json["content"],
+        img: json["img"],
+        section: sectionValues.map[json["section"]],
+        content: List<String>.from(json["content"].map((x) => x)),
         images: List<String>.from(json["Images"].map((x) => x)),
+        dep: json["dep"],
         city: json["city"] == null ? null : json["city"],
+        id: json["id"],
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
         "title": title,
-        "img": coverImg,
         "description": description,
-        "section": section,
-        "dep": dep,
-        "content": content == null ? null : content,
+        "img": img,
+        "section": sectionValues.reverse[section],
+        "content": List<dynamic>.from(content.map((x) => x)),
         "Images": List<dynamic>.from(images.map((x) => x)),
+        "dep": dep,
         "city": city == null ? null : city,
+        "id": id,
     };
+}
+
+enum Section { EXPLORE_TOP_ATTRACTIONS, KEEP_UP_WITH_THE_NEW }
+
+final sectionValues = EnumValues({
+    "Explore top attractions": Section.EXPLORE_TOP_ATTRACTIONS,
+    "Keep up with the new": Section.KEEP_UP_WITH_THE_NEW
+});
+
+class EnumValues<T> {
+    Map<String, T> map;
+    Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        if (reverseMap == null) {
+            reverseMap = map.map((k, v) => new MapEntry(v, k));
+        }
+        return reverseMap;
+    }
 }

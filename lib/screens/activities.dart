@@ -15,7 +15,7 @@ class Activities extends StatefulWidget {
 class _ActivitiesState extends State<Activities> {
   final _pageController = PageController(viewportFraction: 0.877);
   // ignore: deprecated_member_use
-  List<ActivitiesArticle> articles = new List();
+  List<ActivitiesArticles> articles = new List();
   double currentPage = 0;
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
@@ -53,7 +53,8 @@ class _ActivitiesState extends State<Activities> {
   @override
   Widget build(BuildContext context) {
         final Size size = MediaQuery.of(context).size;
-    if (articles.length > 0) {
+              if(articles.length>0){
+
     return SafeArea(
         child: Container(
       child: ListView(
@@ -149,7 +150,7 @@ class _ActivitiesState extends State<Activities> {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage('assets/' +
-                                    articles[index].coverImg.toString()),
+                                    articles[index].img.toString()),
                               ),
                             ),
                             child: Stack(
@@ -239,7 +240,7 @@ class _ActivitiesState extends State<Activities> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: Image.asset(
-                                'assets/' + articles[index].coverImg.toString(),
+                                'assets/' + articles[index].img.toString(),
                                 height: 110,
                                 width: 120,
                                 fit: BoxFit.cover,
@@ -263,13 +264,17 @@ class _ActivitiesState extends State<Activities> {
               ))
         ],
       ),
-    )); } else {
-      return Center(
-        child: SpinKitCircle(
-          color: Colors.blue,
-          size: 85.0,
-        ),
-      );
+    )); } 
+      else{ return
+            Center(
+              child:Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Padding(padding: EdgeInsets.all(10),
+                child: CircularProgressIndicator(),),
+                Padding(padding: EdgeInsets.all(10),
+               child: Text("Loading Articles"))
+              ],)
+            );}}
     }
-  }
-}
+  
+
