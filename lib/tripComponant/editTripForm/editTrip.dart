@@ -1,13 +1,54 @@
-import 'package:explore_egypt/TripComponant/addTripform/addCity.dart';
 import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editHotel.dart';
 import 'package:flutter/material.dart';
 
-class NewTrip extends StatefulWidget {
+// ignore: must_be_immutable
+class EditTrip extends StatefulWidget {
+  int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+
+  EditTrip({
+    Key key,
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  }) : super(key: key);
   @override
-  _NewTripState createState() => _NewTripState();
+  _EditTripState createState() => _EditTripState();
 }
 
-class _NewTripState extends State<NewTrip> {
+class _EditTripState extends State<EditTrip> {
   int userId;
   // String programName;
   String fromDate;
@@ -26,13 +67,14 @@ class _NewTripState extends State<NewTrip> {
   String departureTime;
   String arrivalTime;
   String details;
+
   var formKey = GlobalKey<FormState>();
   var programName = new TextEditingController();
 
   void startDate() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.parse(widget.fromDate),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     ).then((value) => {
@@ -46,7 +88,7 @@ class _NewTripState extends State<NewTrip> {
   void endDate() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.parse(widget.toDate),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     ).then((value) => {
@@ -57,11 +99,30 @@ class _NewTripState extends State<NewTrip> {
         });
   }
 
+  void initState() {
+    super.initState();
+    setState(() {
+      programName.text = widget.programName;
+      fromDate = widget.fromDate;
+      toDate = widget.toDate;
+    });
+    print("to${widget.toDate}");
+    print(widget.programName);
+    print(widget.fromDate);
+    print(widget.details);
+    print(widget.adress);
+    print(widget.hotelName);
+    print(widget.roomPrice);
+    print(widget.trainNumber);
+    print(widget.ticketPrice);
+    print(widget.destination);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(getTranslated(context, 'new_trip')),
+          title: Text(getTranslated(context, 'edit_trip')),
         ),
         body: ListView(
           children: <Widget>[
@@ -75,7 +136,7 @@ class _NewTripState extends State<NewTrip> {
                     children: [
                       Center(
                         child: Text(
-                          getTranslated(context, 'trip_program_setup'),
+                          getTranslated(context, 'trip_program_edit'),
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w500,
@@ -118,7 +179,7 @@ class _NewTripState extends State<NewTrip> {
                               controller: programName,
                               decoration: InputDecoration(
                                 hintText:
-                                    getTranslated(context, 'enter_trip_name'),
+                                    getTranslated(context, 'edit_program_name'),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                 ),
@@ -185,10 +246,24 @@ class _NewTripState extends State<NewTrip> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => City(
+                              builder: (context) => EditHotel(
+                                    id: id,
                                     programName: programName.text,
                                     fromDate: fromDate,
                                     toDate: toDate,
+                                    cityId: widget.cityId.toString(),
+                                    hotelName: widget.hotelName,
+                                    roomPrice: widget.roomPrice,
+                                    adress: widget.adress,
+                                    contactInfo: widget.contactInfo,
+                                    trainNumber: widget.trainNumber,
+                                    ticketPrice: widget.ticketPrice,
+                                    arrivalTime: widget.arrivalTime,
+                                    departureTime: widget.departureTime,
+                                    destination: widget.destination,
+                                    fromCityId: widget.cityId,
+                                    // toCityId:widget.destinationId,
+                                    details: widget.details,
                                   )));
                     }),
               ),

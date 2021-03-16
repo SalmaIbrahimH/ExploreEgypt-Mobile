@@ -1,9 +1,11 @@
 import 'package:explore_egypt/localization/localization_constants.dart';
-import 'package:explore_egypt/tripComponant/addTripform/AddTrain.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editTrainCard.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editTrain.dart';
+
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class HotelCard extends StatefulWidget {
+class EditHotelCard extends StatefulWidget {
   int userId;
   String programName;
   String fromDate;
@@ -23,46 +25,65 @@ class HotelCard extends StatefulWidget {
   String arrivalTime;
   String details;
 
-  HotelCard({
-    this.userId,
-    this.programName,
-    this.fromDate,
-    this.toDate,
-    this.cityId,
-    this.fromCityId,
-    this.toCityId,
-    this.id,
-    this.hotelName,
-    this.roomPrice,
-    this.adress,
-    this.contactInfo,
-    this.trainNumber,
-    this.destination,
-    this.ticketPrice,
-    this.departureTime,
-    this.arrivalTime,
-    this.details,
-  });
+  EditHotelCard(
+      {this.userId,
+      this.programName,
+      this.fromDate,
+      this.toDate,
+      this.cityId,
+      this.fromCityId,
+      this.toCityId,
+      this.id,
+      this.hotelName,
+      this.roomPrice,
+      this.adress,
+      this.contactInfo,
+      this.trainNumber,
+      this.destination,
+      this.ticketPrice,
+      this.departureTime,
+      this.arrivalTime,
+      this.details});
 
   @override
-  _HotelCardState createState() => _HotelCardState();
+  _EditHotelCardState createState() => _EditHotelCardState();
 }
 
-class _HotelCardState extends State<HotelCard> {
+class _EditHotelCardState extends State<EditHotelCard> {
+  int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
           print("hotelName${widget.hotelName}");
-          print("price${widget.roomPrice}");
+          print("hotelName${widget.roomPrice}");
           print("adress${widget.adress}");
           print("name${widget.programName}");
           print("from${widget.fromDate}");
           print("to${widget.toDate}");
+          print("id${widget.id}");
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddTrain(
+                  builder: (context) => EditTrain(
                         userId: widget.userId,
                         programName: widget.programName,
                         fromDate: widget.fromDate,
@@ -72,16 +93,15 @@ class _HotelCardState extends State<HotelCard> {
                         roomPrice: widget.roomPrice,
                         adress: widget.adress,
                         contactInfo: widget.contactInfo,
-                        // fromCityId: widget.fromCityId,
-                        // toCityId: widget.toCityId,
-                        // id: widget.id,
-                        
-                        // trainNumber: widget.trainNumber,
-                        // destination: widget.destination,
-                        // ticketPrice: widget.ticketPrice,
-                        // departureTime: widget.departureTime,
-                        // arrivalTime: widget.arrivalTime,
-                        // details: widget.details,
+                        fromCityId: widget.fromCityId,
+                        toCityId: widget.toCityId,
+                        id: widget.id,
+                        trainNumber: widget.trainNumber,
+                        destination: widget.destination,
+                        ticketPrice: widget.ticketPrice,
+                        departureTime: widget.departureTime,
+                        arrivalTime: widget.arrivalTime,
+                        details: widget.details,
                       )));
         },
         child: Card(

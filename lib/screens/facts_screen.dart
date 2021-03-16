@@ -1,7 +1,9 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/article.dart';
+import 'package:explore_egypt/services/WishListService.dart';
 import 'package:flutter/material.dart';
 import '../components/custom_card.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../services/explore_article.dart';
 
 ExploreArticle exploreArticle = ExploreArticle();
@@ -13,7 +15,7 @@ class FactsScreen extends StatefulWidget {
 
 class _FactsScreenState extends State<FactsScreen> {
   List<Article> articles = [];
-
+  var name;
   getData() async {
     var data = await exploreArticle.getFactsArticles();
     articles = data;
@@ -27,6 +29,12 @@ class _FactsScreenState extends State<FactsScreen> {
   //   setState(() {});
   //   print('testtt');
   // }
+  getFav(id) async {
+    bool res = await WishListService().isFav(id, 8, "explorDep");
+    if (res) {
+      return true;
+    }
+  }
 
   @override
   void initState() {
@@ -44,7 +52,7 @@ class _FactsScreenState extends State<FactsScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 12.0, left: 12.0),
               child: Text(
-                'Quick Facts',
+                getTranslated(context, 'quick_facts'),
                 style: TextStyle(
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold,
@@ -59,6 +67,8 @@ class _FactsScreenState extends State<FactsScreen> {
                   img: articles[index].images[0],
                   title: articles[index].title,
                   description: articles[index].description,
+                  // name != null ? icon: Icon(Icons.favorite_outline)
+                  // icon: Icon(Icons.favorite_outline),
                 ),
               ),
             ),
@@ -67,9 +77,8 @@ class _FactsScreenState extends State<FactsScreen> {
       );
     } else {
       return Center(
-        child: SpinKitCircle(
-          color: Colors.blue,
-          size: 85.0,
+        child: CircularProgressIndicator(
+          backgroundColor: Color(0xFFeeeeee),
         ),
       );
     }

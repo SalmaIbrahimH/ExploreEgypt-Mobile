@@ -2,13 +2,12 @@ import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/services/tripSer.dart';
-// import 'package:explore_egypt/tripComponant/addTripform/AddTrain.dart';
-import 'package:explore_egypt/tripComponant/cards/hotelCard.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editHotelCard.dart';
 
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class City extends StatefulWidget {
+class EditHotel extends StatefulWidget {
   int userId;
   String programName;
   String fromDate;
@@ -27,7 +26,8 @@ class City extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
-  City({
+
+  EditHotel({
     Key key,
     this.userId,
     this.programName,
@@ -50,10 +50,28 @@ class City extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CityState createState() => _CityState();
+  _EditHotelState createState() => _EditHotelState();
 }
 
-class _CityState extends State<City> {
+class _EditHotelState extends State<EditHotel> {
+  int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
   List<Cities> cityList = [];
   List<Hotel> hotelList = [];
   String cityvalue;
@@ -63,7 +81,20 @@ class _CityState extends State<City> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      // cityvalue = widget.toCity;
+    });
     getCityFromJson();
+    print("to${widget.toDate}");
+    print(widget.programName);
+    print(widget.fromDate);
+    print(widget.details);
+    print(widget.adress);
+    print(widget.hotelName);
+    print(widget.roomPrice);
+    print(widget.trainNumber);
+    print(widget.ticketPrice);
+    print(widget.destination);
   }
 
   getCityFromJson() async {
@@ -99,8 +130,7 @@ class _CityState extends State<City> {
                           children: [
                             Center(
                               child: Text(
-                                getTranslated(
-                                    context, 'select_city_to_show_hotel'),
+                                getTranslated(context, 'edit_city_and_hotel'),
                                 style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500,
@@ -166,25 +196,24 @@ class _CityState extends State<City> {
                                     itemCount: hotelList.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      return HotelCard(
-                                        userId: widget.userId,
-                                        programName: widget.programName,
+                                      return EditHotelCard(
                                         fromDate: widget.fromDate,
                                         toDate: widget.toDate,
-                                        cityId: hotelList[index].cityId,
-                                        // fromCityId: widget.fromCityId,
-                                        // toCityId: widget.toCityId,
+                                        id: widget.id,
+                                        programName: widget.programName,
                                         hotelName: hotelList[index].hotelName,
                                         roomPrice: hotelList[index].roomPrice,
                                         adress: hotelList[index].adress,
                                         contactInfo:
                                             hotelList[index].contactInfo,
-                                        // trainNumber: widget.trainNumber,
-                                        // destination: widget.destination,
-                                        // ticketPrice: widget.ticketPrice,
-                                        // departureTime: widget.departureTime,
-                                        // arrivalTime: widget.arrivalTime,
-                                        // details: widget.details,
+                                        trainNumber: widget.trainNumber,
+                                        ticketPrice: widget.ticketPrice,
+                                        arrivalTime: widget.arrivalTime,
+                                        departureTime: widget.departureTime,
+                                        destination: widget.destination,
+                                        fromCityId: widget.cityId,
+                                        // toCityId: destinationId,
+                                        details: widget.details,
                                       );
                                     },
                                   );

@@ -28,6 +28,13 @@ class CustomCard extends StatelessWidget {
               ),
               padding: EdgeInsets.all(6.0),
             ),
+            // Container(
+            //   child: IconButton(
+            //     icon: icon,
+            //     onPressed: () {},
+            //   ),
+            //   padding: EdgeInsets.all(6.0),
+            // ),
             Container(
               height: 212.4,
               decoration: BoxDecoration(

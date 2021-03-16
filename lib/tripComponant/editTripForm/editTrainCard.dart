@@ -1,9 +1,9 @@
-import 'package:explore_egypt/tripComponant/addTripform/saveTrip.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/saveEdit.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class TrainCard extends StatefulWidget {
-  int userId;
+class EditTrainCard extends StatefulWidget {
+ int userId;
   String programName;
   String fromDate;
   String toDate;
@@ -22,8 +22,8 @@ class TrainCard extends StatefulWidget {
   String arrivalTime;
   String details;
 
-  TrainCard(
-      { this.userId,
+  EditTrainCard(
+      {this.userId,
     this.programName,
     this.fromDate,
     this.toDate,
@@ -43,10 +43,28 @@ class TrainCard extends StatefulWidget {
     this.details,});
 
   @override
-  _TrainCardState createState() => _TrainCardState();
+  _EditTrainCardState createState() => _EditTrainCardState();
 }
 
-class _TrainCardState extends State<TrainCard> {
+class _EditTrainCardState extends State<EditTrainCard> {
+int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -62,8 +80,8 @@ class _TrainCardState extends State<TrainCard> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SaveTrip(
-                      userId: widget.userId,
+                  builder: (context) => SaveEdit(
+                         userId: widget.userId,
                         programName: widget.programName,
                         fromDate: widget.fromDate,
                         toDate: widget.toDate,
@@ -144,7 +162,7 @@ class _TrainCardState extends State<TrainCard> {
                                     color: Colors.white,
                                   ),
                                   Text(
-                                    widget.cityId,
+                                    widget.destination,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),

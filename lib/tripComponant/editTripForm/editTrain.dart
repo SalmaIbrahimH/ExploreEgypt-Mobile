@@ -2,11 +2,11 @@ import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/services/tripSer.dart';
-import 'package:explore_egypt/tripComponant/cards/trainCard.dart';
+import 'package:explore_egypt/tripComponant/editTripForm/editTrainCard.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class AddTrain extends StatefulWidget {
+class EditTrain extends StatefulWidget {
   int userId;
   String programName;
   String fromDate;
@@ -26,9 +26,9 @@ class AddTrain extends StatefulWidget {
   String arrivalTime;
   String details;
 
-  AddTrain({
-    Key key,
-    this.userId,
+  EditTrain(
+      {Key key,
+         this.userId,
     this.programName,
     this.fromDate,
     this.toDate,
@@ -45,14 +45,33 @@ class AddTrain extends StatefulWidget {
     this.ticketPrice,
     this.departureTime,
     this.arrivalTime,
-    this.details,
-  }) : super(key: key);
+    this.details,})
+      : super(key: key);
 
   @override
-  _AddTrainState createState() => _AddTrainState();
+  _EditTrainState createState() => _EditTrainState();
 }
 
-class _AddTrainState extends State<AddTrain> {
+class _EditTrainState extends State<EditTrain> {
+   int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+
   List<Cities> cityList = [];
   List<Train> trainList = [];
   String cityvalue;
@@ -61,7 +80,20 @@ class _AddTrainState extends State<AddTrain> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      // cityvalue=widget.toCity;
+    });
     getCityFromJson();
+
+    print(widget.programName);
+    print(widget.fromDate);
+    print(widget.toDate);
+    print(widget.adress);
+    print(widget.hotelName);
+    print(widget.roomPrice);
+    print(widget.trainNumber);
+    print(widget.ticketPrice);
+    print(widget.destination);
   }
 
   getCityFromJson() async {
@@ -187,16 +219,13 @@ class _AddTrainState extends State<AddTrain> {
                                     itemCount: trainList.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      return TrainCard(
-                                        userId: widget.userId,
-                                        programName: widget.programName,
+                                      return EditTrainCard(
                                         fromDate: widget.fromDate,
                                         toDate: widget.toDate,
-                                        cityId: widget.cityId.toString(),
+                                        programName: widget.programName,
                                         hotelName: widget.hotelName,
                                         roomPrice: widget.roomPrice,
                                         adress: widget.adress,
-                                        contactInfo: widget.contactInfo,
                                         trainNumber:
                                             trainList[index].trainNumber,
                                         ticketPrice:
@@ -205,12 +234,9 @@ class _AddTrainState extends State<AddTrain> {
                                             trainList[index].arrivalTime,
                                         departureTime:
                                             trainList[index].departureTime,
+                                        // city: trainList[index].city,
                                         destination:
                                             trainList[index].destination,
-                                        fromCityId: trainList[index].cityId,
-                                        toCityId:
-                                            trainList[index].destinationId,
-                                        details: trainList[index].details,
                                       );
                                     },
                                   );
