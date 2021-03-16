@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
         title: Text(
           getTranslated(context, 'explore_egypt'),
           style: GoogleFonts.playfairDisplay(
-              fontSize: 38.6,
+              fontSize: 32.6,
               fontWeight: FontWeight.w400,
               color: Colors.blue[800]),
         ),
@@ -130,53 +130,58 @@ class _HomeState extends State<Home> {
           //   ),
           // )
           // ),
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              size: 32.0,
-              color: Colors.blue[700],
-            ),
-            onPressed: () {
-              print(hotels);
-              showSearch(
-                context: context,
-                delegate: DataSearch(data: hotels),
-              );
-            },
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: DropdownButton(
-              onChanged: (Language language) {
-                _changeLanguage(language);
-              },
-              underline: SizedBox(),
-              icon: Icon(
-                Icons.language,
-                color: Colors.blue[700],
-                size: 30.0,
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.search,
+                  size: 32.0,
+                  color: Colors.blue[700],
+                ),
+                onPressed: () {
+                  print(hotels);
+                  showSearch(
+                    context: context,
+                    delegate: DataSearch(data: hotels),
+                  );
+                },
               ),
-              items: Language.languageList()
-                  .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
-                        value: lang,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Text(
-                              lang.flag,
-                              style: TextStyle(
-                                fontSize: 24.0,
-                              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: DropdownButton(
+                  onChanged: (Language language) {
+                    _changeLanguage(language);
+                  },
+                  underline: SizedBox(),
+                  icon: Icon(
+                    Icons.language,
+                    color: Colors.blue[700],
+                    size: 30.0,
+                  ),
+                  items: Language.languageList()
+                      .map<DropdownMenuItem<Language>>((lang) =>
+                          DropdownMenuItem(
+                            value: lang,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Text(
+                                  lang.flag,
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                                Text(lang.name,
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    )),
+                              ],
                             ),
-                            Text(lang.name,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                )),
-                          ],
-                        ),
-                      ))
-                  .toList(),
-            ),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ],
           ),
         ],
 

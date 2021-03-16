@@ -39,9 +39,9 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
           context,
           MaterialPageRoute(builder: (BuildContext context) => Home()),
           (Route<dynamic> route) => false);
+      final snackBar = SnackBar(content: Text('you should to be logged'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-    final snackBar = SnackBar(content: Text('you should to be logged'));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   getTripsFromJson() async {

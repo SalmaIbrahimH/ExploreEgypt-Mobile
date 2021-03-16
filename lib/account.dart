@@ -45,6 +45,7 @@ class _BodyState extends State<Body> {
     print("token account");
     userID = utf8.decode(base64.decode(token));
     print(token);
+    setState(() {});
   }
 
   @override

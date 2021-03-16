@@ -227,7 +227,7 @@ class _TripDetailsState extends State<TripDetails> {
                           // arrow icon
                           Expanded(
                             child: Icon(
-                              Icons.arrow_back,
+                              Icons.arrow_forward,
                               size: 30,
                             ),
                             flex: 5,

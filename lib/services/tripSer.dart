@@ -138,6 +138,7 @@ class TripService {
       base_url = ar_url;
     }
     response = await dio.post("$base_url/programs", data: {
+      "userID": userId,
       "programName": programName,
       "fromDate": fromDate,
       "toDate": toDate,
