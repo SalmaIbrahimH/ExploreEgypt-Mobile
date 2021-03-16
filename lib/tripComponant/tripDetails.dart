@@ -2,34 +2,49 @@ import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/editTripForm/editTrip.dart';
 import 'package:explore_egypt/tripComponant/showTrip.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class TripDetails extends StatefulWidget {
+  int userId;
   String programName;
-  String from;
-  String to;
-  String toCity;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
+  String contactInfo;
   String trainNumber;
-  String ticketPrice;
   String destination;
-  int id;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
-  TripDetails(
-      {this.programName,
-      this.from,
-      this.to,
-      this.toCity,
-      this.hotelName,
-      this.roomPrice,
-      this.adress,
-      this.trainNumber,
-      this.ticketPrice,
-      this.id,
-      this.destination});
+  TripDetails({
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  });
   @override
   _TripDetailsState createState() => _TripDetailsState();
 }
@@ -46,23 +61,6 @@ class _TripDetailsState extends State<TripDetails> {
   String trainNumber;
   String ticketPrice;
   String destination;
-
-  // editTOJson(id) async {
-  //   print("edit $id");
-  //   await TripService().edit(
-  //       id,
-  //       widget.programName,
-  //       widget.from,
-  //       widget.to,
-  //       widget.hotelName,
-  //       widget.roomPrice,
-  //       widget.adress,
-  //       widget.destination,
-  //       widget.trainNumber,
-  //       widget.ticketPrice);
-
-  //   setState(() {});
-  // }
 
   delete(id) async {
     print(" delete1$id");
@@ -124,8 +122,8 @@ class _TripDetailsState extends State<TripDetails> {
                                     {
                                       id = widget.id;
                                       programName = widget.programName;
-                                      from = widget.from;
-                                      to = widget.to;
+                                      from = widget.fromDate;
+                                      to = widget.toDate;
                                       hotelName = widget.hotelName;
                                       roomPrice = widget.roomPrice;
                                       adress = widget.adress;
@@ -136,16 +134,32 @@ class _TripDetailsState extends State<TripDetails> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => EditTrip(
-                                                    id: id,
-                                                    programName: programName,
-                                                    from: from,
-                                                    to: to,
-                                                    hotelName: hotelName,
-                                                    roomPrice: roomPrice,
-                                                    adress: adress,
-                                                    destination: destination,
-                                                    trainNumber: trainNumber,
-                                                    ticketPrice: ticketPrice,
+                                                    userId: widget.userId,
+                                                    programName:
+                                                        widget.programName,
+                                                    fromDate: widget.fromDate,
+                                                    toDate: widget.toDate,
+                                                    cityId: widget.cityId,
+                                                    fromCityId:
+                                                        widget.fromCityId,
+                                                    toCityId: widget.toCityId,
+                                                    id: widget.id,
+                                                    hotelName: widget.hotelName,
+                                                    roomPrice: widget.roomPrice,
+                                                    adress: widget.adress,
+                                                    contactInfo:
+                                                        widget.contactInfo,
+                                                    trainNumber:
+                                                        widget.trainNumber,
+                                                    destination:
+                                                        widget.destination,
+                                                    ticketPrice:
+                                                        widget.ticketPrice,
+                                                    departureTime:
+                                                        widget.departureTime,
+                                                    arrivalTime:
+                                                        widget.arrivalTime,
+                                                    details: widget.details,
                                                   )));
                                     }
                                   }),
@@ -190,38 +204,19 @@ class _TripDetailsState extends State<TripDetails> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       //trave; details
-                      Row(
-                        children: <Widget>[
+                      Center(
                           // depatrutre city
-                          Expanded(
-                            child: Text(
-                              widget.destination,
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            flex: 4,
-                          ),
-                          // arrow icon
-                          Expanded(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              size: 30,
-                            ),
-                            flex: 4,
-                          ),
-                          // arival city
-                          Expanded(
-                            child: Text(widget.destination,
-                                style: TextStyle(fontSize: 20)),
-                            flex: 4,
-                          )
-                        ],
+                        child: Text(
+                          widget.destination,
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
                       Row(
                         children: <Widget>[
                           //departure date
                           Expanded(
                             child: Text(
-                              widget.from
+                              widget.fromDate.toString()
                               // "${DateFormat("dd/MM/yyyy").format( widget.from)}"
                               ,
                               style: TextStyle(fontSize: 20),
@@ -238,8 +233,8 @@ class _TripDetailsState extends State<TripDetails> {
                           ),
                           // arrival date
                           Expanded(
-                            child:
-                                Text(widget.to, style: TextStyle(fontSize: 20)),
+                            child: Text(widget.toDate.toString(),
+                                style: TextStyle(fontSize: 20)),
                             flex: 4,
                           )
                         ],
@@ -248,58 +243,62 @@ class _TripDetailsState extends State<TripDetails> {
                   )),
             ),
             //hotel details
-            Container(
-              height: 150,
-              decoration: BoxDecoration(color: Colors.cyan.shade50),
-              child: Center(
-                child: Row(
-                  children: [
-                    //hotel icon
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Icon(
-                            Icons.hotel,
-                            size: 40,
-                            color: Colors.deepOrangeAccent,
-                          )),
-                    ),
-                    //hotel name
-                    Expanded(
-                        flex: 8,
+            Flexible(
+              child: Container(
+                height: 150,
+                decoration: BoxDecoration(color: Colors.cyan.shade50),
+                child: Center(
+                  child: Row(
+                    children: [
+                      //hotel icon
+                      Expanded(
+                        flex: 4,
                         child: Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(widget.hotelName,
-                                  style: TextStyle(
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w500)),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              Text(widget.roomPrice,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  )),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    size: 15,
-                                  ),
-                                  Text("widget.adress",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      )),
-                                ],
-                              )
-                            ],
-                          ),
-                        ))
-                  ],
+                            padding: EdgeInsets.all(10),
+                            child: Icon(
+                              Icons.hotel,
+                              size: 40,
+                              color: Colors.deepOrangeAccent,
+                            )),
+                      ),
+                      //hotel name
+                      Expanded(
+                          flex: 8,
+                          child: Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(widget.hotelName,
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w500)),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text("EGP${widget.roomPrice}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    )),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.location_on,
+                                      size: 15,
+                                    ),
+                                    Flexible(
+                                      child: Text(widget.adress,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                          )),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -347,7 +346,7 @@ class _TripDetailsState extends State<TripDetails> {
                                     size: 15,
                                   ),
                                   Flexible(
-                                    child: Text("Adress",
+                                    child: Text(widget.details,
                                         style: TextStyle(
                                           fontSize: 18,
                                         )),

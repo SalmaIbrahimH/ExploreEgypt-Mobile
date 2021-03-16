@@ -8,12 +8,45 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class City extends StatefulWidget {
+  int userId;
   String programName;
-  // DateTime from;
-  // DateTime to;
-  String from;
-  String to;
-  City({Key key, this.programName, this.from, this.to}) : super(key: key);
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+  City({
+    Key key,
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  }) : super(key: key);
 
   @override
   _CityState createState() => _CityState();
@@ -25,9 +58,8 @@ class _CityState extends State<City> {
   String cityvalue;
   String cityname;
   var formKey = GlobalKey<FormState>();
-  
-  @override
 
+  @override
   void initState() {
     super.initState();
     getCityFromJson();
@@ -46,7 +78,6 @@ class _CityState extends State<City> {
     });
   }
 
-  
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -134,14 +165,23 @@ class _CityState extends State<City> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return HotelCard(
-                                        from: widget.from,
-                                        to: widget.to,
+                                        userId: widget.userId,
                                         programName: widget.programName,
+                                        fromDate: widget.fromDate,
+                                        toDate: widget.toDate,
+                                        cityId: hotelList[index].cityId,
+                                        // fromCityId: widget.fromCityId,
+                                        // toCityId: widget.toCityId,
                                         hotelName: hotelList[index].hotelName,
                                         roomPrice: hotelList[index].roomPrice,
-                                        contactInfo:
-                                            hotelList[index].contactInfo,
                                         adress: hotelList[index].adress,
+                                        contactInfo: hotelList[index].contactInfo,
+                                        // trainNumber: widget.trainNumber,
+                                        // destination: widget.destination,
+                                        // ticketPrice: widget.ticketPrice,
+                                        // departureTime: widget.departureTime,
+                                        // arrivalTime: widget.arrivalTime,
+                                        // details: widget.details,
                                       );
                                     },
                                   );

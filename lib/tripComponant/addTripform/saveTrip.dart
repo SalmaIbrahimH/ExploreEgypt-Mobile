@@ -4,30 +4,46 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class SaveTrip extends StatefulWidget {
+  int userId;
   String programName;
-  // DateTime from;
-  // DateTime to;
-  String from;
-  String to;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
-  String ticketPrice;
-  String destination;
+  String contactInfo;
   String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
-  SaveTrip(
-      {Key key,
-      this.hotelName,
-      this.adress,
-      this.roomPrice,
-      this.programName,
-      this.from,
-      this.to,
-      this.destination,
-      this.ticketPrice,
-      this.trainNumber})
-      : super(key: key);
+  SaveTrip({
+    Key key,
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  }) : super(key: key);
   @override
   _SaveTripState createState() => _SaveTripState();
 }
@@ -36,15 +52,23 @@ class _SaveTripState extends State<SaveTrip> {
   List<Trip> program;
   save() async {
     program = await TripService().save(
+        widget.userId,
         widget.programName,
-        widget.from,
-        widget.to,
+        widget.fromDate,
+        widget.toDate,
+        widget.cityId,
+        widget.fromCityId,
+        widget.toCityId,
         widget.hotelName,
         widget.roomPrice,
         widget.adress,
-        widget.destination,
+        widget.contactInfo,
         widget.trainNumber,
-        widget.ticketPrice);
+        widget.destination,
+        widget.ticketPrice,
+        widget.departureTime,
+        widget.arrivalTime,
+        widget.details);
     print(program);
 
     setState(() {});
@@ -70,8 +94,8 @@ class _SaveTripState extends State<SaveTrip> {
                     print("hotelName${widget.hotelName}");
                     print("adress${widget.adress}");
                     print("name${widget.programName}");
-                    print("from${widget.from}");
-                    print("to${widget.to}");
+                    print("from${widget.fromDate}");
+                    print("to${widget.toDate}");
                     save();
                     showDialog(
                         context: context,

@@ -24,7 +24,6 @@ class TripService {
 
   ////get cities list from json
   Future<List<Cities>> getCties() async {
-
     List<Cities> city = [];
     Response response;
     Dio dio = new Dio();
@@ -39,7 +38,6 @@ class TripService {
 
   //// get Hotel By Id program from json
   Future<List<Hotel>> getHotelById(cityvalue) async {
-
     List<Hotel> hotel = [];
     Response response;
     Dio dio = new Dio();
@@ -54,7 +52,6 @@ class TripService {
 
   //// get train By Id program from jsom
   Future<List<Train>> getTrainById(destvalue, cityvalue) async {
-
     List<Train> train = [];
     Response response;
     Dio dio = new Dio();
@@ -70,7 +67,6 @@ class TripService {
 
 //// get train By deperture city Id program
   Future<List<Train>> getTrainBycityId(cityvalue) async {
-
     List<Train> train = [];
     Response response;
     Dio dio = new Dio();
@@ -85,70 +81,96 @@ class TripService {
 
 //// post program to json
   Future<List<Trip>> save(
+    int userId,
     String programName,
-    String from,
-    String to,
+    String fromDate,
+    String toDate,
+    String cityId,
+    String fromCityId,
+    String toCityId,
     String hotelName,
     String roomPrice,
     String adress,
+    String contactInfo,
     String trainNumber,
-    String ticketPrice,
     String destination,
-
+    String ticketPrice,
+    String departureTime,
+    String arrivalTime,
+    String details,
   ) async {
-
     Response response;
+
     Dio dio = new Dio();
     response = await dio.post("$url/programs", data: {
       "programName": programName,
-      "from": from,
-      "to": to,
+      "fromDate": fromDate,
+      "toDate": toDate,
       "selHotel": {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
+        "adress": adress,
+        "contactInfo": contactInfo,
       },
-      "selTrain":{
-          "trainNumber": trainNumber,
-          "ticketPrice": ticketPrice,
-          "destination": destination,},
-      "adress": adress,
+      "selTrain": {
+        "trainNumber": trainNumber,
+        "destination": destination,
+        "ticketPrice": ticketPrice,
+        "departureTime": departureTime,
+        "arrivalTime": arrivalTime,
+        "details": details,
+      },
     });
     var data = response.data;
 
     return data;
   }
 
-  //// post program to json
-  Future<List<Trip>> edit(int id,
+  //// edit program to json
+  Future<List<Trip>> edit(
+     userId,
     String programName,
-    String from,
-    String to,
+    String fromDate,
+    String toDate,
+    // String cityId,
+    // String fromCityId,
+    // String toCityId,
+    int id,
     String hotelName,
     String roomPrice,
     String adress,
+    String contactInfo,
     String trainNumber,
-    String ticketPrice,
     String destination,
+    String ticketPrice,
+    String departureTime,
+    String arrivalTime,
+    String details,
   ) async {
- 
     Response response;
     Dio dio = new Dio();
     response = await dio.put("$url/programs/$id", data: {
+      "id": id,
       "programName": programName,
-      "from": from,
-      "to": to,
+      "fromDate": fromDate,
+      "toDate": toDate,
       "selHotel": {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
+        "adress": adress,
+        "contactInfo": contactInfo,
       },
-      "selTrain"
-          "trainNumber": trainNumber,
-          "ticketPrice": ticketPrice,
-          "destination": destination,
-      "adress": adress,
+      "selTrain": {
+        "trainNumber": trainNumber,
+        "destination": destination,
+        "ticketPrice": ticketPrice,
+        "departureTime": departureTime,
+        "arrivalTime": arrivalTime,
+        "details": details,
+      },
     });
     var data = response.data;
-
+    print("hi");
     return data;
   }
 
@@ -162,5 +184,18 @@ class TripService {
     var data = response.data;
     return data;
   }
-}
 
+  Future<List<Hotel>> getHotels() async {
+    List<Hotel> hotels = [];
+    Response response;
+    Dio dio = new Dio();
+    print('test before');
+    response = await dio.get("$url/hotels");
+    print('test after');
+    var data = response.data;
+    data.forEach((val) {
+      hotels.add(Hotel.fromJson(val));
+    });
+    return hotels;
+  }
+}

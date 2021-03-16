@@ -7,49 +7,70 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class EditHotel extends StatefulWidget {
-  int id;
+  int userId;
   String programName;
-  String from;
-  String to;
-  String toCity;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
+  String contactInfo;
   String trainNumber;
-  String ticketPrice;
   String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
-  EditHotel(
-      {Key key,
-      this.id,
-      this.programName,
-      this.from,
-      this.to,
-      this.toCity,
-      this.hotelName,
-      this.roomPrice,
-      this.adress,
-      this.trainNumber,
-      this.ticketPrice,
-      this.destination})
-      : super(key: key);
+  EditHotel({
+    Key key,
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  }) : super(key: key);
 
   @override
   _EditHotelState createState() => _EditHotelState();
 }
 
 class _EditHotelState extends State<EditHotel> {
-  String toCity;
+  int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
-  int id;
-  String from;
-  String to;
-
   String adress;
+  String contactInfo;
   String trainNumber;
-  String ticketPrice;
   String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
   List<Cities> cityList = [];
   List<Hotel> hotelList = [];
   String cityvalue;
@@ -63,10 +84,10 @@ class _EditHotelState extends State<EditHotel> {
       // cityvalue = widget.toCity;
     });
     getCityFromJson();
-
+    print("to${widget.toDate}");
     print(widget.programName);
-    print(widget.from);
-    print(widget.to);
+    print(widget.fromDate);
+    print(widget.details);
     print(widget.adress);
     print(widget.hotelName);
     print(widget.roomPrice);
@@ -175,14 +196,23 @@ class _EditHotelState extends State<EditHotel> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return EditHotelCard(
-                                        from: widget.from,
-                                        to: widget.to,
+                                        fromDate: widget.fromDate,
+                                        toDate: widget.toDate,
+                                        id: widget.id,
                                         programName: widget.programName,
                                         hotelName: hotelList[index].hotelName,
                                         roomPrice: hotelList[index].roomPrice,
+                                        adress: hotelList[index].adress,
                                         contactInfo:
                                             hotelList[index].contactInfo,
-                                        adress: hotelList[index].adress,
+                                        trainNumber: widget.trainNumber,
+                                        ticketPrice: widget.ticketPrice,
+                                        arrivalTime: widget.arrivalTime,
+                                        departureTime: widget.departureTime,
+                                        destination: widget.destination,
+                                        fromCityId: widget.cityId,
+                                        // toCityId: destinationId,
+                                        details: widget.details,
                                       );
                                     },
                                   );

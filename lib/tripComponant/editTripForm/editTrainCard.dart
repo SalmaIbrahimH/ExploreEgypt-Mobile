@@ -3,54 +3,68 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class EditTrainCard extends StatefulWidget {
+ int userId;
   String programName;
-  String from;
-  String to;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
+  String contactInfo;
   String trainNumber;
-  String city;
-  dynamic cityId;
-  String ticketPrice;
   String destination;
-  String destinationId;
+  String ticketPrice;
   String departureTime;
   String arrivalTime;
-  int id;
+  String details;
 
   EditTrainCard(
-      {this.trainNumber,
-      this.city,
-      this.cityId,
-      this.ticketPrice,
-      this.destination,
-      this.destinationId,
-      this.departureTime,
-      this.arrivalTime,
-      this.id,
-      this.hotelName,
-      this.roomPrice,
-      this.adress,
-      this.programName,
-      this.from,
-      this.to});
+      {this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,});
 
   @override
   _EditTrainCardState createState() => _EditTrainCardState();
 }
 
 class _EditTrainCardState extends State<EditTrainCard> {
-  String toCity;
+int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
-  int id;
-  String from;
-  String to;
   String adress;
+  String contactInfo;
   String trainNumber;
-  String ticketPrice;
   String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -59,23 +73,32 @@ class _EditTrainCardState extends State<EditTrainCard> {
           print("hotelName${widget.roomPrice}");
           print("adress${widget.adress}");
           print("name${widget.programName}");
-          print("from${widget.from}");
-          print("to${widget.to}");
+          print("from${widget.fromDate}");
+          print("to${widget.toDate}");
           print("destination${widget.destination}");
 
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => SaveEdit(
-                      hotelName: widget.hotelName,
-                      roomPrice: widget.roomPrice,
-                      adress: widget.adress,
-                      programName: widget.programName,
-                      from: widget.from,
-                      to: widget.to,
-                      destination: widget.destination,
-                      ticketPrice: widget.ticketPrice,
-                      trainNumber: widget.trainNumber)));
+                         userId: widget.userId,
+                        programName: widget.programName,
+                        fromDate: widget.fromDate,
+                        toDate: widget.toDate,
+                        cityId: widget.cityId,
+                        fromCityId: widget.fromCityId,
+                        toCityId: widget.toCityId,
+                        id: widget.id,
+                        hotelName: widget.hotelName,
+                        roomPrice: widget.roomPrice,
+                        adress: widget.adress,
+                        contactInfo: widget.contactInfo,
+                        trainNumber: widget.trainNumber,
+                        destination: widget.destination,
+                        ticketPrice: widget.ticketPrice,
+                        departureTime: widget.departureTime,
+                        arrivalTime: widget.arrivalTime,
+                        details: widget.details,)));
         },
         child: Card(
             child: Padding(
@@ -139,7 +162,7 @@ class _EditTrainCardState extends State<EditTrainCard> {
                                     color: Colors.white,
                                   ),
                                   Text(
-                                    widget.city,
+                                    widget.destination,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),

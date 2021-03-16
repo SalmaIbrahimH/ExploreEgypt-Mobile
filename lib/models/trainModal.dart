@@ -32,7 +32,7 @@ class Train {
     String destinationId;
     String departureTime;
     String arrivalTime;
-    Details details;
+    String details;
     int id;
 
     factory Train.fromJson(Map<String, dynamic> json) => Train(
@@ -46,7 +46,7 @@ class Train {
         destinationId: json["destinationId"],
         departureTime: json["departureTime"],
         arrivalTime: json["arrivalTime"],
-        details: detailsValues.map[json["details"]],
+        details: json["details"],
         id: json["id"],
     );
 
@@ -62,7 +62,7 @@ class Train {
         "destinationId": destinationId,
         "departureTime": departureTime,
         "arrivalTime": arrivalTime,
-        "details": detailsValues.reverse[details],
+        "details": details,
         "id": id,
     };
 }
@@ -75,12 +75,6 @@ final cityValues = EnumValues({
     "cairo": City.CAIRO
 });
 
-enum Details { SPECIAL_SERVICE_OD, SPEED_AC_SPANISH }
-
-final detailsValues = EnumValues({
-    "Special Service OD": Details.SPECIAL_SERVICE_OD,
-    "Speed AC Spanish": Details.SPEED_AC_SPANISH
-});
 
 class EnumValues<T> {
     Map<String, T> map;

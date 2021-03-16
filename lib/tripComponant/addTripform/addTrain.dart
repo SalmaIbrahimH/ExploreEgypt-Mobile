@@ -4,41 +4,59 @@ import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/cards/trainCard.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-// ignore: must_be_immutable
-// ignore: camel_case_types
 // ignore: must_be_immutable
 class AddTrain extends StatefulWidget {
-
+  int userId;
   String programName;
-  // DateTime from;
-  // DateTime to;
-  String from;
-  String to;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
-  AddTrain(
-      {Key key,
-      this.hotelName,
-      this.adress,
-      this.roomPrice,
-      this.programName,
-      this.from,
-      this.to})
-      : super(key: key);
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
+
+  AddTrain({
+    Key key,
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  }) : super(key: key);
 
   @override
   _AddTrainState createState() => _AddTrainState();
 }
 
 class _AddTrainState extends State<AddTrain> {
-
   List<Cities> cityList = [];
   List<Train> trainList = [];
   String cityvalue;
   String destvalue;
-  
+
   @override
   void initState() {
     super.initState();
@@ -168,22 +186,28 @@ class _AddTrainState extends State<AddTrain> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return TrainCard(
-                                        from: widget.from,
-                                        to: widget.to,
+                                        userId: widget.userId,
                                         programName: widget.programName,
+                                        fromDate: widget.fromDate,
+                                        toDate: widget.toDate,
+                                        cityId: widget.cityId.toString(),
                                         hotelName: widget.hotelName,
                                         roomPrice: widget.roomPrice,
                                         adress: widget.adress,
+                                        contactInfo: widget.contactInfo,
                                         trainNumber:
                                             trainList[index].trainNumber,
-                                         ticketPrice: trainList[index].ticketPrice,
+                                        ticketPrice:
+                                            trainList[index].ticketPrice,
                                         arrivalTime:
                                             trainList[index].arrivalTime,
                                         departureTime:
                                             trainList[index].departureTime,
-                                        city: trainList[index].city,
                                         destination:
                                             trainList[index].destination,
+                                        fromCityId: trainList[index].cityId,
+                                        toCityId: trainList[index].destinationId,
+                                        details: trainList[index].details,
                                       );
                                     },
                                   );

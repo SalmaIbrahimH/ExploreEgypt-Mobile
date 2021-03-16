@@ -10,59 +10,57 @@ String tripToJson(List<Trip> data) => json.encode(List<dynamic>.from(data.map((x
 
 class Trip {
     Trip({
+        this.userId,
         this.programName,
-        this.from,
-        this.to,
-        this.city,
-        this.fromCity,
-        this.toCity,
+        this.fromDate,
+        this.toDate,
+        this.cityId,
+        this.fromCityId,
+        this.toCityId,
         this.selHotel,
         this.selTrain,
         this.id,
-        this.userId,
     });
 
+    int userId;
     String programName;
-    // DateTime from;
-    // DateTime to;
-    String from;
-    String to;
-    String city;
-    String fromCity;
-    String toCity;
+    String fromDate;
+    String toDate;
+    String cityId;
+    String fromCityId;
+    String toCityId;
     SelHotel selHotel;
     SelTrain selTrain;
     int id;
-    int userId;
 
     factory Trip.fromJson(Map<String, dynamic> json) => Trip(
+        userId: json["userID"],
         programName: json["programName"],
-        // from: DateTime.parse(json["from"]),
-        // to: DateTime.parse(json["to"]),
-        from: json["from"],
-        to: json["to"],
-        city: json["city"],
-        fromCity: json["fromCity"] == null ? null : json["fromCity"],
-        toCity: json["toCity"] == null ? null : json["toCity"],
+        // fromDate: DateTime.parse(json["fromDate"]),
+        // toDate: DateTime.parse(json["toDate"]),
+        fromDate: json["fromDate"],
+        toDate: json["toDate"],
+        cityId: json["cityID"],
+        fromCityId: json["fromCityID"],
+        toCityId: json["toCityID"],
         selHotel: SelHotel.fromJson(json["selHotel"]),
         selTrain: SelTrain.fromJson(json["selTrain"]),
         id: json["id"],
-        userId: json["userID"] == null ? null : json["userID"],
     );
 
     Map<String, dynamic> toJson() => {
+        "userID": userId,
         "programName": programName,
-        // "from": "${from.year.toString().padLeft(4, '0')}-${from.month.toString().padLeft(2, '0')}-${from.day.toString().padLeft(2, '0')}",
-        // "to": "${to.year.toString().padLeft(4, '0')}-${to.month.toString().padLeft(2, '0')}-${to.day.toString().padLeft(2, '0')}",
-        "from": from,
-        "to": to,
-        "city": city,
-        "fromCity": fromCity == null ? null : fromCity,
-        "toCity": toCity == null ? null : toCity,
+        // "fromDate": "${fromDate.year.toString().padLeft(4, '0')}-${fromDate.month.toString().padLeft(2, '0')}-${fromDate.day.toString().padLeft(2, '0')}",
+        // "toDate": "${toDate.year.toString().padLeft(4, '0')}-${toDate.month.toString().padLeft(2, '0')}-${toDate.day.toString().padLeft(2, '0')}",
+        "fromDate": fromDate,
+        "toDate": toDate,
+        "cityID": cityId,
+        "fromCityID": fromCityId,
+        "toCityID": toCityId,
         "selHotel": selHotel.toJson(),
         "selTrain": selTrain.toJson(),
         "id": id,
-        "userID": userId == null ? null : userId,
     };
 }
 
@@ -70,19 +68,27 @@ class SelHotel {
     SelHotel({
         this.hotelName,
         this.roomPrice,
+        this.adress,
+        this.contactInfo,
     });
 
     String hotelName;
     String roomPrice;
+    String adress;
+    String contactInfo;
 
     factory SelHotel.fromJson(Map<String, dynamic> json) => SelHotel(
         hotelName: json["hotelName"],
         roomPrice: json["roomPrice"],
+        adress: json["adress"],
+        contactInfo: json["contactInfo"],
     );
 
     Map<String, dynamic> toJson() => {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
+        "adress": adress,
+        "contactInfo": contactInfo,
     };
 }
 
@@ -91,21 +97,33 @@ class SelTrain {
         this.trainNumber,
         this.destination,
         this.ticketPrice,
+        this.departureTime,
+        this.arrivalTime,
+        this.details,
     });
 
-    dynamic trainNumber;
+    String trainNumber;
     String destination;
     String ticketPrice;
+    String departureTime;
+    String arrivalTime;
+    String details;
 
     factory SelTrain.fromJson(Map<String, dynamic> json) => SelTrain(
         trainNumber: json["trainNumber"],
         destination: json["destination"],
-        ticketPrice: json["ticketPrice"] == null ? null : json["ticketPrice"],
+        ticketPrice: json["ticketPrice"],
+        departureTime: json["departureTime"],
+        arrivalTime: json["arrivalTime"],
+        details: json["details"],
     );
 
     Map<String, dynamic> toJson() => {
         "trainNumber": trainNumber,
         "destination": destination,
-        "ticketPrice": ticketPrice == null ? null : ticketPrice,
+        "ticketPrice": ticketPrice,
+        "departureTime": departureTime,
+        "arrivalTime": arrivalTime,
+        "details": details,
     };
 }

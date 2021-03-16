@@ -2,7 +2,6 @@ import 'package:explore_egypt/models/article.dart';
 import 'package:flutter/material.dart';
 import '../services/explore_article.dart';
 import '../components/culture_article_widget.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 ExploreArticle exploreArticle = ExploreArticle();
 
@@ -62,9 +61,8 @@ class _CultureScreenState extends State<CultureScreen> {
       );
     } else {
       return Center(
-        child: SpinKitCircle(
-          color: Colors.blue,
-          size: 85.0,
+        child: CircularProgressIndicator(
+          backgroundColor: Color(0xFFeeeeee),
         ),
       );
     }
