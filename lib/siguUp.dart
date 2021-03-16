@@ -57,7 +57,7 @@ class _BodyState extends State<Body> {
   void initState() {
     super.initState();
     getusersFromsServer();
-    checkLoginStatus();
+    // checkLoginStatus();
   }
 
   getusersFromsServer() async {
@@ -256,7 +256,7 @@ class _BodyState extends State<Body> {
                       }
                       return null;
                     },
-                    icon: Icons.mail,
+                    icon: Icons.location_city,
                     controller: cityController,
                     onChanged: (value) {},
                   ),

@@ -63,7 +63,7 @@ class _BodyState extends State<Body> {
   final TextEditingController passwordController = new TextEditingController();
   @override
   void initState() {
-    checkLoginStatus();
+    // checkLoginStatus();
     super.initState();
     users = new Users();
   }
@@ -104,7 +104,8 @@ class _BodyState extends State<Body> {
     } else {
       print("false");
       // Toast.show("you have to sing up ", context, duration: Toast.LENGTH_LONG);
-      final snackBar = SnackBar(content: Text('you have to sing up '));
+      final snackBar =
+          SnackBar(content: Text('this email not found you have to sing up '));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       // Navigator.push(
       //   context,

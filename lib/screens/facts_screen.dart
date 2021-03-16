@@ -1,4 +1,5 @@
 import 'package:explore_egypt/models/article.dart';
+import 'package:explore_egypt/service/WishListService.dart';
 import 'package:flutter/material.dart';
 import '../components/custom_card.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -13,7 +14,7 @@ class FactsScreen extends StatefulWidget {
 
 class _FactsScreenState extends State<FactsScreen> {
   List<Article> articles = [];
-
+  var name;
   getData() async {
     var data = await exploreArticle.getFactsArticles();
     articles = data;
@@ -27,6 +28,12 @@ class _FactsScreenState extends State<FactsScreen> {
   //   setState(() {});
   //   print('testtt');
   // }
+  getFav(id) async {
+    bool res = await WishListService().isFav(id, 8, "explorDep");
+    if (res) {
+      return true;
+    }
+  }
 
   @override
   void initState() {
@@ -59,6 +66,8 @@ class _FactsScreenState extends State<FactsScreen> {
                   img: articles[index].images[0],
                   title: articles[index].title,
                   description: articles[index].description,
+                  // name != null ? icon: Icon(Icons.favorite_outline)
+                  // icon: Icon(Icons.favorite_outline),
                 ),
               ),
             ),

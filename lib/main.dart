@@ -34,21 +34,21 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
+    // checkLoginStatus();
   }
 
-  checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getInt("token");
-    print("token main");
-    print(token);
-    if (token == null) {
-      print("go");
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-      );
-    }
-  }
+  // checkLoginStatus() async {
+  //   sharedPreferences = await SharedPreferences.getInstance();
+  //   var token = sharedPreferences.getInt("token");
+  //   print("token main");
+  //   print(token);
+  //   if (token == null) {
+  //     print("go");
+  //     Navigator.of(context).push(
+  //       MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

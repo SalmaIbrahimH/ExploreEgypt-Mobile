@@ -1,10 +1,13 @@
 import 'package:explore_egypt/profile.dart';
+import 'package:explore_egypt/service/usersService.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'login.dart';
 import 'package:explore_egypt/tripComponant/myTrip.dart';
 import './screens/explore_screen.dart';
+import 'account.dart';
+import 'login.dart';
+import 'models/users.dart';
 
 GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -15,32 +18,36 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   SharedPreferences sharedPreferences;
+  String userID;
+  Users user;
 
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
+    // checkLoginStatus();
+    getUser();
   }
 
-  checkLoginStatus() async {
+  getUser() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    userID = utf8.decode(base64.decode(sharedPreferences.getString("token")));
+    user = await UsersService().getUserByID(userID);
+    print("user");
+    setState(() {});
+  }
+
+  Future<bool> checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     print("token home");
+    userID = utf8.decode(base64.decode(token));
     print(utf8.decode(base64.decode(token)));
     print(token);
     if (token == null) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-          (Route<dynamic> route) => false);
+      return false;
+    } else {
+      return true;
     }
-    //   if (sharedPreferences.getInt("token") == 0) {
-    //     Navigator.of(context).pop();
-    //     Navigator.of(context).pushReplacement(
-    //       MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-    //     );
-    //   }
-    // }
   }
 
   int _selectedIndex = 0;
@@ -51,25 +58,9 @@ class _HomeState extends State<Home> {
       'Index 1',
       style: optionStyle,
     ),
-    // Text(
-    //   'Index 1',
-    //   style: optionStyle,
-    // ),
-
     ExploreScreen(),
     MyTrip(),
-    Text(
-      'Index3',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 4',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 5',
-      style: optionStyle,
-    ),
+    AccountScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -78,9 +69,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _openEndDrawer() {
-    _scaffoldKey.currentState.openEndDrawer();
-  }
+  // void _openEndDrawer() {
+  //   _scaffoldKey.currentState.openEndDrawer();
+  // }
 
   void _closeEndDrawer() {
     Navigator.of(context).pop();
@@ -101,19 +92,19 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50, right: 15),
-            child: IconButton(
-              icon: Icon(
-                Icons.person,
-                color: Colors.blueGrey[500],
-                size: 40,
-              ),
-              onPressed: () {
-                _openEndDrawer();
-              },
-            ),
-          )
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 50, right: 15),
+          //   child: IconButton(
+          //     icon: Icon(
+          //       Icons.list,
+          //       color: Colors.blueGrey[500],
+          //       size: 40,
+          //     ),
+          //     onPressed: () {
+          //       _openEndDrawer();
+          //     },
+          //   ),
+          // )
         ],
 
         backgroundColor: Colors.grey[100],
@@ -130,30 +121,27 @@ class _HomeState extends State<Home> {
                 color: Colors.grey.shade200,
               ),
               accountName: Padding(
-                padding: const EdgeInsets.only(top: 30, left: 20),
-                child: Text("xyz",
-                    style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
-              ),
-              accountEmail: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Text("xyz@gmail.com",
-                    style: TextStyle(fontSize: 15, color: Colors.blueGrey)),
-              ),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.grey.shade50,
-                foregroundColor: Colors.blueGrey,
+                padding: const EdgeInsets.only(top: 30, left: 2),
                 child: InkWell(
                   onTap: () {
-                    // Toast.show("you have to sing up ", context,
-                    //     duration: Toast.LENGTH_LONG);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (BuildContext context) => ProfilePage()),
                     );
                   },
+                  child: Text("",
+                      style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+                ),
+              ),
+              accountEmail: Padding(
+                padding: const EdgeInsets.all(2.0),
+
+                //  padding: const EdgeInsets.only(top: 30, left: 2),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 2),
                   child: Text(
-                    "image",
-                    style: TextStyle(fontSize: 20),
+                    "",
+                    style: TextStyle(fontSize: 15, color: Colors.blueGrey),
                   ),
                 ),
               ),
@@ -173,33 +161,63 @@ class _HomeState extends State<Home> {
                 )
               ],
             ),
-            ListTile(
-              title: new Text(
-                "All Inboxes",
-                style: TextStyle(fontSize: 20, color: Colors.blueGrey),
-              ),
-              leading: new Icon(Icons.mail),
-            ),
+            userID != null
+                ? InkWell(
+                    onTap: () {
+                      sharedPreferences.clear();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => LoginScreen()),
+                          (Route<dynamic> route) => false);
+                      setState(() {});
+                    },
+                    child: ListTile(
+                        title: new Text(
+                          "Log out",
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.blueGrey),
+                        ),
+                        leading: new Icon(Icons.logout)),
+                  )
+                : InkWell(
+                    onTap: () {
+                      print("in");
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => LoginScreen()),
+                          (Route<dynamic> route) => false);
+                      setState(() {});
+                    },
+                    child: ListTile(
+                      title: new Text(
+                        "Sing In",
+                        style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                      ),
+                      leading: new Icon(Icons.login_rounded),
+                    ),
+                  ),
             Divider(
               height: 0.1,
             ),
-            ListTile(
-              title: new Text("Primary",
-                  style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
-              leading: new Icon(Icons.inbox),
-            ),
-            MaterialButton(
-              onPressed: () {
-                sharedPreferences.clear();
-                // sharedPreferences.commit();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginScreen()),
-                    (Route<dynamic> route) => false);
-              },
-              child: Text("Log Out", style: TextStyle(color: Colors.black)),
-            ),
+            // ListTile(
+            //   title: new Text("Primary",
+            //       style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+            //   leading: new Icon(Icons.inbox),
+            // ),
+            // MaterialButton(
+            //   onPressed: () {
+            //     sharedPreferences.clear();
+            //     // sharedPreferences.commit();
+            //     Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (BuildContext context) => LoginScreen()),
+            //         (Route<dynamic> route) => false);
+            //   },
+            //   child: Text("Log Out", style: TextStyle(color: Colors.black)),
+            // ),
           ],
         ),
       ),
@@ -218,14 +236,15 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.card_travel_outlined),
             label: 'My trip',
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.favorite),
+          //   label: 'Favorite',
+          // ),
+
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorite',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+            icon: Icon(Icons.account_box),
+            label: 'account',
+          )
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blueGrey[400],

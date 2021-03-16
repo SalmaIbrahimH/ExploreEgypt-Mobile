@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TripDetails extends StatefulWidget {
-  
   String programName;
   String from;
   String to;
@@ -15,20 +13,18 @@ class TripDetails extends StatefulWidget {
   String ticketPrice;
   String destenation;
 
-  TripDetails({
-    this.programName,
-    this.from,
-    this.to,
-    this.toCity,
-    this.hotelName,
-    this.roomPrice,
-    this.adress,
-    this.trainNumber,
-    this.ticketPrice,
-    this.destenation
-  });
+  TripDetails(
+      {this.programName,
+      this.from,
+      this.to,
+      this.toCity,
+      this.hotelName,
+      this.roomPrice,
+      this.adress,
+      this.trainNumber,
+      this.ticketPrice,
+      this.destenation});
   @override
-  
   _TripDetailsState createState() => _TripDetailsState();
 }
 
@@ -39,11 +35,11 @@ class _TripDetailsState extends State<TripDetails> {
       appBar: AppBar(
           // backgroundColor: Colors.amberAccent,
           title: Center(
-            child: Text(
-              "Trip Details",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-          )),
+        child: Text(
+          "Trip Details",
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      )),
       body: Container(
         child: Column(
           children: [
@@ -102,8 +98,8 @@ class _TripDetailsState extends State<TripDetails> {
                             flex: 4,
                           ),
                           Expanded(
-                            child:
-                                Text(widget.destenation, style: TextStyle(fontSize: 20)),
+                            child: Text(widget.destenation,
+                                style: TextStyle(fontSize: 20)),
                             flex: 4,
                           )
                         ],
@@ -125,7 +121,8 @@ class _TripDetailsState extends State<TripDetails> {
                             flex: 5,
                           ),
                           Expanded(
-                            child: Text(widget.to, style: TextStyle(fontSize: 20)),
+                            child:
+                                Text(widget.to, style: TextStyle(fontSize: 20)),
                             flex: 4,
                           )
                         ],
