@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/activitiesArticle.dart';
 import 'package:explore_egypt/widgets/custom_tab_indicator.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -89,42 +90,45 @@ class _ActivitiesState extends State<Activities> {
                             tabs: [
                               Tab(
                                 child: Container(
-                                  child: Text('New & Trending'),
+                                  child: Text(getTranslated(context, 'new')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Sights & Attractions'),
+                                  child: Text(getTranslated(context, 'sights')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Experiences'),
+                                  child: Text(
+                                      getTranslated(context, 'experiences')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Arts & Culture'),
+                                  child: Text(getTranslated(context, 'arts')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Shopping'),
+                                  child:
+                                      Text(getTranslated(context, 'shopping')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Food & Drink'),
+                                  child: Text(getTranslated(context, 'food')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Spas & Wellness'),
+                                  child: Text(getTranslated(context, 'spas')),
                                 ),
                               ),
                               Tab(
                                 child: Container(
-                                  child: Text('Itineraries'),
+                                  child: Text(
+                                      getTranslated(context, 'iteneraries')),
                                 ),
                               ),
                             ],
@@ -214,7 +218,7 @@ class _ActivitiesState extends State<Activities> {
               padding: EdgeInsets.only(top: 20),
               child: Center(
                 child: Text(
-                  'Explore Top Attractions',
+                  getTranslated(context, 'explore_top'),
                   style: GoogleFonts.lato(
                       fontSize: 30.6, fontWeight: FontWeight.w600),
                 ),

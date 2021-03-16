@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/tripComponant/editTripForm/editHotel.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class _EditTripState extends State<EditTrip> {
   int id;
   String from;
   String to;
-   String toCity;
+  String toCity;
   String hotelName;
   String roomPrice;
   String adress;
@@ -98,7 +99,7 @@ class _EditTripState extends State<EditTrip> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Edit your Trip"),
+          title: Text(getTranslated(context, 'edit_trip')),
         ),
         body: ListView(
           children: <Widget>[
@@ -112,7 +113,7 @@ class _EditTripState extends State<EditTrip> {
                     children: [
                       Center(
                         child: Text(
-                          "Trip Program Edit",
+                          getTranslated(context, 'trip_program_edit'),
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w500,
@@ -124,7 +125,7 @@ class _EditTripState extends State<EditTrip> {
                       ),
                       Center(
                           child: Text(
-                        "you can Edit your trip details",
+                        getTranslated(context, 'change_later'),
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       )),
                     ],
@@ -145,7 +146,7 @@ class _EditTripState extends State<EditTrip> {
                               padding: const EdgeInsets.only(
                                   top: 0, left: 0, right: 0, bottom: 20),
                               child: Text(
-                                "Trip program name",
+                                getTranslated(context, 'trip_program_name'),
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
@@ -154,7 +155,8 @@ class _EditTripState extends State<EditTrip> {
                             TextFormField(
                               controller: programName,
                               decoration: InputDecoration(
-                                hintText: "Edit you trip name",
+                                hintText:
+                                    getTranslated(context, 'edit_program_name'),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                 ),
@@ -170,7 +172,7 @@ class _EditTripState extends State<EditTrip> {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 20),
                                       child: Text(
-                                        "Start Date",
+                                        getTranslated(context, 'start_date'),
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 24),
                                       ),
@@ -185,7 +187,7 @@ class _EditTripState extends State<EditTrip> {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 20),
                                       child: Text(
-                                        "End Date",
+                                        getTranslated(context, 'end_date'),
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 24),
                                       ),
@@ -211,7 +213,7 @@ class _EditTripState extends State<EditTrip> {
                 child: MaterialButton(
                     color: Colors.green,
                     child: Text(
-                      "Continue",
+                      getTranslated(context, 'continue'),
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     onPressed: () {

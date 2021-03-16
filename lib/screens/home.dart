@@ -1,4 +1,8 @@
+import 'package:explore_egypt/components/language.dart';
 import 'package:explore_egypt/components/search.dart';
+import 'package:explore_egypt/localization/demo_localization.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
+import 'package:explore_egypt/main.dart';
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/profile.dart';
 import 'package:explore_egypt/screens/activities.dart';
@@ -68,10 +72,6 @@ class _HomeState extends State<Home> {
       style: optionStyle,
     ),
     ProfilePage(),
-    Text(
-      'Index 5',
-      style: optionStyle,
-    ),
   ];
 
   void _onItemTapped(int index) {
@@ -88,6 +88,15 @@ class _HomeState extends State<Home> {
     Navigator.of(context).pop();
   }
 
+  // Change language
+  void _changeLanguage(Language language) async {
+    Locale _temp = await setLocale(language.languageCode);
+
+    MyApp.setLocale(context, _temp);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => super.widget));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,13 +104,13 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         toolbarHeight: 90,
         title: Text(
-          'Explore Egypt',
+          getTranslated(context, 'explore_egypt'),
           style: GoogleFonts.playfairDisplay(
               fontSize: 38.6,
               fontWeight: FontWeight.w400,
               color: Colors.blue[800]),
         ),
-        centerTitle: true,
+        // centerTitle: true,
         actions: <Widget>[
           // Padding(
           //   padding: const EdgeInsets.only(bottom: 50, right: 15),
@@ -129,6 +138,40 @@ class _HomeState extends State<Home> {
                 delegate: DataSearch(data: hotels),
               );
             },
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: DropdownButton(
+              onChanged: (Language language) {
+                _changeLanguage(language);
+              },
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.language,
+                color: Colors.blue[700],
+                size: 30.0,
+              ),
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
+                        value: lang,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(
+                              lang.flag,
+                              style: TextStyle(
+                                fontSize: 24.0,
+                              ),
+                            ),
+                            Text(lang.name,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                )),
+                          ],
+                        ),
+                      ))
+                  .toList(),
+            ),
           ),
         ],
 
@@ -214,7 +257,8 @@ class _HomeState extends State<Home> {
                         builder: (BuildContext context) => LoginScreen()),
                     (Route<dynamic> route) => false);
               },
-              child: Text("Log Out", style: TextStyle(color: Colors.black)),
+              child: Text(getTranslated(context, 'logout'),
+                  style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

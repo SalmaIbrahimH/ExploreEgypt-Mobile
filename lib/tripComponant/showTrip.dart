@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/tripModel.dart';
 import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/cards/tripCard.dart';
@@ -9,27 +10,23 @@ class ShowMyTrips extends StatefulWidget {
 }
 
 class _ShowMyTripsState extends State<ShowMyTrips> {
-
   List<Trip> tripList = [];
 
   @override
   void initState() {
     super.initState();
     getTripsFromJson();
-    
   }
 
   getTripsFromJson() async {
     tripList = await TripService().getTrips();
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("My Trips"),
+          title: Text(getTranslated(context, 'my_trips')),
         ),
         body: FutureBuilder(
             future: getTripsFromJson(),
@@ -39,7 +36,7 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                   itemCount: tripList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return TripCard(
-                      id:tripList[index].id,
+                      id: tripList[index].id,
                       programName: tripList[index].programName,
                       from: tripList[index].from.toString(),
                       to: tripList[index].to.toString(),
@@ -62,8 +59,12 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                       child: CircularProgressIndicator(),
                     ),
                     Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Loading trips",style: TextStyle(fontSize: 20),),)
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        getTranslated(context, 'loading_trips'),
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    )
                   ],
                 ));
               }

@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/article.dart';
 import 'package:flutter/material.dart';
 import '../services/explore_article.dart';
@@ -34,7 +35,7 @@ class _CultureScreenState extends State<CultureScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 12.0, left: 12.0),
               child: Text(
-                'Egypt\'s Culture',
+                getTranslated(context, 'egypt_culture'),
                 style: TextStyle(
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold,

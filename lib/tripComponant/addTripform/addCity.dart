@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/services/tripSer.dart';
@@ -48,7 +49,7 @@ class _CityState extends State<City> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Select Hotel"),
+          title: Text(getTranslated(context, 'select_hotel')),
         ),
         body: Container(
           child: Form(
@@ -65,7 +66,8 @@ class _CityState extends State<City> {
                           children: [
                             Center(
                               child: Text(
-                                "Choose the city you will go to show the hotel",
+                                getTranslated(
+                                    context, 'select_city_to_show_hotel'),
                                 style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500,
@@ -78,7 +80,7 @@ class _CityState extends State<City> {
                             ),
                             Center(
                                 child: Text(
-                              "you can change these details later",
+                              getTranslated(context, 'change_later'),
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white),
                             )),
@@ -108,7 +110,7 @@ class _CityState extends State<City> {
                         })
                       },
                       hint: Text(
-                        "Select city",
+                        getTranslated(context, 'select_city'),
                         style: TextStyle(fontSize: 25),
                       ),
                     ),
@@ -122,7 +124,7 @@ class _CityState extends State<City> {
                               builder: (context, snapshot) {
                                 if (hotelList.length == 0) {
                                   return Text(
-                                    "No Hotels Found",
+                                    getTranslated(context, 'no_hotels'),
                                     style: TextStyle(fontSize: 20),
                                   );
                                 }
@@ -154,7 +156,8 @@ class _CityState extends State<City> {
                                       ),
                                       Padding(
                                           padding: EdgeInsets.all(10),
-                                          child: Text("Loading trips"))
+                                          child: Text(getTranslated(
+                                              context, 'loading_trips')))
                                     ],
                                   ));
                                 }

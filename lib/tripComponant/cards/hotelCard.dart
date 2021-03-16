@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/tripComponant/addTripform/AddTrain.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,6 @@ class HotelCard extends StatefulWidget {
 }
 
 class _HotelCardState extends State<HotelCard> {
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -165,7 +165,8 @@ class _HotelCardState extends State<HotelCard> {
                                     children: <Widget>[
                                       Flexible(
                                         child: Text(
-                                          "Room Starts from",
+                                          getTranslated(
+                                              context, 'room_start_from'),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: "sans-serif",

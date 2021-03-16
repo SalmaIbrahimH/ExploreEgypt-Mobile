@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/widgets/custom_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,13 +32,13 @@ class ExploreScreen extends StatelessWidget {
               ),
               tabs: <Widget>[
                 Tab(
-                  text: 'Facts',
+                  text: getTranslated(context, 'facts'),
                 ),
                 Tab(
-                  text: 'Culture',
+                  text: getTranslated(context, 'culture'),
                 ),
                 Tab(
-                  text: 'History',
+                  text: getTranslated(context, 'history'),
                 ),
               ],
             ),

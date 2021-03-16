@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter         # Add this line
   google_fonts: ^1.1.0
   smooth_page_indicator: ^0.2.1
   http: any
@@ -49,6 +51,7 @@ flutter:
   assets:
     - assets/
     - images/
+    - lib/lang/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

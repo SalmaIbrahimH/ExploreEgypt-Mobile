@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/tripComponant/editTripForm/editTrainCard.dart';
 import 'package:flutter/material.dart';
 
@@ -14,21 +15,21 @@ class EditHotelCard extends StatefulWidget {
   String cityId;
   String img;
 
-  EditHotelCard(
-      {this.id,
-      this.hotelName,
-      this.roomPrice,
-      this.contactInfo,
-      this.adress,
-      this.cityId,
-      this.img,
-      this.programName,
-      this.from,
-      this.to,
-      // this.destination,
-      // this.ticketPrice,
-      // this.trainNumber
-      });
+  EditHotelCard({
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.contactInfo,
+    this.adress,
+    this.cityId,
+    this.img,
+    this.programName,
+    this.from,
+    this.to,
+    // this.destination,
+    // this.ticketPrice,
+    // this.trainNumber
+  });
 
   @override
   _EditHotelCardState createState() => _EditHotelCardState();
@@ -60,15 +61,15 @@ class _EditHotelCardState extends State<EditHotelCard> {
               context,
               MaterialPageRoute(
                   builder: (context) => EditTrainCard(
-                      hotelName: widget.hotelName,
-                      roomPrice: widget.roomPrice,
-                      adress: widget.adress,
-                      programName: widget.programName,
-                      from: widget.from,
-                      to: widget.to,
-                      // destination: widget.destination,
-                      // trainNumber: widget.trainNumber,
-                      // ticketPrice: widget.ticketPrice,
+                        hotelName: widget.hotelName,
+                        roomPrice: widget.roomPrice,
+                        adress: widget.adress,
+                        programName: widget.programName,
+                        from: widget.from,
+                        to: widget.to,
+                        // destination: widget.destination,
+                        // trainNumber: widget.trainNumber,
+                        // ticketPrice: widget.ticketPrice,
                       )));
         },
         child: Card(
@@ -182,7 +183,8 @@ class _EditHotelCardState extends State<EditHotelCard> {
                                     children: <Widget>[
                                       Flexible(
                                         child: Text(
-                                          "Room Starts from",
+                                          getTranslated(
+                                              context, 'room_start_from'),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: "sans-serif",

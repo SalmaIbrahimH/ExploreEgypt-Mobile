@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/tripModel.dart';
 import 'package:explore_egypt/services/tripSer.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class _SaveTripState extends State<SaveTrip> {
               MaterialButton(
                   color: Colors.green,
                   child: Text(
-                    "add trip",
+                    getTranslated(context, 'add_trip'),
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
@@ -118,7 +119,7 @@ dialogContant(BuildContext context) {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Your trip is Saved succssfully",
+                  getTranslated(context, 'trip_saved'),
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                 ),
@@ -134,7 +135,7 @@ dialogContant(BuildContext context) {
                     color: Colors.green,
                     child: Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text("Go to main page",
+                      child: Text(getTranslated(context, 'go_to_main'),
                           style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                     onPressed: () {

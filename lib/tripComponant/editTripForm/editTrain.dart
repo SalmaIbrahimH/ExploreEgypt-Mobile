@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/services/tripSer.dart';
@@ -97,7 +98,7 @@ class _EditTrainState extends State<EditTrain> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Select Train"),
+          title: Text(getTranslated(context, 'select_train')),
         ),
         body: Container(
           child: Form(
@@ -114,7 +115,8 @@ class _EditTrainState extends State<EditTrain> {
                             Center(
                               child: Flexible(
                                 child: Text(
-                                  "Choose the departure city and destenation to show the train schadule",
+                                  getTranslated(
+                                      context, 'choose_start_and_dest'),
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
@@ -128,7 +130,7 @@ class _EditTrainState extends State<EditTrain> {
                             ),
                             Center(
                                 child: Text(
-                              "you can change these details later",
+                              getTranslated(context, 'change_later'),
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white),
                             )),
@@ -153,7 +155,7 @@ class _EditTrainState extends State<EditTrain> {
                         })
                       },
                       hint: Text(
-                        "Select City",
+                        getTranslated(context, 'select_city'),
                         style: TextStyle(fontSize: 25),
                       ),
                     ),
@@ -176,7 +178,7 @@ class _EditTrainState extends State<EditTrain> {
                         })
                       },
                       hint: Text(
-                        "Select destination",
+                        getTranslated(context, 'select_dest'),
                         style: TextStyle(fontSize: 25),
                       ),
                     ),
@@ -188,7 +190,7 @@ class _EditTrainState extends State<EditTrain> {
                               builder: (context, snapshot) {
                                 if (trainList.length == 0) {
                                   return Text(
-                                    "No Trains Match your selection ",
+                                    getTranslated(context, 'no_trains'),
                                     style: TextStyle(fontSize: 20),
                                   );
                                 } else {

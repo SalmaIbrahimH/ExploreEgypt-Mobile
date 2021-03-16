@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/services/tripSer.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 // ignore: camel_case_types
 // ignore: must_be_immutable
 class AddTrain extends StatefulWidget {
-
   String programName;
   // DateTime from;
   // DateTime to;
@@ -33,12 +33,11 @@ class AddTrain extends StatefulWidget {
 }
 
 class _AddTrainState extends State<AddTrain> {
-
   List<Cities> cityList = [];
   List<Train> trainList = [];
   String cityvalue;
   String destvalue;
-  
+
   @override
   void initState() {
     super.initState();
@@ -68,7 +67,7 @@ class _AddTrainState extends State<AddTrain> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Select Train"),
+          title: Text(getTranslated(context, 'select_train')),
         ),
         body: Container(
           child: Form(
@@ -85,7 +84,8 @@ class _AddTrainState extends State<AddTrain> {
                             Center(
                               child: Flexible(
                                 child: Text(
-                                  "Choose the departure city and destenation to show the train schadule",
+                                  getTranslated(
+                                      context, 'choose_start_and_dest'),
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
@@ -99,7 +99,7 @@ class _AddTrainState extends State<AddTrain> {
                             ),
                             Center(
                                 child: Text(
-                              "you can change these details later",
+                              getTranslated(context, 'change_later'),
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white),
                             )),
@@ -124,7 +124,7 @@ class _AddTrainState extends State<AddTrain> {
                         })
                       },
                       hint: Text(
-                        "Select City",
+                        getTranslated(context, 'select_city'),
                         style: TextStyle(fontSize: 25),
                       ),
                     ),
@@ -147,7 +147,7 @@ class _AddTrainState extends State<AddTrain> {
                         })
                       },
                       hint: Text(
-                        "Select destination",
+                        getTranslated(context, 'select_dest'),
                         style: TextStyle(fontSize: 25),
                       ),
                     ),
@@ -159,7 +159,7 @@ class _AddTrainState extends State<AddTrain> {
                               builder: (context, snapshot) {
                                 if (trainList.length == 0) {
                                   return Text(
-                                    "No Trains Match your selection ",
+                                    getTranslated(context, 'no_trains'),
                                     style: TextStyle(fontSize: 20),
                                   );
                                 } else {
@@ -176,7 +176,8 @@ class _AddTrainState extends State<AddTrain> {
                                         adress: widget.adress,
                                         trainNumber:
                                             trainList[index].trainNumber,
-                                         ticketPrice: trainList[index].ticketPrice,
+                                        ticketPrice:
+                                            trainList[index].ticketPrice,
                                         arrivalTime:
                                             trainList[index].arrivalTime,
                                         departureTime:

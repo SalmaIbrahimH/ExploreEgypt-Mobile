@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/screens/home.dart';
 import 'package:explore_egypt/services/usersService.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,8 @@ class _BodyState extends State<Body> {
             context,
             MaterialPageRoute(builder: (context) => LoginScreen()),
           );
-          final snackBar = SnackBar(content: Text('Sing Up Successfuly '));
+          final snackBar =
+              SnackBar(content: Text(getTranslated(context, 'signup_success')));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       }
@@ -117,7 +119,7 @@ class _BodyState extends State<Body> {
       // Toast.show("this email are already sing up ", context,
       //     duration: Toast.LENGTH_LONG);
       final snackBar =
-          SnackBar(content: Text('this email are already sing up'));
+          SnackBar(content: Text(getTranslated(context, 'already_signed')));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       Navigator.push(
         context,
@@ -148,7 +150,7 @@ class _BodyState extends State<Body> {
             ),
             SizedBox(height: size.height * 0.03),
             Text(
-              "SING UP ",
+              getTranslated(context, 'signup'),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: size.height * 0.03),
@@ -157,10 +159,11 @@ class _BodyState extends State<Body> {
               child: Column(
                 children: [
                   RoundedInputField(
-                    hintText: "First Name",
+                    hintText: getTranslated(context, 'first_name'),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your first name';
+                        return getTranslated(
+                            context, 'please_enter_first_name');
                       }
                       return null;
                     },
@@ -169,11 +172,11 @@ class _BodyState extends State<Body> {
                     onChanged: (value) {},
                   ),
                   RoundedInputField(
-                    hintText: "Last Name",
+                    hintText: getTranslated(context, 'last_name'),
                     icon: Icons.person,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your last name';
+                        return getTranslated(context, 'please_enter_last_name');
                       }
                       return null;
                     },
@@ -181,14 +184,14 @@ class _BodyState extends State<Body> {
                     onChanged: (value) {},
                   ),
                   RoundedInputField(
-                    hintText: "Your Email",
+                    hintText: getTranslated(context, 'your_email'),
                     icon: Icons.mail,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter valid email';
+                        return getTranslated(context, 'please_enter_email');
                       }
                       if (!value.contains('@')) {
-                        return 'email should be valid';
+                        return getTranslated(context, 'email_should_be_valid');
                       }
                       return null;
                     },
@@ -196,13 +199,13 @@ class _BodyState extends State<Body> {
                     onChanged: (value) {},
                   ),
                   RoundedPasswordField(
-                    hintText: "Password",
+                    hintText: getTranslated(context, 'password'),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter valid password';
+                        return getTranslated(context, 'must_enter_password');
                       }
                       if (value.length < 4) {
-                        return "Password should be more than 4 characters";
+                        return getTranslated(context, 'password_more');
                       }
                       return null;
                     },
@@ -222,15 +225,15 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   RoundedPasswordField(
-                    hintText: "Confirm Password",
+                    hintText: getTranslated(context, 'confirm_password'),
                     obscureText: hidePassword,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter re-password';
+                        return getTranslated(context, 'must_confirm_password');
                       }
                       if (passwordController.text !=
                           conpasswordController.text) {
-                        return 're-password should equeal password';
+                        return getTranslated(context, 'confirm_should_equal');
                       }
                       return null;
                     },
@@ -249,10 +252,10 @@ class _BodyState extends State<Body> {
                     controller: conpasswordController,
                   ),
                   RoundedInputField(
-                    hintText: "City",
+                    hintText: getTranslated(context, 'city'),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your city';
+                        return getTranslated(context, 'enter_city');
                       }
                       return null;
                     },
@@ -490,13 +493,17 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          login ? "Don’t have an Account ? " : "Already have an Account ? ",
+          login
+              ? getTranslated(context, 'dont_have_account')
+              : getTranslated(context, 'have_account'),
           style: TextStyle(color: kPrimaryColor),
         ),
         GestureDetector(
           onTap: press,
           child: Text(
-            login ? "Sign Up" : "Sign In",
+            login
+                ? getTranslated(context, 'signup')
+                : getTranslated(context, 'signin'),
             style: TextStyle(
                 color: kPrimaryColor,
                 fontWeight: FontWeight.bold,

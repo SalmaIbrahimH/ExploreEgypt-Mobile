@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/editTripForm/editTrip.dart';
 import 'package:explore_egypt/tripComponant/showTrip.dart';
@@ -77,7 +78,7 @@ class _TripDetailsState extends State<TripDetails> {
       appBar: AppBar(
           title: Center(
         child: Text(
-          "Trip Details",
+          getTranslated(context, 'trip_details'),
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
       )),
@@ -170,7 +171,7 @@ class _TripDetailsState extends State<TripDetails> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        "Your Trip Program is all set! ",
+                        getTranslated(context, 'all_set'),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -347,10 +348,11 @@ class _TripDetailsState extends State<TripDetails> {
                                     size: 15,
                                   ),
                                   Flexible(
-                                    child: Text("Adress",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        )),
+                                    child:
+                                        Text(getTranslated(context, 'address'),
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            )),
                                   ),
                                 ],
                               )
@@ -373,7 +375,7 @@ class _TripDetailsState extends State<TripDetails> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              content: Text("Do you want to delete"),
+              content: Text(getTranslated(context, 'want_to_delete')),
               actions: [
                 MaterialButton(
                   onPressed: () {
@@ -382,13 +384,13 @@ class _TripDetailsState extends State<TripDetails> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => ShowMyTrips()));
                   },
-                  child: Text("Yes"),
+                  child: Text(getTranslated(context, 'yes')),
                 ),
                 MaterialButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("No"),
+                  child: Text(getTranslated(context, 'no')),
                 )
               ],
             ));

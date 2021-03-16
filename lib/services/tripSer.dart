@@ -1,11 +1,16 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/cityModal.dart';
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/models/tripModel.dart';
 import 'package:dio/dio.dart';
 
+const String ar_url = 'https://explore-egypt-arabic-db.herokuapp.com';
+const String en_url = 'https://explore-egypt-db.herokuapp.com';
+String base_url;
+
 class TripService {
-  String url = "https://explore-egypt-db.herokuapp.com";
+  // String url = "https://explore-egypt-db.herokuapp.com";
 
   //// get trip program from json
   Future<List<Trip>> getTrips() async {
@@ -13,7 +18,12 @@ class TripService {
     List<Trip> trips = [];
     Response response;
     Dio dio = new Dio();
-    response = await dio.get("$url/programs");
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.get("$base_url/programs");
     var data = response.data;
     //  print(data);
     data.forEach((value) {
@@ -27,7 +37,12 @@ class TripService {
     List<Cities> city = [];
     Response response;
     Dio dio = new Dio();
-    response = await dio.get("$url/city");
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.get("$base_url/city");
     var data = response.data;
     // print(data);
     data.forEach((value) {
@@ -41,7 +56,12 @@ class TripService {
     List<Hotel> hotel = [];
     Response response;
     Dio dio = new Dio();
-    response = await dio.get("$url/hotels?cityID=$cityvalue");
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.get("$base_url/hotels?cityID=$cityvalue");
     var data = response.data;
     // print(data);
     data.forEach((value) {
@@ -55,8 +75,13 @@ class TripService {
     List<Train> train = [];
     Response response;
     Dio dio = new Dio();
-    response =
-        await dio.get("$url/trains?destinationId=$destvalue&cityID=$cityvalue");
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio
+        .get("$base_url/trains?destinationId=$destvalue&cityID=$cityvalue");
     var data = response.data;
     // print(data);
     data.forEach((value) {
@@ -70,7 +95,12 @@ class TripService {
     List<Train> train = [];
     Response response;
     Dio dio = new Dio();
-    response = await dio.get("$url/trains?cityID=$cityvalue");
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.get("$base_url/trains?cityID=$cityvalue");
     var data = response.data;
     // print(data);
     data.forEach((value) {
@@ -93,7 +123,12 @@ class TripService {
   ) async {
     Response response;
     Dio dio = new Dio();
-    response = await dio.post("$url/programs", data: {
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.post("$base_url/programs", data: {
       "programName": programName,
       "from": from,
       "to": to,
@@ -127,7 +162,12 @@ class TripService {
   ) async {
     Response response;
     Dio dio = new Dio();
-    response = await dio.put("$url/programs/$id", data: {
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.put("$base_url/programs/$id", data: {
       "programName": programName,
       "from": from,
       "to": to,
@@ -152,7 +192,12 @@ class TripService {
 
     Response response;
     Dio dio = new Dio();
-    response = await dio.delete("$url/programs/$id");
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
+    response = await dio.delete("$base_url/programs/$id");
     var data = response.data;
     return data;
   }
@@ -161,8 +206,13 @@ class TripService {
     List<Hotel> hotels = new List();
     Response response;
     Dio dio = new Dio();
+    if (await getCurrentLang() == 'en') {
+      base_url = en_url;
+    } else {
+      base_url = ar_url;
+    }
     print('test before');
-    response = await dio.get("$url/hotels");
+    response = await dio.get("$base_url/hotels");
     print('test after');
     var data = response.data;
     data.forEach((val) {

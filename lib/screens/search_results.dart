@@ -1,3 +1,4 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/tripComponant/addTripform/addTrip.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class SearchResults extends StatelessWidget {
             color: Colors.black, //change your color here
           ),
           title: Text(
-            'Search Results',
+            getTranslated(context, 'search_result'),
             style: TextStyle(
               color: Colors.black87,
             ),
@@ -116,7 +117,7 @@ class SearchResults extends StatelessWidget {
                       height: 70.0,
                       minWidth: MediaQuery.of(context).size.width,
                       child: Text(
-                        'Design Your Trip',
+                        getTranslated(context, 'design_trip'),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
