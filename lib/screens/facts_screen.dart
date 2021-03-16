@@ -2,7 +2,7 @@ import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/article.dart';
 import 'package:flutter/material.dart';
 import '../components/custom_card.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../services/explore_article.dart';
 
 ExploreArticle exploreArticle = ExploreArticle();

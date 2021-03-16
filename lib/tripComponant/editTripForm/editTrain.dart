@@ -7,31 +7,45 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class EditTrain extends StatefulWidget {
-  int id;
+  int userId;
   String programName;
-  String from;
-  String to;
-  String toCity;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
   String adress;
+  String contactInfo;
   String trainNumber;
-  String ticketPrice;
   String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
   EditTrain(
       {Key key,
-      this.id,
-      this.programName,
-      this.from,
-      this.to,
-      this.toCity,
-      this.hotelName,
-      this.roomPrice,
-      this.adress,
-      this.trainNumber,
-      this.ticketPrice,
-      this.destination})
+         this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,})
       : super(key: key);
 
   @override
@@ -39,17 +53,24 @@ class EditTrain extends StatefulWidget {
 }
 
 class _EditTrainState extends State<EditTrain> {
-  String toCity;
+   int userId;
+  String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
   String hotelName;
   String roomPrice;
-  int id;
-  String from;
-  String to;
-
   String adress;
+  String contactInfo;
   String trainNumber;
-  String ticketPrice;
   String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
   List<Cities> cityList = [];
   List<Train> trainList = [];
@@ -65,8 +86,8 @@ class _EditTrainState extends State<EditTrain> {
     getCityFromJson();
 
     print(widget.programName);
-    print(widget.from);
-    print(widget.to);
+    print(widget.fromDate);
+    print(widget.toDate);
     print(widget.adress);
     print(widget.hotelName);
     print(widget.roomPrice);
@@ -199,8 +220,8 @@ class _EditTrainState extends State<EditTrain> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return EditTrainCard(
-                                        from: widget.from,
-                                        to: widget.to,
+                                        fromDate: widget.fromDate,
+                                        toDate: widget.toDate,
                                         programName: widget.programName,
                                         hotelName: widget.hotelName,
                                         roomPrice: widget.roomPrice,
@@ -213,7 +234,7 @@ class _EditTrainState extends State<EditTrain> {
                                             trainList[index].arrivalTime,
                                         departureTime:
                                             trainList[index].departureTime,
-                                        city: trainList[index].city,
+                                        // city: trainList[index].city,
                                         destination:
                                             trainList[index].destination,
                                       );

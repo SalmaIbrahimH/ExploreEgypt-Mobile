@@ -80,9 +80,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _openEndDrawer() {
-    _scaffoldKey.currentState.openEndDrawer();
-  }
+  // void _openEndDrawer() {
+  //   _scaffoldKey.currentState.openEndDrawer();
+  // }
 
   void _closeEndDrawer() {
     Navigator.of(context).pop();

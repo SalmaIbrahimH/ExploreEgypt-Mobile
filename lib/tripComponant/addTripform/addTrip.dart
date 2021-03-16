@@ -8,11 +8,24 @@ class NewTrip extends StatefulWidget {
 }
 
 class _NewTripState extends State<NewTrip> {
-  String programNameq;
-  // DateTime from;
-  // DateTime to;
-  String from;
-  String to;
+  int userId;
+  // String programName;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
+  int id;
+  String hotelName;
+  String roomPrice;
+  String adress;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
   var formKey = GlobalKey<FormState>();
   var programName = new TextEditingController();
 
@@ -25,7 +38,7 @@ class _NewTripState extends State<NewTrip> {
     ).then((value) => {
           if (value == null) {},
           setState(() {
-            from = value.toString();
+            fromDate = value.toString();
           })
         });
   }
@@ -39,7 +52,7 @@ class _NewTripState extends State<NewTrip> {
     ).then((value) => {
           if (value == null) {},
           setState(() {
-            to = value.toString();
+            toDate = value.toString();
           })
         });
   }
@@ -174,8 +187,8 @@ class _NewTripState extends State<NewTrip> {
                           MaterialPageRoute(
                               builder: (context) => City(
                                     programName: programName.text,
-                                    from: from,
-                                    to: to,
+                                    fromDate: fromDate,
+                                    toDate: toDate,
                                   )));
                     }),
               ),

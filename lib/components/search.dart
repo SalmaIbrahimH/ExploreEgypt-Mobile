@@ -1,6 +1,5 @@
 import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/screens/search_results.dart';
-import 'package:explore_egypt/services/tripSer.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {

@@ -111,17 +111,26 @@ class TripService {
 
 //// post program to json
   Future<List<Trip>> save(
+    int userId,
     String programName,
-    String from,
-    String to,
+    String fromDate,
+    String toDate,
+    String cityId,
+    String fromCityId,
+    String toCityId,
     String hotelName,
     String roomPrice,
     String adress,
+    String contactInfo,
     String trainNumber,
-    String ticketPrice,
     String destination,
+    String ticketPrice,
+    String departureTime,
+    String arrivalTime,
+    String details,
   ) async {
     Response response;
+
     Dio dio = new Dio();
     if (await getCurrentLang() == 'en') {
       base_url = en_url;
@@ -130,35 +139,48 @@ class TripService {
     }
     response = await dio.post("$base_url/programs", data: {
       "programName": programName,
-      "from": from,
-      "to": to,
+      "fromDate": fromDate,
+      "toDate": toDate,
       "selHotel": {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
+        "adress": adress,
+        "contactInfo": contactInfo,
       },
-      "selTrain"
-          "trainNumber": trainNumber,
-      "ticketPrice": ticketPrice,
-      "destination": destination,
-      "adress": adress,
+      "selTrain": {
+        "trainNumber": trainNumber,
+        "destination": destination,
+        "ticketPrice": ticketPrice,
+        "departureTime": departureTime,
+        "arrivalTime": arrivalTime,
+        "details": details,
+      },
     });
     var data = response.data;
 
     return data;
   }
 
-  //// post program to json
+  //// edit program to json
   Future<List<Trip>> edit(
-    int id,
+    userId,
     String programName,
-    String from,
-    String to,
+    String fromDate,
+    String toDate,
+    // String cityId,
+    // String fromCityId,
+    // String toCityId,
+    int id,
     String hotelName,
     String roomPrice,
     String adress,
+    String contactInfo,
     String trainNumber,
-    String ticketPrice,
     String destination,
+    String ticketPrice,
+    String departureTime,
+    String arrivalTime,
+    String details,
   ) async {
     Response response;
     Dio dio = new Dio();
@@ -169,20 +191,25 @@ class TripService {
     }
     response = await dio.put("$base_url/programs/$id", data: {
       "programName": programName,
-      "from": from,
-      "to": to,
+      "fromDate": fromDate,
+      "toDate": toDate,
       "selHotel": {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
+        "adress": adress,
+        "contactInfo": contactInfo,
       },
-      "selTrain"
-          "trainNumber": trainNumber,
-      "ticketPrice": ticketPrice,
-      "destination": destination,
-      "adress": adress,
+      "selTrain": {
+        "trainNumber": trainNumber,
+        "destination": destination,
+        "ticketPrice": ticketPrice,
+        "departureTime": departureTime,
+        "arrivalTime": arrivalTime,
+        "details": details,
+      },
     });
     var data = response.data;
-
+    print("hi");
     return data;
   }
 
@@ -203,7 +230,7 @@ class TripService {
   }
 
   Future<List<Hotel>> getHotels() async {
-    List<Hotel> hotels = new List();
+    List<Hotel> hotels = [];
     Response response;
     Dio dio = new Dio();
     if (await getCurrentLang() == 'en') {

@@ -4,28 +4,45 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HotelCard extends StatefulWidget {
+  int userId;
   String programName;
-  String from;
-  String to;
+  String fromDate;
+  String toDate;
+  String cityId;
+  String fromCityId;
+  String toCityId;
   int id;
   String hotelName;
   String roomPrice;
-  String contactInfo;
   String adress;
-  String cityId;
-  String img;
+  String contactInfo;
+  String trainNumber;
+  String destination;
+  String ticketPrice;
+  String departureTime;
+  String arrivalTime;
+  String details;
 
-  HotelCard(
-      {this.id,
-      this.hotelName,
-      this.roomPrice,
-      this.contactInfo,
-      this.adress,
-      this.cityId,
-      this.img,
-      this.programName,
-      this.from,
-      this.to});
+  HotelCard({
+    this.userId,
+    this.programName,
+    this.fromDate,
+    this.toDate,
+    this.cityId,
+    this.fromCityId,
+    this.toCityId,
+    this.id,
+    this.hotelName,
+    this.roomPrice,
+    this.adress,
+    this.contactInfo,
+    this.trainNumber,
+    this.destination,
+    this.ticketPrice,
+    this.departureTime,
+    this.arrivalTime,
+    this.details,
+  });
 
   @override
   _HotelCardState createState() => _HotelCardState();
@@ -37,21 +54,34 @@ class _HotelCardState extends State<HotelCard> {
     return GestureDetector(
         onTap: () {
           print("hotelName${widget.hotelName}");
-          print("hotelName${widget.roomPrice}");
+          print("price${widget.roomPrice}");
           print("adress${widget.adress}");
           print("name${widget.programName}");
-          print("from${widget.from}");
-          print("to${widget.to}");
+          print("from${widget.fromDate}");
+          print("to${widget.toDate}");
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => AddTrain(
+                        userId: widget.userId,
+                        programName: widget.programName,
+                        fromDate: widget.fromDate,
+                        toDate: widget.toDate,
+                        cityId: widget.cityId,
                         hotelName: widget.hotelName,
                         roomPrice: widget.roomPrice,
                         adress: widget.adress,
-                        programName: widget.programName,
-                        from: widget.from,
-                        to: widget.to,
+                        contactInfo: widget.contactInfo,
+                        // fromCityId: widget.fromCityId,
+                        // toCityId: widget.toCityId,
+                        // id: widget.id,
+                        
+                        // trainNumber: widget.trainNumber,
+                        // destination: widget.destination,
+                        // ticketPrice: widget.ticketPrice,
+                        // departureTime: widget.departureTime,
+                        // arrivalTime: widget.arrivalTime,
+                        // details: widget.details,
                       )));
         },
         child: Card(

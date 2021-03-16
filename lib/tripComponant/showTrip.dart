@@ -38,14 +38,18 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                     return TripCard(
                       id: tripList[index].id,
                       programName: tripList[index].programName,
-                      from: tripList[index].from.toString(),
-                      to: tripList[index].to.toString(),
+                      fromDate: tripList[index].fromDate,
+                      toDate: tripList[index].toDate.toString(),
                       hotelName: tripList[index].selHotel.hotelName,
                       roomPrice: tripList[index].selHotel.roomPrice,
-                      destenation: tripList[index].selTrain.destination,
+                      adress: tripList[index].selHotel.adress,
+                      contactInfo: tripList[index].selHotel.contactInfo,
+                      destination: tripList[index].selTrain.destination,
                       trainNumber:
-                          tripList[index].selTrain.trainNumber.toString(),
+                          tripList[index].selTrain.trainNumber,
                       ticketPrice: tripList[index].selTrain.ticketPrice,
+                      details: tripList[index].selTrain.details.toString(),
+
                     );
                   },
                 );
