@@ -5,12 +5,13 @@ import 'package:dio/dio.dart';
 
 const String ar_url = 'https://explore-egypt-arabic-db.herokuapp.com';
 const String en_url = 'https://explore-egypt-db.herokuapp.com';
+// ignore: non_constant_identifier_names
 String base_url;
 
 class ArticleService {
-  Future<List<ActivitiesArticle>> getArticles() async {
+  Future<List<ActivitiesArticles>> getArticles() async {
     // ignore: deprecated_member_use
-    List<ActivitiesArticle> articles = new List();
+    List<ActivitiesArticles> articles = new List();
     Response response;
     // String base_url;
     if (await getCurrentLang() == 'en') {
@@ -25,7 +26,7 @@ class ArticleService {
     var data = response.data;
     print(data);
     data.forEach((value) {
-      articles.add(ActivitiesArticle.fromJson(value));
+      articles.add(ActivitiesArticles.fromJson(value));
     });
 
     return articles;
