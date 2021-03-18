@@ -42,6 +42,7 @@ class _HomeState extends State<Home> {
     super.initState();
     // checkLoginStatus();
     getUser();
+    getHotels();
   }
 
   getUser() async {

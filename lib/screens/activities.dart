@@ -86,7 +86,8 @@ class _ActivitiesState extends State<Activities> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Article(article:articles[index])));
+                                        builder: (context) =>
+                                            Article(article: articles[index])));
                               },
                               child: Container(
                                 margin: EdgeInsets.only(right: 28.8),
@@ -182,11 +183,14 @@ class _ActivitiesState extends State<Activities> {
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap: (){ Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Article(article:articles[index])));},
-                                                  child: Container(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Article(article: articles[index])));
+                          },
+                          child: Container(
                             height: 150,
                             width: size.width,
                             margin: EdgeInsets.only(
@@ -206,8 +210,7 @@ class _ActivitiesState extends State<Activities> {
                                 Flexible(
                                   child: Padding(
                                       padding: const EdgeInsets.only(
-                                        left: 10,
-                                      ),
+                                          left: 12.0, right: 12.0),
                                       child: Text(articles[index].title,
                                           overflow: TextOverflow.clip,
                                           style: GoogleFonts.lato(

@@ -209,7 +209,7 @@ class _TripDetailsState extends State<TripDetails> {
                         // depatrutre city
                         child: Text(
                           widget.destination,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 26),
                         ),
                       ),
                       Row(
@@ -217,7 +217,7 @@ class _TripDetailsState extends State<TripDetails> {
                           //departure date
                           Expanded(
                             child: Text(
-                              widget.fromDate.toString()
+                              widget.fromDate.toString().substring(0, 10)
                               // "${DateFormat("dd/MM/yyyy").format( widget.from)}"
                               ,
                               style: TextStyle(fontSize: 20),
@@ -234,7 +234,8 @@ class _TripDetailsState extends State<TripDetails> {
                           ),
                           // arrival date
                           Expanded(
-                            child: Text(widget.toDate.toString(),
+                            child: Text(
+                                widget.toDate.toString().substring(0, 10),
                                 style: TextStyle(fontSize: 20)),
                             flex: 4,
                           )
