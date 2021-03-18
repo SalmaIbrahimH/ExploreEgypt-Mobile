@@ -1,4 +1,5 @@
 import 'package:explore_egypt/TripComponant/addTripform/addCity.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:flutter/material.dart';
 
 class NewTrip extends StatefulWidget {
@@ -7,7 +8,7 @@ class NewTrip extends StatefulWidget {
 }
 
 class _NewTripState extends State<NewTrip> {
- int userId;
+  int userId;
   // String programName;
   String fromDate;
   String toDate;
@@ -57,14 +58,11 @@ class _NewTripState extends State<NewTrip> {
         });
   }
 
-  
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("New Trip"),
+          title: Text(getTranslated(context, 'new_trip')),
         ),
         body: ListView(
           children: <Widget>[
@@ -78,7 +76,7 @@ class _NewTripState extends State<NewTrip> {
                     children: [
                       Center(
                         child: Text(
-                          "Trip Program Setup",
+                          getTranslated(context, 'trip_program_setup'),
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w500,
@@ -90,7 +88,7 @@ class _NewTripState extends State<NewTrip> {
                       ),
                       Center(
                           child: Text(
-                        "you can change these details later",
+                        getTranslated(context, 'change_later'),
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       )),
                     ],
@@ -111,7 +109,7 @@ class _NewTripState extends State<NewTrip> {
                               padding: const EdgeInsets.only(
                                   top: 0, left: 0, right: 0, bottom: 20),
                               child: Text(
-                                "Trip program name",
+                                getTranslated(context, 'trip_program_name'),
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
@@ -120,7 +118,8 @@ class _NewTripState extends State<NewTrip> {
                             TextFormField(
                               controller: programName,
                               decoration: InputDecoration(
-                                hintText: "Enter you trip name",
+                                hintText:
+                                    getTranslated(context, 'enter_trip_name'),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                 ),
@@ -136,7 +135,7 @@ class _NewTripState extends State<NewTrip> {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 20),
                                       child: Text(
-                                        "Start Date",
+                                        getTranslated(context, 'start_date'),
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 24),
                                       ),
@@ -151,7 +150,7 @@ class _NewTripState extends State<NewTrip> {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 20),
                                       child: Text(
-                                        "End Date",
+                                        getTranslated(context, 'end_date'),
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 24),
                                       ),
@@ -174,26 +173,25 @@ class _NewTripState extends State<NewTrip> {
             Padding(
               padding: EdgeInsets.all(15),
               child: Center(
-                child:
-                    MaterialButton(
-                        color: Colors.green,
-                        child: Text(
-                          "Continue",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        onPressed: () {
-                          // print("from $from");
-                          // print("from $to");
-                          // print(programName.text);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => City(
-                                        programName: programName.text,
-                                        fromDate: fromDate,
-                                        toDate: toDate,
-                                      )));
-                        }),
+                child: MaterialButton(
+                    color: Colors.green,
+                    child: Text(
+                      getTranslated(context, 'continue'),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () {
+                      // print("from $from");
+                      // print("from $to");
+                      // print(programName.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => City(
+                                    programName: programName.text,
+                                    fromDate: fromDate,
+                                    toDate: toDate,
+                                  )));
+                    }),
               ),
             )
           ],

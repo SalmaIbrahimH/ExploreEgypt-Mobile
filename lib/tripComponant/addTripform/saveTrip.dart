@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/tripModel.dart';
+import 'package:explore_egypt/screens/home.dart';
 import 'package:explore_egypt/services/tripSer.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class SaveTrip extends StatefulWidget {
@@ -51,6 +56,37 @@ class SaveTrip extends StatefulWidget {
 }
 
 class _SaveTripState extends State<SaveTrip> {
+  int userID;
+  // List<Trip> tripList = [];
+  bool isApiCallProcess = false;
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    // isApiCallProcess = true;
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    userID = int.parse(utf8.decode(base64.decode(token)));
+    widget.userId = userID;
+    print(userID);
+    print("token show trip");
+    print(utf8.decode(base64.decode(token)));
+    print(token);
+    if (token == null) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => Home()),
+          (Route<dynamic> route) => false);
+      final snackBar = SnackBar(content: Text('you should to be logged'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
   List<Trip> program;
   save() async {
     program = await TripService().save(
@@ -90,7 +126,7 @@ class _SaveTripState extends State<SaveTrip> {
               MaterialButton(
                   color: Colors.green,
                   child: Text(
-                    "add trip",
+                    getTranslated(context, 'add_trip'),
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
@@ -146,7 +182,7 @@ dialogContant(BuildContext context) {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Your trip is Saved succssfully",
+                  getTranslated(context, 'trip_saved'),
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                 ),
@@ -162,7 +198,7 @@ dialogContant(BuildContext context) {
                     color: Colors.green,
                     child: Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text("Go to main page",
+                      child: Text(getTranslated(context, 'go_to_main'),
                           style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                     onPressed: () {

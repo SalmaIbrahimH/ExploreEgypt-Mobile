@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'package:explore_egypt/screens/home.dart';
+import 'package:explore_egypt/service/tripSer.dart';
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/tripModel.dart';
-import 'package:explore_egypt/services/tripSer.dart';
 import 'package:explore_egypt/tripComponant/cards/tripCard.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../Progress.dart';
 
 class ShowMyTrips extends StatefulWidget {
   @override
@@ -9,27 +14,57 @@ class ShowMyTrips extends StatefulWidget {
 }
 
 class _ShowMyTripsState extends State<ShowMyTrips> {
-
+  String userID;
   List<Trip> tripList = [];
+  bool isApiCallProcess = false;
+  SharedPreferences sharedPreferences;
 
   @override
   void initState() {
     super.initState();
-    getTripsFromJson();
-    
+    isApiCallProcess = true;
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    userID = utf8.decode(base64.decode(token));
+    print(userID);
+    print("token show trip");
+    print(utf8.decode(base64.decode(token)));
+    print(token);
+    if (token == null) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => Home()),
+          (Route<dynamic> route) => false);
+      final snackBar = SnackBar(content: Text('you should to be logged'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   getTripsFromJson() async {
-    tripList = await TripService().getTrips();
-    setState(() {
-      
-    });
+    tripList = await TripService().getTrips(userID);
+    isApiCallProcess = false;
+    print("data");
+    print(tripList);
+    setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Progress(
+      child: _uiSetup(context),
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+    );
+  }
+
+  Widget _uiSetup(BuildContext context) {
+    return new Scaffold(
         appBar: AppBar(
-          title: Text("My Trips"),
+          title: Text(getTranslated(context, 'my_trips')),
         ),
         body: FutureBuilder(
             future: getTripsFromJson(),
@@ -39,7 +74,7 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                   itemCount: tripList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return TripCard(
-                      id:tripList[index].id,
+                      id: tripList[index].id,
                       programName: tripList[index].programName,
                       fromDate: tripList[index].fromDate,
                       toDate: tripList[index].toDate.toString(),
@@ -48,8 +83,7 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                       adress: tripList[index].selHotel.adress,
                       contactInfo: tripList[index].selHotel.contactInfo,
                       destination: tripList[index].selTrain.destination,
-                      trainNumber:
-                          tripList[index].selTrain.trainNumber,
+                      trainNumber: tripList[index].selTrain.trainNumber,
                       ticketPrice: tripList[index].selTrain.ticketPrice,
                       details: tripList[index].selTrain.details.toString(),
                       city:tripList[index].city
@@ -63,12 +97,7 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(10),
-                      child: CircularProgressIndicator(),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Loading trips",style: TextStyle(fontSize: 20),),)
+                        padding: EdgeInsets.all(10), child: Text("No trips"))
                   ],
                 ));
               }

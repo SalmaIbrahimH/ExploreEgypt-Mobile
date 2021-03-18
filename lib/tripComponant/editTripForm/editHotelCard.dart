@@ -1,3 +1,5 @@
+import 'package:explore_egypt/localization/localization_constants.dart';
+// import 'package:explore_egypt/tripComponant/editTripForm/editTrainCard.dart';
 import 'package:explore_egypt/tripComponant/editTripForm/editTrain.dart';
 
 import 'package:flutter/material.dart';
@@ -221,7 +223,8 @@ class _EditHotelCardState extends State<EditHotelCard> {
                                     children: <Widget>[
                                       Flexible(
                                         child: Text(
-                                          "Room Starts from",
+                                          getTranslated(
+                                              context, 'room_start_from'),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: "sans-serif",

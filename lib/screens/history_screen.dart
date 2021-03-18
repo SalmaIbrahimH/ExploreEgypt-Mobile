@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:explore_egypt/localization/localization_constants.dart';
 import 'package:explore_egypt/models/article.dart';
 import 'package:flutter/material.dart';
 import '../services/explore_article.dart';
@@ -34,7 +35,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text(
-                'Egypt\'s History',
+                getTranslated(context, 'history'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28.0,
@@ -118,7 +119,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         }
                       },
                       child: Text(
-                        'Prev',
+                        getTranslated(context, 'prev'),
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 18.0,
@@ -142,7 +143,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         }
                       },
                       child: Text(
-                        'Next',
+                        getTranslated(context, 'next'),
                         style: TextStyle(
                           color: Colors.green,
                           fontSize: 18.0,
