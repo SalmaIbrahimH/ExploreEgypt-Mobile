@@ -24,6 +24,7 @@ class TripDetails extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   TripDetails({
     this.userId,
@@ -44,6 +45,7 @@ class TripDetails extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city
   });
   @override
   _TripDetailsState createState() => _TripDetailsState();
@@ -61,7 +63,9 @@ class _TripDetailsState extends State<TripDetails> {
   String trainNumber;
   String ticketPrice;
   String destination;
+  String city;
 
+  
   delete(id) async {
     print(" delete1$id");
     await TripService().delete(id);
@@ -93,18 +97,7 @@ class _TripDetailsState extends State<TripDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        // program name
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 50),
-                          child: Text(
-                            widget.programName,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                       
                         Padding(
                           padding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -113,11 +106,13 @@ class _TripDetailsState extends State<TripDetails> {
                             children: [
                               IconButton(
                                   icon: Icon(
-                                    Icons.edit,
+                                    Icons.edit,color: Colors.white,
                                     size: 30,
                                   ),
                                   onPressed: () {
                                     print("edit${widget.id}");
+                                    print("city${widget.city}");
+
 
                                     {
                                       id = widget.id;
@@ -130,6 +125,7 @@ class _TripDetailsState extends State<TripDetails> {
                                       destination = widget.destination;
                                       trainNumber = widget.trainNumber;
                                       ticketPrice = widget.ticketPrice;
+                                      city=widget.city;
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -160,13 +156,14 @@ class _TripDetailsState extends State<TripDetails> {
                                                     arrivalTime:
                                                         widget.arrivalTime,
                                                     details: widget.details,
+                                                    city:widget.city,
                                                   )));
                                     }
                                   }),
                               IconButton(
                                   icon: Icon(
                                     Icons.delete,
-                                    color: Colors.red,
+                                    color: Colors.red.shade600,
                                     size: 30,
                                   ),
                                   onPressed: () {
@@ -179,6 +176,18 @@ class _TripDetailsState extends State<TripDetails> {
                         ),
                       ],
                     ),
+                     // program name
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 50),
+                          child: Text(
+                            widget.programName,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
 
                     // msg
                     Padding(
@@ -203,13 +212,34 @@ class _TripDetailsState extends State<TripDetails> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      //trave; details
-                      Center(
-                          // depatrutre city
-                        child: Text(
-                          widget.destination,
-                          style: TextStyle(fontSize: 20),
-                        ),
+                      //travel details
+                      Row(
+                        children: [
+                          Expanded(
+                              // depatrutre city
+                            child: Text(
+                              widget.city,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            flex: 4,
+                          ),
+                           // arrow icon
+                          Expanded(
+                            child: Icon(
+                              Icons.arrow_forward,
+                              size: 30,
+                            ),
+                            flex: 5,
+                          ),
+                           Expanded(
+                              // depatrutre city
+                            child: Text(
+                              widget.destination,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            flex: 4,
+                          ),
+                        ],
                       ),
                       Row(
                         children: <Widget>[
@@ -226,7 +256,7 @@ class _TripDetailsState extends State<TripDetails> {
                           // arrow icon
                           Expanded(
                             child: Icon(
-                              Icons.arrow_back,
+                              Icons.arrow_forward,
                               size: 30,
                             ),
                             flex: 5,

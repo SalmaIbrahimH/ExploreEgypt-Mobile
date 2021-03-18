@@ -21,6 +21,7 @@ class EditTrip extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   EditTrip({
     Key key,
@@ -42,6 +43,7 @@ class EditTrip extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city
   }) : super(key: key);
   @override
   _EditTripState createState() => _EditTripState();
@@ -66,9 +68,12 @@ class _EditTripState extends State<EditTrip> {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
 
   var formKey = GlobalKey<FormState>();
   var programName = new TextEditingController();
+
 
   void startDate() {
     showDatePicker(
@@ -105,16 +110,18 @@ class _EditTripState extends State<EditTrip> {
       fromDate = widget.fromDate;
       toDate = widget.toDate;
     });
+   
+   print("id${widget.id}");
     print("to${widget.toDate}");
-    print(widget.programName);
-    print(widget.fromDate);
-    print(widget.details);
-    print(widget.adress);
-    print(widget.hotelName);
-    print(widget.roomPrice);
-    print(widget.trainNumber);
-    print(widget.ticketPrice);
-    print(widget.destination);
+    print("name${widget.programName}");
+    print("from${widget.fromDate}");
+    print("detail${widget.details}");
+    print("adress${widget.adress}");
+    print("hotel${widget.hotelName}");
+    print("rprice${widget.roomPrice}");
+    print("trainno${widget.trainNumber}");
+    print("ticketprive${widget.ticketPrice}");
+    print("destenaion${widget.destination}");
   }
 
   @override
@@ -241,11 +248,12 @@ class _EditTripState extends State<EditTrip> {
                       // print("from $from");
                       // print("from $to");
                       // print(programName.text);
+                      print("id${widget.id}");
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => EditHotel(
-                                    id: id,
+                                    id: widget.id,
                                     programName: programName.text,
                                     fromDate: fromDate,
                                     toDate: toDate,

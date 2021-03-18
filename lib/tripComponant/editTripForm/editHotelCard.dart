@@ -22,27 +22,28 @@ class EditHotelCard extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   EditHotelCard(
       {this.userId,
-    this.programName,
-    this.fromDate,
-    this.toDate,
-    this.cityId,
-    this.fromCityId,
-    this.toCityId,
-    this.id,
-    this.hotelName,
-    this.roomPrice,
-    this.adress,
-    this.contactInfo,
-    this.trainNumber,
-    this.destination,
-    this.ticketPrice,
-    this.departureTime,
-    this.arrivalTime,
-    this.details
-      });
+      this.programName,
+      this.fromDate,
+      this.toDate,
+      this.cityId,
+      this.fromCityId,
+      this.toCityId,
+      this.id,
+      this.hotelName,
+      this.roomPrice,
+      this.adress,
+      this.contactInfo,
+      this.trainNumber,
+      this.destination,
+      this.ticketPrice,
+      this.departureTime,
+      this.arrivalTime,
+      this.details,
+      this.city});
 
   @override
   _EditHotelCardState createState() => _EditHotelCardState();
@@ -67,23 +68,29 @@ class _EditHotelCardState extends State<EditHotelCard> {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          print("hotelName${widget.hotelName}");
-          print("hotelName${widget.roomPrice}");
-          print("adress${widget.adress}");
+          print("to${widget.id}");
+          print("to${widget.toDate}");
           print("name${widget.programName}");
           print("from${widget.fromDate}");
-          print("to${widget.toDate}");
-          print("id${widget.id}");
+          print("detail${widget.details}");
+          print("adress${widget.adress}");
+          print("hotel${widget.hotelName}");
+          print("rprice${widget.roomPrice}");
+          print("trainno${widget.trainNumber}");
+          print("ticketprive${widget.ticketPrice}");
+          print("destenaion${widget.destination}");
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => EditTrain(
-                           userId: widget.userId,
+                        userId: widget.userId,
                         programName: widget.programName,
                         fromDate: widget.fromDate,
                         toDate: widget.toDate,
@@ -95,14 +102,12 @@ class _EditHotelCardState extends State<EditHotelCard> {
                         fromCityId: widget.fromCityId,
                         toCityId: widget.toCityId,
                         id: widget.id,
-                        
                         trainNumber: widget.trainNumber,
                         destination: widget.destination,
                         ticketPrice: widget.ticketPrice,
                         departureTime: widget.departureTime,
                         arrivalTime: widget.arrivalTime,
                         details: widget.details,
-                      
                       )));
         },
         child: Card(

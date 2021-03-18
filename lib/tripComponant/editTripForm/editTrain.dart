@@ -24,6 +24,7 @@ class EditTrain extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+   String city; 
 
   EditTrain(
       {Key key,
@@ -44,7 +45,8 @@ class EditTrain extends StatefulWidget {
     this.ticketPrice,
     this.departureTime,
     this.arrivalTime,
-    this.details,})
+    this.details,
+    this.city})
       : super(key: key);
 
   @override
@@ -70,6 +72,7 @@ class _EditTrainState extends State<EditTrain> {
   String departureTime;
   String arrivalTime;
   String details;
+  String city; 
 
   List<Cities> cityList = [];
   List<Train> trainList = [];
@@ -83,16 +86,18 @@ class _EditTrainState extends State<EditTrain> {
       // cityvalue=widget.toCity;
     });
     getCityFromJson();
-
-    print(widget.programName);
-    print(widget.fromDate);
-    print(widget.toDate);
-    print(widget.adress);
-    print(widget.hotelName);
-    print(widget.roomPrice);
-    print(widget.trainNumber);
-    print(widget.ticketPrice);
-    print(widget.destination);
+  print("to${widget.id}");
+    print("to${widget.toDate}");
+    print("name${widget.programName}");
+    print("from${widget.fromDate}");
+    print("detail${widget.details}");
+    print("adress${widget.adress}");
+    print("hotel${widget.hotelName}");
+    print("rprice${widget.roomPrice}");
+    print("trainno${widget.trainNumber}");
+    print("ticketprive${widget.ticketPrice}");
+    print("destenaion${widget.destination}");
+    print("city${widget.city}");
   }
 
   getCityFromJson() async {
@@ -220,6 +225,7 @@ class _EditTrainState extends State<EditTrain> {
                                       return EditTrainCard(
                                         fromDate: widget.fromDate,
                                         toDate: widget.toDate,
+                                         id: widget.id,
                                         programName: widget.programName,
                                         hotelName: widget.hotelName,
                                         roomPrice: widget.roomPrice,
@@ -232,7 +238,7 @@ class _EditTrainState extends State<EditTrain> {
                                             trainList[index].arrivalTime,
                                         departureTime:
                                             trainList[index].departureTime,
-                                        // city: trainList[index].city,
+                                        city: trainList[index].city,
                                         destination:
                                             trainList[index].destination,
                                       );

@@ -25,6 +25,7 @@ class _NewTripState extends State<NewTrip> {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
   var formKey = GlobalKey<FormState>();
   var programName = new TextEditingController();
 

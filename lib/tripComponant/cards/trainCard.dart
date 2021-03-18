@@ -21,6 +21,7 @@ class TrainCard extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   TrainCard(
       { this.userId,
@@ -40,7 +41,8 @@ class TrainCard extends StatefulWidget {
     this.ticketPrice,
     this.departureTime,
     this.arrivalTime,
-    this.details,});
+    this.details,
+    this.city});
 
   @override
   _TrainCardState createState() => _TrainCardState();
@@ -58,6 +60,9 @@ class _TrainCardState extends State<TrainCard> {
           print("from${widget.fromDate}");
           print("to${widget.toDate}");
           print("destination${widget.destination}");
+          print("fromCityId${widget.fromCityId}");
+          print("toCityId${widget.toCityId}");
+
 
           Navigator.push(
               context,
@@ -74,6 +79,7 @@ class _TrainCardState extends State<TrainCard> {
                         hotelName: widget.hotelName,
                         roomPrice: widget.roomPrice,
                         adress: widget.adress,
+                        city:widget.city,
                         contactInfo: widget.contactInfo,
                         trainNumber: widget.trainNumber,
                         destination: widget.destination,
@@ -144,7 +150,7 @@ class _TrainCardState extends State<TrainCard> {
                                     color: Colors.white,
                                   ),
                                   Text(
-                                    widget.cityId,
+                                    widget.city,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),

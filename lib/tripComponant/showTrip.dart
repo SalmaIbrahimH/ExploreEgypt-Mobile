@@ -52,6 +52,7 @@ class _ShowMyTripsState extends State<ShowMyTrips> {
                           tripList[index].selTrain.trainNumber,
                       ticketPrice: tripList[index].selTrain.ticketPrice,
                       details: tripList[index].selTrain.details.toString(),
+                      city:tripList[index].city
 
                     );
                   },

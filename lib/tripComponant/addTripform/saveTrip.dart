@@ -22,6 +22,7 @@ class SaveTrip extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   SaveTrip({
     Key key,
@@ -43,6 +44,7 @@ class SaveTrip extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city,
   }) : super(key: key);
   @override
   _SaveTripState createState() => _SaveTripState();
@@ -68,7 +70,9 @@ class _SaveTripState extends State<SaveTrip> {
         widget.ticketPrice,
         widget.departureTime,
         widget.arrivalTime,
-        widget.details);
+        widget.details,
+        widget.city,);
+      
     print(program);
 
     setState(() {});

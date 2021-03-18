@@ -21,6 +21,7 @@ class TripCard extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   TripCard({
     this.userId,
@@ -41,6 +42,7 @@ class TripCard extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city
   });
 
   @override
@@ -74,6 +76,7 @@ class _TripCardState extends State<TripCard> {
                         departureTime: widget.departureTime,
                         arrivalTime: widget.arrivalTime,
                         details: widget.details,
+                        city: widget.city,
                       )));
         },
         child: Card(

@@ -23,6 +23,8 @@ class SaveEdit extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
 
   SaveEdit({
     Key key,
@@ -44,6 +46,7 @@ class SaveEdit extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city
   }) : super(key: key);
   @override
   _SaveEditState createState() => _SaveEditState();
@@ -52,25 +55,26 @@ class SaveEdit extends StatefulWidget {
 class _SaveEditState extends State<SaveEdit> {
   List<Trip> program;
   editTOJson(id) async {
-    // program = await TripService().edit(
-    //     id,
-    //     widget.userId.toString(),
-    //     widget.programName,
-    //     widget.fromDate,
-    //     widget.toDate,
-    //     // widget.cityId,
-    //     // widget.fromCityId,
-    //     // widget.toCityId,
-    //     widget.hotelName,
-    //     widget.roomPrice,
-    //     widget.adress,
-    //     widget.contactInfo,
-    //     widget.trainNumber,
-    //     widget.destination,
-    //     widget.ticketPrice,
-    //     widget.departureTime,
-    //     widget.arrivalTime,
-    //     widget.details);
+    program = await TripService().edit(
+        id,
+        widget.userId,
+        widget.programName,
+        widget.fromDate,
+        widget.toDate,
+        widget.cityId,
+        widget.fromCityId,
+        widget.toCityId,
+        widget.hotelName,
+        widget.roomPrice,
+        widget.adress,
+        widget.contactInfo,
+        widget.trainNumber,
+        widget.destination,
+        widget.ticketPrice,
+        widget.departureTime,
+        widget.arrivalTime,
+        widget.details,
+        widget.city);
     print(program);
 
     setState(() {});
@@ -92,13 +96,17 @@ class _SaveEditState extends State<SaveEdit> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
-                    // print("hotelName${widget.hotelName}");
-                    // print("hotelName${widget.hotelName}");
-                    // print("adress${widget.adress}");
-                    // print("name${widget.programName}");
-                    // print("from${widget.from}");
-                    // print("to${widget.to}");
                     print("id${widget.id}");
+                    print("to${widget.toDate}");
+                    print("name${widget.programName}");
+                    print("from${widget.fromDate}");
+                    print("detail${widget.details}");
+                    print("adress${widget.adress}");
+                    print("hotel${widget.hotelName}");
+                    print("rprice${widget.roomPrice}");
+                    print("trainno${widget.trainNumber}");
+                    print("ticketprive${widget.ticketPrice}");
+                    print("destenaion${widget.destination}");
                     editTOJson(widget.id);
                     showDialog(
                         context: context,

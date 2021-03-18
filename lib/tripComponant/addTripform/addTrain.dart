@@ -24,6 +24,7 @@ class AddTrain extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
 
   AddTrain({
     Key key,
@@ -45,6 +46,7 @@ class AddTrain extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city,
   }) : super(key: key);
 
   @override
@@ -194,6 +196,7 @@ class _AddTrainState extends State<AddTrain> {
                                         hotelName: widget.hotelName,
                                         roomPrice: widget.roomPrice,
                                         adress: widget.adress,
+                                        // city:widget.city,
                                         contactInfo: widget.contactInfo,
                                         trainNumber:
                                             trainList[index].trainNumber,
@@ -205,9 +208,10 @@ class _AddTrainState extends State<AddTrain> {
                                             trainList[index].departureTime,
                                         destination:
                                             trainList[index].destination,
-                                        fromCityId: trainList[index].cityId,
-                                        toCityId: trainList[index].destinationId,
+                                        fromCityId: trainList[index].cityId.toString(),
+                                        toCityId: trainList[index].destinationId.toString(),
                                         details: trainList[index].details,
+                                        city:trainList[index].city
                                       );
                                     },
                                   );

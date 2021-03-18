@@ -25,6 +25,8 @@ class EditHotel extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
 
   EditHotel({
     Key key,
@@ -46,6 +48,7 @@ class EditHotel extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    this.city
   }) : super(key: key);
 
   @override
@@ -71,6 +74,8 @@ class _EditHotelState extends State<EditHotel> {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
   List<Cities> cityList = [];
   List<Hotel> hotelList = [];
   String cityvalue;
@@ -84,16 +89,17 @@ class _EditHotelState extends State<EditHotel> {
       // cityvalue = widget.toCity;
     });
     getCityFromJson();
+    print("to${widget.id}");
     print("to${widget.toDate}");
-    print(widget.programName);
-    print(widget.fromDate);
-    print(widget.details);
-    print(widget.adress);
-    print(widget.hotelName);
-    print(widget.roomPrice);
-    print(widget.trainNumber);
-    print(widget.ticketPrice);
-    print(widget.destination);
+    print("name${widget.programName}");
+    print("from${widget.fromDate}");
+    print("detail${widget.details}");
+    print("adress${widget.adress}");
+    print("hotel${widget.hotelName}");
+    print("rprice${widget.roomPrice}");
+    print("trainno${widget.trainNumber}");
+    print("ticketprive${widget.ticketPrice}");
+    print("destenaion${widget.destination}");
   }
 
   getCityFromJson() async {
@@ -213,6 +219,7 @@ class _EditHotelState extends State<EditHotel> {
                                         fromCityId: widget.cityId,
                                         // toCityId: destinationId,
                                         details: widget.details,
+                                        city:widget.city
                                       );
                                     },
                                   );

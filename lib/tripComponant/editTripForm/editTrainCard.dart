@@ -21,6 +21,8 @@ class EditTrainCard extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
 
   EditTrainCard(
       {this.userId,
@@ -40,7 +42,8 @@ class EditTrainCard extends StatefulWidget {
     this.ticketPrice,
     this.departureTime,
     this.arrivalTime,
-    this.details,});
+    this.details,
+    this.city});
 
   @override
   _EditTrainCardState createState() => _EditTrainCardState();
@@ -65,17 +68,23 @@ int userId;
   String departureTime;
   String arrivalTime;
   String details;
+  String city;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          print("hotelName${widget.hotelName}");
-          print("hotelName${widget.roomPrice}");
-          print("adress${widget.adress}");
+              print("to${widget.id}");
+          print("to${widget.toDate}");
           print("name${widget.programName}");
           print("from${widget.fromDate}");
-          print("to${widget.toDate}");
-          print("destination${widget.destination}");
+          print("detail${widget.details}");
+          print("adress${widget.adress}");
+          print("hotel${widget.hotelName}");
+          print("rprice${widget.roomPrice}");
+          print("trainno${widget.trainNumber}");
+          print("ticketprive${widget.ticketPrice}");
+          print("destenaion${widget.destination}");
 
           Navigator.push(
               context,
@@ -98,7 +107,8 @@ int userId;
                         ticketPrice: widget.ticketPrice,
                         departureTime: widget.departureTime,
                         arrivalTime: widget.arrivalTime,
-                        details: widget.details,)));
+                        details: widget.details,
+                        city:widget.city)));
         },
         child: Card(
             child: Padding(

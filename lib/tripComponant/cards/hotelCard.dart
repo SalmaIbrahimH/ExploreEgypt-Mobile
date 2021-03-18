@@ -21,6 +21,7 @@ class HotelCard extends StatefulWidget {
   String departureTime;
   String arrivalTime;
   String details;
+  // String city;
 
   HotelCard({
     this.userId,
@@ -41,6 +42,7 @@ class HotelCard extends StatefulWidget {
     this.departureTime,
     this.arrivalTime,
     this.details,
+    // this.city
   });
 
   @override
@@ -71,6 +73,7 @@ class _HotelCardState extends State<HotelCard> {
                         roomPrice: widget.roomPrice,
                         adress: widget.adress,
                         contactInfo: widget.contactInfo,
+                        // city:widget.city,
                         // fromCityId: widget.fromCityId,
                         // toCityId: widget.toCityId,
                         // id: widget.id,

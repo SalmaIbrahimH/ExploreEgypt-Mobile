@@ -3,9 +3,12 @@ import 'package:explore_egypt/models/hotelModel.dart';
 import 'package:explore_egypt/models/trainModal.dart';
 import 'package:explore_egypt/models/tripModel.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class TripService {
   String url = "https://explore-egypt-db.herokuapp.com";
+
+  get context => null;
 
   //// get trip program from json
   Future<List<Trip>> getTrips() async {
@@ -98,6 +101,7 @@ class TripService {
     String departureTime,
     String arrivalTime,
     String details,
+    String city,
   ) async {
     Response response;
 
@@ -106,6 +110,10 @@ class TripService {
       "programName": programName,
       "fromDate": fromDate,
       "toDate": toDate,
+      "cityId": cityId,
+      "city":city,
+      "fromCityId": fromCityId,
+      "toCityId": toCityId,
       "selHotel": {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
@@ -127,15 +135,14 @@ class TripService {
   }
 
   //// edit program to json
-  Future<List<Trip>> edit(
-     userId,
+  Future<List<Trip>> edit(id,
+    int userId,
     String programName,
     String fromDate,
     String toDate,
-    // String cityId,
-    // String fromCityId,
-    // String toCityId,
-    int id,
+    String cityId,
+    String fromCityId,
+    String toCityId,
     String hotelName,
     String roomPrice,
     String adress,
@@ -146,6 +153,9 @@ class TripService {
     String departureTime,
     String arrivalTime,
     String details,
+  String city,
+
+    
   ) async {
     Response response;
     Dio dio = new Dio();
@@ -154,6 +164,8 @@ class TripService {
       "programName": programName,
       "fromDate": fromDate,
       "toDate": toDate,
+      "cityId": cityId,
+      "city":city,
       "selHotel": {
         "hotelName": hotelName,
         "roomPrice": roomPrice,
@@ -169,6 +181,8 @@ class TripService {
         "details": details,
       },
     });
+ 
+  
     var data = response.data;
     print("hi");
     return data;

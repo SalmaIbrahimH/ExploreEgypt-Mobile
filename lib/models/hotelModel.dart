@@ -22,7 +22,7 @@ class Hotel {
 
     int id;
     String hotelName;
-    City city;
+    String city;
     String roomPrice;
     String contactInfo;
     String adress;
@@ -32,7 +32,7 @@ class Hotel {
     factory Hotel.fromJson(Map<String, dynamic> json) => Hotel(
         id: json["id"],
         hotelName: json["hotelName"],
-        city: cityValues.map[json["city"]],
+        city: json["city"],
         roomPrice: json["roomPrice"],
         contactInfo: json["contactInfo"],
         adress: json["adress"],
